@@ -96,7 +96,9 @@
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="PlaceableObject.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="structs.h" />
     <ClInclude Include="Tower.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,94 @@
+# ignore this line
+# some coments
+# with % you will say what letter to map to what name of file in extention .bmp
+# in format % [char] [name] 
+# and one per line for example:
+% d path1 #right edge
+% f path2 #middle path
+% g path3 # left edge
+% v path4 # down edge
+% r path5 # up edge
+% t path6 # out corner ur
+% e path7 # out corner ul
+% b path8 # out corner dr
+% c path9 # out corner dl
+% u path6 # in corner ur
+% y path7 # in corner ul
+% j path8 # in corner dr
+% h path9 # in corner dl
+% q rock1 #big rock up right
+% w rock2 #and so on, comments are not needed
+% a rock3 
+% s rock4 
+% x rock5 #lonely little rock
+
+
+# Next ones MUST ever been included
+
+% D default #default will not be mapped in the text file, but will use this image for spaces
+% S path2 # will be used to mark the start of the path
+% E path2 # will be used to mark the end of the path
+# numbers will be used to the next point from 0-9 where S = 0 and E = (0..9)
+% N path2 # N will be used for whateva number
+
+
+# the map must be 25 * 50 and will be used two or more of them
+# one for the sprites, another for the path of movement and placeable sprites
+# the @ will be used to mark the start and the end of the map and ! the end of the line
+
+@
+                                                  ! # here i will use the same map that is used below since the sprites are the same for a mid path
+    x                         x                   !
+                                        x         !
+               x                                  !
+                                                  !
+         ettttttttttttttttttttt            qw     !
+         d12345678901234567890g            as     !
+         d0jvvvvvvvvvvvvvvvvh1g                   !
+  qw     d9d     x          d2g                   !
+  as     d8d             qw d3g                   !
+         d7d  x          as d4g      x            !
+       qwd6d                d5g                   !
+       asd5d                d6g                   !
+         d4urrrrrrrrt       d7g    x    qw        !
+    x    d3210987654g       d8g         as        !
+         cvvvvvvvvh3g       d9g                   !
+                  d2g       d0g                   !
+           x      d1g       d1g                   !
+tttttttttttttttttty0g       d2g                   !
+S1234567890123456789g       d6urrrrrrrrrrrrrrrrrrr!
+vvvvvvvvvvvvvvvvvvvvb       d45678901234567890123E!
+                            cvvvvvvvvvvvvvvvvvvvvv!
+                                qw                !
+                                as                !
+@
+
+# next map will be used to mark the path of monsters to follow
+# there can be more than two, in cases that there are more paths posibles with diferent starts
+# i will implement this for only one next map
+@
+                                                  !
+                                                  !
+                                                  !
+                                                  !
+                                                  !
+                                                  !
+          12345678901234567890                    !
+          0                  1                    !
+          9                  2                    !
+          8                  3                    !
+          7                  4                    !
+          6                  5                    !
+          5                  6                    !
+          4                  7                    !
+          3210987654         8                    !
+                   3         9                    !
+                   2         0                    !
+                   1         1                    !
+                   0         2                    !
+S1234567890123456789         6                    !
+                             45678901234567890123E!
+                                                  !
+                                                  !
+                                                  !
+@
