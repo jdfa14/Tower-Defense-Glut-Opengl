@@ -13,6 +13,6 @@ public:
 	{
 	}
 private:
-	string name;
+	std::string name;
 };
 

@@ -92,6 +92,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="addGlut.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="Image_Functions.h" />
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="PlaceableObject.h" />

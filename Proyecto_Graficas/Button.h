@@ -19,6 +19,6 @@ public:
 
 	void action(){}
 private:
-	string text;
+	std::string text;
 };
 
