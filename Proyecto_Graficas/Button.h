@@ -19,6 +19,10 @@ public:
 
 	void action(){}
 private:
+<<<<<<< HEAD
 	//string text;
+=======
+	std::string text;
+>>>>>>> origin/De-La-Fuente
 };
 

@@ -50,10 +50,14 @@
     <ClInclude Include="BadAgent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+=======
+    <ClInclude Include="Image.h">
+>>>>>>> origin/De-La-Fuente
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
