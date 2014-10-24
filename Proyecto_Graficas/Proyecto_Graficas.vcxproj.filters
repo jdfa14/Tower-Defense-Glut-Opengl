@@ -1,64 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\image_DXT.c">
+      <Filter>SOIL</Filter>
     </ClCompile>
+    <ClCompile Include="src\image_helper.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SOIL.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stb_image_aug.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PlaceableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Image_Functions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="addGlut.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tower.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Mobile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaceableObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="BadAgent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="addGlut.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
     <ClInclude Include="structs.h">
-      <Filter>Header Files</Filter>
+      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
-=======
-    <ClInclude Include="Image.h">
->>>>>>> origin/De-La-Fuente
-      <Filter>Header Files</Filter>
+      <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="src\image_DXT.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\image_helper.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SOIL.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stb_image_aug.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stbi_DDS_aug.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stbi_DDS_aug_c.h">
+      <Filter>SOIL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{4b9dd677-50b3-42e7-a392-c0fceb331133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{5a4132ff-e403-4712-bf32-b6858be4d1c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Structs">
+      <UniqueIdentifier>{b64fbb65-7273-45fa-a4c0-6208d4143d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SOIL">
+      <UniqueIdentifier>{a8887b0b-e43f-49fb-bdc1-bc311d457adf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

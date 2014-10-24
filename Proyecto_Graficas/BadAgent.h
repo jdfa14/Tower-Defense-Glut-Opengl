@@ -13,10 +13,6 @@ public:
 	{
 	}
 private:
-<<<<<<< HEAD
-	//string name;
-=======
 	std::string name;
->>>>>>> origin/De-La-Fuente
 };
 
