@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\image_DXT.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\image_helper.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SOIL.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\stb_image_aug.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SoilSrc\image_DXT.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="SoilSrc\image_helper.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="SoilSrc\SOIL.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
+    <ClCompile Include="SoilSrc\stb_image_aug.c">
+      <Filter>SOIL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -52,22 +52,22 @@
     <ClInclude Include="Window.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="src\image_DXT.h">
+    <ClInclude Include="SoilSrc\image_DXT.h">
       <Filter>SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="src\image_helper.h">
+    <ClInclude Include="SoilSrc\image_helper.h">
       <Filter>SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="src\SOIL.h">
+    <ClInclude Include="SoilSrc\SOIL.h">
       <Filter>SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="src\stb_image_aug.h">
+    <ClInclude Include="SoilSrc\stb_image_aug.h">
       <Filter>SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="src\stbi_DDS_aug.h">
+    <ClInclude Include="SoilSrc\stbi_DDS_aug.h">
       <Filter>SOIL</Filter>
     </ClInclude>
-    <ClInclude Include="src\stbi_DDS_aug_c.h">
+    <ClInclude Include="SoilSrc\stbi_DDS_aug_c.h">
       <Filter>SOIL</Filter>
     </ClInclude>
   </ItemGroup>
