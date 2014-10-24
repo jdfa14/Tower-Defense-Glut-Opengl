@@ -15,7 +15,7 @@ public:
 
 	~Image()
 	{
-		
+		free(imagen);
 	}
 
 	void setPath(std::string path){
@@ -27,12 +27,13 @@ private:
 	std::string path;
 	int width;
 	int height;
+	int channels;
 	bool isLoaded;
-	GLuint imagen;
+	unsigned char *imagen;
 
 	void loadImage(){
-		imagen = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-		isLoaded = (imagen != 0);
+		imagen = SOIL_load_image(path.c_str(), &width, &height, &channels)
+		isLoaded = (imagen != NULL);
 	}
 
 	void reLoadImage(){
