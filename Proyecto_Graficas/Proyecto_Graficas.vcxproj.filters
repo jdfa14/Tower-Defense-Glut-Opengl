@@ -49,9 +49,6 @@
     <ClInclude Include="structs.h">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="SoilSrc\image_DXT.h">
       <Filter>SOIL</Filter>
     </ClInclude>
@@ -70,6 +67,10 @@
     <ClInclude Include="SoilSrc\stbi_DDS_aug_c.h">
       <Filter>SOIL</Filter>
     </ClInclude>
+    <ClInclude Include="GlutWindow.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_array.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

@@ -156,12 +156,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\image_DXT.c" />
-    <ClCompile Include="src\image_helper.c" />
-    <ClCompile Include="src\SOIL.c" />
-    <ClCompile Include="src\stb_image_aug.c" />
+    <ClCompile Include="SoilSrc\image_DXT.c" />
+    <ClCompile Include="SoilSrc\image_helper.c" />
+    <ClCompile Include="SoilSrc\SOIL.c" />
+    <ClCompile Include="SoilSrc\stb_image_aug.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="auto_array.h" />
     <ClInclude Include="BadAgent.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
@@ -170,16 +171,16 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="PlaceableObject.h" />
-    <ClInclude Include="src\image_DXT.h" />
-    <ClInclude Include="src\image_helper.h" />
-    <ClInclude Include="src\SOIL.h" />
-    <ClInclude Include="src\stbi_DDS_aug.h" />
-    <ClInclude Include="src\stbi_DDS_aug_c.h" />
-    <ClInclude Include="src\stb_image_aug.h" />
+    <ClInclude Include="SoilSrc\image_DXT.h" />
+    <ClInclude Include="SoilSrc\image_helper.h" />
+    <ClInclude Include="SoilSrc\SOIL.h" />
+    <ClInclude Include="SoilSrc\stbi_DDS_aug.h" />
+    <ClInclude Include="SoilSrc\stbi_DDS_aug_c.h" />
+    <ClInclude Include="SoilSrc\stb_image_aug.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Tower.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="GlutWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
