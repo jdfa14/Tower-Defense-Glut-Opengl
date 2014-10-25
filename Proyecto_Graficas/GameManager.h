@@ -16,11 +16,19 @@ public:
 	GameManager(){
 		isPlaying = false;
 		level = initMenu;
+		
+	}
+	
+	void init(){
+
+		double width = win.getOrthoWidth();
+		double height = win.getOrthoHeight();
 		//images
 		bgInitMenu.setPath("Imagenes/background.bmp");
-		bgInitMenu.setPositions(win.getXMapped(0), win.getYMapped(0), 0);
-		bgInitMenu.setSizes(300, 300, 1);
+		bgInitMenu.setPositions(0, 0, -99);
+		bgInitMenu.setSizes(width,height, 1);
 	}
+
 	~GameManager(){
 
 	}
@@ -40,16 +48,18 @@ public:
 	GlutWindow *getWin(){ return &win; }
 
 	void draw(double time){
+		bgInitMenu.draw();
+		
 		switch (level)
 		{
 		case initMenu:
-			bgInitMenu.draw();
+			
 			break;
 		default:
 			break;
 		}
 	}
-
+	Image bgInitMenu;
 private:
 	
 	enum levels
@@ -63,8 +73,7 @@ private:
 	
 	
 	GlutWindow win;
-
-	Image bgInitMenu;
+	
 
 
 	std::map<char, std::string> sprites_map;//

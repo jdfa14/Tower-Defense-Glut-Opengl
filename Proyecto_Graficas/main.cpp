@@ -7,8 +7,8 @@
 
 
 
-GlutWindow *win = new GlutWindow();
-//GameManager gameManager;
+GlutWindow *win;
+GameManager gameManager;
 Image img;
 
 double angulo = 0;
@@ -91,7 +91,8 @@ void display(){
 
 	//real code
 
-	//gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
+	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
+
 	//testing code below
 	glPushMatrix();
 	glTranslated(x2, y2, +49);
@@ -101,6 +102,7 @@ void display(){
 	glPopMatrix();
 
 	img.draw();
+
 
 	glutSwapBuffers();
 }
@@ -122,11 +124,13 @@ void begin(){
 }
 
 int main(int argc, char **argv){
-	//win = gameManager.getWin();
+	win = gameManager.getWin();
 	win->setWindowSize(0, 600, 0, 600);
 	win->setOrthoSize(-500, 500, -500, 500, 100,300);
 	win->setCamera(0, 0, 200, 0, 0, 0, 0, 1, 0);
 	win->setName("Tower Defense");
+
+	gameManager.init();// loading images, positions, sizes
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

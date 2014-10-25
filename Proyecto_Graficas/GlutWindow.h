@@ -58,7 +58,7 @@ public:
 	double getWindowWidth(){ return abs(xMax - xMin); }
 	double getOrthoWidth(){ return abs(rigthOrtho - leftOrtho); }
 	double getWindowsHeight(){ return abs(yMax - yMin); }
-	double getOrthoHeigth() { return abs(topOrtho - bottomOrtho); }
+	double getOrthoHeight() { return abs(topOrtho - bottomOrtho); }
 	double getOrthoVolum(){ return abs(farOrtho - nearOrtho); }
 	std::string getName(){ return winName; }
 
@@ -88,7 +88,7 @@ public:
 	}
 
 	double getYMapped(double y){
-		double ratio = getWindowsHeight() / getOrthoHeigth();
+		double ratio = getWindowsHeight() / getOrthoHeight();
 		return topOrtho - y / ratio;
 	}
 
