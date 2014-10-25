@@ -1,28 +1,29 @@
 #pragma once
-//#include <vector>
-//#include <map>
+#include "addGlut.h"
+#include <vector>
+#include <map>
 #include "Image.h"
-//#include "GlutWindow.h"
-//#include "Tower.h"
-//#include "BadAgent.h"
-//#include "Button.h"
-//#include "structs.h"
+#include "GlutWindow.h"
+#include "Tower.h"
+#include "BadAgent.h"
+#include "Button.h"
+#include "structs.h"
 
 
-
-using namespace std;
 class GameManager
 {
 public:
 	GameManager(){
 		isPlaying = false;
-		level = 0;
-
+		level = initMenu;
 		//images
-		//bgInitMenu.setPath("C:/Users/JesusDavid/Documents/GitHub/Tower-Defense-Glut-Opengl/Proyecto_Graficas/Imagenes/background.bmp");
-		
+		bgInitMenu.setPath("Imagenes/background.bmp");
+		bgInitMenu.setPositions(win.getXMapped(0), win.getYMapped(0), 0);
+		bgInitMenu.setSizes(300, 300, 1);
 	}
-	//~GameManager();
+	~GameManager(){
+
+	}
 
 	void loadLevel(int x){
 
@@ -30,7 +31,7 @@ public:
 
 	void prepareList(){}
 	void prepareLevel(){}
-	void prepareMaps(string levelname){
+	void prepareMaps(std::string levelname){
 
 	}
 	void showGrid(bool wannaShow){}
@@ -38,33 +39,43 @@ public:
 	void buttonAction(int thisButton){}
 	GlutWindow *getWin(){ return &win; }
 
-	//void(*draw)(unsigned int time);// pointer to the draw function 
-	
+	void draw(double time){
+		switch (level)
+		{
+		case initMenu:
+			bgInitMenu.draw();
+			break;
+		default:
+			break;
+		}
+	}
 
 private:
 	
+	enum levels
+	{
+		initMenu,selectUser,choseLevel,level1,level2,level3,level4
+	};
+
 	bool isPlaying;// true if playing a level false if not
 	int level;// level that will be played
-	//void(*button)(void); //pointer to a function
-
-
+	
+	
+	
 	GlutWindow win;
 
-	//Image bgInitMenu;
+	Image bgInitMenu;
 
 
-	//map<char, string> sprites_map;//
-	//map<string, GLuint> images;
+	std::map<char, std::string> sprites_map;//
+	std::map<std::string, GLuint> images;
 
 
-	//vector<Location> path;
-	//vector<GLuint> spritesBackground; //sprites to draw as bg
-	//vector<Tower> towers;
-	//vector<BadAgent> enemies;
-	//vector<Button> buttons;
+	std::vector<Location> path;
+	std::vector<GLuint> spritesBackground; //sprites to draw as bg
+	std::vector<Tower> towers;
+	std::vector<BadAgent> enemies;
+	std::vector<Button> buttons;
 
-	void drawInitMenu(unsigned int time){
-
-	}
 };
 

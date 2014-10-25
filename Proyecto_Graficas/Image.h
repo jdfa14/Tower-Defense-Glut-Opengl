@@ -1,14 +1,35 @@
+/* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above notice and this permission notice shall be included in all copies
+* or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+/* File for "Textures" lesson of the OpenGL tutorial on
+* www.videotutorialsrock.com
+*/
+/* Modified by Jesus De La Fuente Amaya on 10/25/2014
+*  All rights are reserved
+*/
+
 #pragma once
 #include "addGlut.h"
 #include <fstream>
-//#include <iostream>
 #include <string>
 #include <assert.h>
 #include "auto_array.h"
 #include "PlaceableObject.h"
-//#include <SFML/Graphics.hpp>
-
-//using namespace sf;
 
 class Image :
 	public PlaceableObject
@@ -36,19 +57,7 @@ public:
 	}
 
 	void draw(){
-		/*
-		glClearColor(1.0, 1.0, 1.0, 1.0);
-		GLfloat ambientLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
-		GLfloat directedLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		GLfloat directedLightPos[] = { 4.0f, 4.0f, 25.0f, 1.0f };
 
-		glLightfv(GL_LIGHT0, GL_DIFFUSE, directedLight);
-		glLightfv(GL_LIGHT0, GL_POSITION, directedLightPos);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
-		*/
 		if (isLoaded){
 			glEnable(GL_NORMALIZE);
 			glEnable(GL_TEXTURE_2D);
@@ -56,25 +65,25 @@ public:
 
 			glPushMatrix();
 			glTranslatef(x - width / 2.0, y - height / 2.0, z - volume / 2.0);
-			glScalef(width / (widthImg / 16.0), height / (heightImg / 16.0), volume);
+			glScalef(width , height , volume);
 			glBegin(GL_QUADS);
-			glTexCoord2f(0.0f, 0.0f);
+			glTexCoord3f(0.0f, 0.0f,0.0f);
 			glVertex3f(0.0f, 0.0f, 0);
 
-			glTexCoord2f(1.0f, 0.0f);
-			glVertex3f(8.0f, 0.0f, 0);
-			glTexCoord2f(1.0f, 1.0f);
-			glVertex3f(8.0f, 8.0f, 0);
-			glTexCoord2f(0.0f, 1.0f);
-			glVertex3f(0.0f, 8.0f, 0);
+			glTexCoord3f(1.0f, 0.0f,0.0f);
+			glVertex3f(1.0f, 0.0f, 0);
+
+			glTexCoord3f(1.0f, 1.0f,0.0f);
+			glVertex3f(1.0f, 1.0f, 0);
+
+			glTexCoord3f(0.0f, 1.0f,0.0f);
+			glVertex3f(0.0f, 1.0f, 0);
 			glEnd();
 
-			//glutWireCube(1);
-
 			glDisable(GL_TEXTURE_2D);
+
 			glPopMatrix();
 		}
-
 	}
 
 private:
@@ -102,7 +111,7 @@ private:
 	}
 
 	//Reads the next four bytes as an integer, using little-endian form
-	int readInt(ifstream &input)
+	int readInt(std::ifstream &input)
 	{
 		char buffer[4];
 		input.read(buffer, 4);
@@ -110,7 +119,7 @@ private:
 	}
 
 	//Reads the next two bytes as a short, using little-endian form
-	short readShort(ifstream &input)
+	short readShort(std::ifstream &input)
 	{
 		char buffer[2];
 		input.read(buffer, 2);
@@ -123,8 +132,8 @@ private:
 			isLoaded = false;
 		}
 
-		ifstream input;
-		input.open(path.c_str(), ifstream::binary);
+		std::ifstream input;
+		input.open(path.c_str(), std::ifstream::binary);
 		assert(!input.fail() || !"Could not find file");
 		char buffer[2];
 		input.read(buffer, 2);
@@ -171,7 +180,7 @@ private:
 		int bytesPerRow = ((widthImg * 3 + 3) / 4) * 4 - (widthImg * 3 % 4);
 		int size = bytesPerRow * heightImg;
 		auto_array<char> pixels(new char[size]);
-		input.seekg(dataOffset, ios_base::beg);
+		input.seekg(dataOffset, std::ios_base::beg);
 		input.read(pixels.get(), size);
 
 		//Get the data into the right format
@@ -202,16 +211,15 @@ private:
 		glBindTexture(GL_TEXTURE_2D, texture); //Tell OpenGL which texture to edit
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//Map the image to the texture
-		glTexImage2D(GL_TEXTURE_2D,                //Always GL_TEXTURE_2D
-			0,                            //0 for now
-			GL_RGB,                       //Format OpenGL uses for image
-			widthImg, heightImg,  //Width and height
-			0,                            //The border of the image
-			GL_RGB, //GL_RGB, because pixels are stored in RGB format
-			GL_UNSIGNED_BYTE, //GL_UNSIGNED_BYTE, because pixels are stored
-			//as unsigned numbers
-			imagen);               //The actual pixel data
+										//Map the image to the texture
+		glTexImage2D(GL_TEXTURE_2D,     //Always GL_TEXTURE_2D
+			0,                          //0 for now
+			GL_RGB,                     //Format OpenGL uses for image
+			widthImg, heightImg,		//Width and height
+			0,                          //The border of the image
+			GL_RGB,						//GL_RGB, because pixels are stored in RGB format
+			GL_UNSIGNED_BYTE,			//GL_UNSIGNED_BYTE, because pixels are stored
+										//as unsigned numbers
+			imagen);					//The actual pixel data
 	}
 };
-
