@@ -7,7 +7,9 @@
 
 
 GlutWindow win;
+GameManager gameManager;
 Image img;
+
 double angulo = 0;
 double x2 = 200, y2 = 200;
 
@@ -23,7 +25,6 @@ void reshape(int width, int height){
 	glLoadIdentity();
 	gluLookAt(win.getEyeX(), win.getEyeY(), win.getEyeZ(), win.getOrigX(), win.getOrigY(), win.getOrigZ(), win.getCamX(), win.getCamY(), win.getCamZ());
 }
-
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Al inicio
 
@@ -33,18 +34,8 @@ void display(){
 		glRotated(angulo, 0, 1, 0);
 		glutWireCube(1);
 	glPopMatrix();
-	
+
 	glutSwapBuffers();
-}
-
-void begin(){
-	glClearColor(0.5, 0.0, 1.0, 0.0);
-	glColor3ub(255, 255, 255);//color de linea
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	glShadeModel(GL_SMOOTH);//sombreado plano
-
-	img.setPath();
 }
 
 void keyboard(unsigned char key, int x, int y){
@@ -110,7 +101,17 @@ void time(int x){
 	glutTimerFunc(5, time, 1);
 }
 
+void begin(){
+	glClearColor(0.5, 0.0, 1.0, 0.0);
+	glColor3ub(255, 255, 255);//color de linea
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	glShadeModel(GL_SMOOTH);//sombreado plano
+
+}
+
 int main(int argc, char **argv){
+	//win = gameManager.getWin();
 	win.setWindowSize(0, 600, 0, 600);
 	win.setOrthoSize(-500, 500, -500, 500, 100,300);
 	win.setCamera(0, 0, 200, 0, 0, 0, 0, 1, 0);

@@ -1,10 +1,11 @@
 #pragma once
 #include "addGlut.h"
 #include <fstream>
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include <assert.h>
 #include "auto_array.h"
+#include "PlaceableObject.h"
 //#include <SFML/Graphics.hpp>
 
 //using namespace sf;
@@ -19,6 +20,10 @@ public:
 		this->path = path;
 		loadImage();
 	}
+	Image() : PlaceableObject()
+	{
+		isLoaded = false;
+	}
 
 	~Image()
 	{
@@ -31,30 +36,52 @@ public:
 	}
 
 	void draw(){
-		glPushMatrix();
+		/*
+		glClearColor(1.0, 1.0, 1.0, 1.0);
+		GLfloat ambientLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+		GLfloat directedLight[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		GLfloat directedLightPos[] = { 4.0f, 4.0f, 25.0f, 1.0f };
 
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glTranslatef(x, y, z - width / 2.0);
-		glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f);
-		glVertex3f(0.0f, 0.0f, 0);
-		glTexCoord2f(1.0f, 0.0f);
-		glVertex3f(8.0f, 0.0f, 0);
-		glTexCoord2f(1.0f, 1.0f);
-		glVertex3f(8.0f, 8.0f, 0);
-		glTexCoord2f(0.0f, 1.0f);
-		glVertex3f(0.0f, 8.0f, 0);
-		glEnd();
-		glDisable(GL_TEXTURE_2D);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, directedLight);
+		glLightfv(GL_LIGHT0, GL_POSITION, directedLightPos);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		*/
+		if (isLoaded){
+			glEnable(GL_NORMALIZE);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, texture);
 
-		glPopMatrix();
+			glPushMatrix();
+			glTranslatef(x - width / 2.0, y - height / 2.0, z - volume / 2.0);
+			glScalef(width / (widthImg / 16.0), height / (heightImg / 16.0), volume);
+			glBegin(GL_QUADS);
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex3f(0.0f, 0.0f, 0);
+
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex3f(8.0f, 0.0f, 0);
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex3f(8.0f, 8.0f, 0);
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex3f(0.0f, 8.0f, 0);
+			glEnd();
+
+			//glutWireCube(1);
+
+			glDisable(GL_TEXTURE_2D);
+			glPopMatrix();
+		}
+
 	}
 
 private:
 	std::string path;
 	bool isLoaded;
-	int width;
-	int height;
+	int widthImg;
+	int heightImg;
 	unsigned char *imagen;
 	GLuint texture;
 
@@ -95,9 +122,9 @@ private:
 			free(imagen);
 			isLoaded = false;
 		}
+
 		ifstream input;
 		input.open(path.c_str(), ifstream::binary);
-
 		assert(!input.fail() || !"Could not find file");
 		char buffer[2];
 		input.read(buffer, 2);
@@ -111,16 +138,16 @@ private:
 		{
 		case 40:
 			//V3
-			width = readInt(input);
-			height = readInt(input);
+			widthImg = readInt(input);
+			heightImg = readInt(input);
 			input.ignore(2);
 			assert(readShort(input) == 24 || !"Image is not 24 bits per pixel");
 			assert(readShort(input) == 0 || !"Image is compressed");
 			break;
 		case 12:
 			//OS/2 V1
-			width = readShort(input);
-			height = readShort(input);
+			widthImg = readShort(input);
+			heightImg = readShort(input);
 			input.ignore(2);
 			assert(readShort(input) == 24 || !"Image is not 24 bits per pixel");
 			break;
@@ -141,31 +168,34 @@ private:
 		}
 
 		//Read the data
-		int bytesPerRow = ((width * 3 + 3) / 4) * 4 - (width * 3 % 4);
-		int size = bytesPerRow * height;
+		int bytesPerRow = ((widthImg * 3 + 3) / 4) * 4 - (widthImg * 3 % 4);
+		int size = bytesPerRow * heightImg;
 		auto_array<char> pixels(new char[size]);
 		input.seekg(dataOffset, ios_base::beg);
 		input.read(pixels.get(), size);
 
 		//Get the data into the right format
-		auto_array<char> pixels2(new char[width * height * 3]);
-		for (int y = 0; y < height; y++)
+		auto_array<char> pixels2(new char[widthImg * heightImg * 3]);
+		for (int y = 0; y < heightImg; y++)
 		{
-			for (int x = 0; x < width; x++)
+			for (int x = 0; x < widthImg; x++)
 			{
 				for (int c = 0; c < 3; c++)
 				{
-					pixels2[3 * (width * y + x) + c] =
+					pixels2[3 * (widthImg * y + x) + c] =
 						pixels[bytesPerRow * y + 3 * x + (2 - c)];
 				}
 			}
 		}
+
 		input.close();
 
 		imagen = (unsigned char*)(pixels2.release());
 		if (imagen != NULL){
 			isLoaded = true;
 		}
+
+		loadTexture();
 	}
 	
 	void loadTexture(){
@@ -176,7 +206,7 @@ private:
 		glTexImage2D(GL_TEXTURE_2D,                //Always GL_TEXTURE_2D
 			0,                            //0 for now
 			GL_RGB,                       //Format OpenGL uses for image
-			width, height,  //Width and height
+			widthImg, heightImg,  //Width and height
 			0,                            //The border of the image
 			GL_RGB, //GL_RGB, because pixels are stored in RGB format
 			GL_UNSIGNED_BYTE, //GL_UNSIGNED_BYTE, because pixels are stored

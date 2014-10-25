@@ -92,6 +92,8 @@ public:
 		return topOrtho - y / ratio;
 	}
 
+
+
 private:
 	std::string winName;
 	//windows size
