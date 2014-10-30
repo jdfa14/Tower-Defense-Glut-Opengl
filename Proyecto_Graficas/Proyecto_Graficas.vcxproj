@@ -124,7 +124,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -156,10 +156,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SoilSrc\image_DXT.c" />
-    <ClCompile Include="SoilSrc\image_helper.c" />
-    <ClCompile Include="SoilSrc\SOIL.c" />
-    <ClCompile Include="SoilSrc\stb_image_aug.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadAgent.h" />
@@ -170,12 +166,6 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="PlaceableObject.h" />
-    <ClInclude Include="SoilSrc\image_DXT.h" />
-    <ClInclude Include="SoilSrc\image_helper.h" />
-    <ClInclude Include="SoilSrc\SOIL.h" />
-    <ClInclude Include="SoilSrc\stbi_DDS_aug.h" />
-    <ClInclude Include="SoilSrc\stbi_DDS_aug_c.h" />
-    <ClInclude Include="SoilSrc\stb_image_aug.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Tower.h" />

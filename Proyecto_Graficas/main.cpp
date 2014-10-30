@@ -4,12 +4,17 @@
 #include "GameManager.h"
 #include "GlutWindow.h"
 #include "Image.h"
+#include "StaticObject.h"
+#include "Button.h"
 
 
 
 GlutWindow *win;
 GameManager gameManager;
 Image img;
+StaticObject sObj;
+
+Button boton("123456789");
 
 double angulo = 0;
 double x2 = 200, y2 = 200;
@@ -97,12 +102,16 @@ void display(){
 	glPushMatrix();
 	glTranslated(x2, y2, +49);
 	glScaled(100.0, 100.0, 100.0);
-	glRotated(angulo, 0, 1, 0);
+	glRotated(angulo, 0, 1, 1);
 	glutWireCube(1);
 	glPopMatrix();
 
+	img.setRotation(angulo, 0, 0, 1);
 	img.draw2D();
 
+	//sObj.draw();
+
+	boton.draw();
 
 	glutSwapBuffers();
 }
@@ -121,6 +130,10 @@ void begin(){
 	glShadeModel(GL_SMOOTH);//sombreado plano
 	img.setPath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
 	img.setSizes(100, 100, 1);
+
+	sObj.setImagePath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
+	sObj.setSizes(100, 100, 1);
+	sObj.setPositions(0, 0, 0);
 }
 
 int main(int argc, char **argv){

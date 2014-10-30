@@ -2,18 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SoilSrc\image_DXT.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="SoilSrc\image_helper.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="SoilSrc\SOIL.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
-    <ClCompile Include="SoilSrc\stb_image_aug.c">
-      <Filter>SOIL</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -49,24 +37,6 @@
     <ClInclude Include="structs.h">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="SoilSrc\image_DXT.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
-    <ClInclude Include="SoilSrc\image_helper.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
-    <ClInclude Include="SoilSrc\SOIL.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
-    <ClInclude Include="SoilSrc\stb_image_aug.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
-    <ClInclude Include="SoilSrc\stbi_DDS_aug.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
-    <ClInclude Include="SoilSrc\stbi_DDS_aug_c.h">
-      <Filter>SOIL</Filter>
-    </ClInclude>
     <ClInclude Include="GlutWindow.h">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -80,9 +50,6 @@
     </Filter>
     <Filter Include="Structs">
       <UniqueIdentifier>{b64fbb65-7273-45fa-a4c0-6208d4143d71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SOIL">
-      <UniqueIdentifier>{a8887b0b-e43f-49fb-bdc1-bc311d457adf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

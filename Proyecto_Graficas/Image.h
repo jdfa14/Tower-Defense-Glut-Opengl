@@ -144,7 +144,7 @@ public:
 		this->z = z;
 	}
 
-	void setSizes(double height, double width, double volume){
+	void setSizes(double width, double height, double volume){
 		this->height = height;
 		this->width = width;
 		this->volume = volume;

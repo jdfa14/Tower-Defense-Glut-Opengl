@@ -4,4 +4,6 @@
 #else
 #include <windows.h>
 #include <GL/glut.h>
+#include <GL/GL.h>
+#include <GL/GLU.h>
 #endif
