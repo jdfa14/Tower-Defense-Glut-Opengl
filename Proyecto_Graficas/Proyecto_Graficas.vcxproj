@@ -162,7 +162,6 @@
     <ClCompile Include="SoilSrc\stb_image_aug.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="auto_array.h" />
     <ClInclude Include="BadAgent.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />

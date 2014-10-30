@@ -1876,10 +1876,11 @@ int query_NPOT_capability( void )
 	if( has_NPOT_capability == SOIL_CAPABILITY_UNKNOWN )
 	{
 		/*	we haven't yet checked for the capability, do so	*/
-		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_non_power_of_two" ) )
-			)
+		if (
+				(NULL == strstr((char const*)glGetString(GL_EXTENSIONS),
+					"GL_ARB_texture_non_power_of_two"))
+					)
+			
 		{
 			/*	not there, flag the failure	*/
 			has_NPOT_capability = SOIL_CAPABILITY_NONE;
@@ -1893,26 +1894,27 @@ int query_NPOT_capability( void )
 	return has_NPOT_capability;
 }
 
-int query_tex_rectangle_capability( void )
+int query_tex_rectangle_capability(void)
 {
 	/*	check for the capability	*/
-	if( has_tex_rectangle_capability == SOIL_CAPABILITY_UNKNOWN )
+	if (has_tex_rectangle_capability == SOIL_CAPABILITY_UNKNOWN)
 	{
 		/*	we haven't yet checked for the capability, do so	*/
-		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_rectangle" ) )
-		&&
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_EXT_texture_rectangle" ) )
-		&&
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_NV_texture_rectangle" ) )
+		if (
+			(NULL == strstr((char const*)glGetString(GL_EXTENSIONS),
+			"GL_ARB_texture_rectangle"))
+			&&
+			(NULL == strstr((char const*)glGetString(GL_EXTENSIONS),
+			"GL_EXT_texture_rectangle"))
+			&&
+			(NULL == strstr((char const*)glGetString(GL_EXTENSIONS),
+			"GL_NV_texture_rectangle"))
 			)
 		{
 			/*	not there, flag the failure	*/
 			has_tex_rectangle_capability = SOIL_CAPABILITY_NONE;
-		} else
+		}
+		else
 		{
 			/*	it's there!	*/
 			has_tex_rectangle_capability = SOIL_CAPABILITY_PRESENT;

@@ -14,6 +14,7 @@ class GameManager
 {
 public:
 	GameManager(){
+		
 		isPlaying = false;
 		level = initMenu;
 		
@@ -48,12 +49,11 @@ public:
 	GlutWindow *getWin(){ return &win; }
 
 	void draw(double time){
-		bgInitMenu.draw();
+		bgInitMenu.draw2D();
 		
 		switch (level)
 		{
 		case initMenu:
-			
 			break;
 		default:
 			break;
@@ -73,8 +73,6 @@ private:
 	
 	
 	GlutWindow win;
-	
-
 
 	std::map<char, std::string> sprites_map;//
 	std::map<std::string, GLuint> images;

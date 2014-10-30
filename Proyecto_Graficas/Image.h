@@ -28,21 +28,103 @@
 #include <fstream>
 #include <string>
 #include <assert.h>
-#include "auto_array.h"
 #include "PlaceableObject.h"
 
-class Image :
-	public PlaceableObject
+//Just like auto_ptr, but for arrays
+template<class T>
+class auto_array
+{
+private:
+	T* array;
+	mutable bool isReleased;
+public:
+	explicit auto_array(T* array_ = NULL) :
+		array(array_), isReleased(false)
+	{
+	}
+
+	auto_array(const auto_array<T> &aarray)
+	{
+		array = aarray.array;
+		isReleased = aarray.isReleased;
+		aarray.isReleased = true;
+	}
+
+	~auto_array()
+	{
+		if (!isReleased && array != NULL)
+		{
+			delete[] array;
+		}
+	}
+
+	T* get() const
+	{
+		return array;
+	}
+
+	T &operator*() const
+	{
+		return *array;
+	}
+
+	void operator=(const auto_array<T> &aarray)
+	{
+		if (!isReleased && array != NULL)
+		{
+			delete[] array;
+		}
+		array = aarray.array;
+		isReleased = aarray.isReleased;
+		aarray.isReleased = true;
+	}
+
+	T* operator->() const
+	{
+		return array;
+	}
+
+	T* release()
+	{
+		isReleased = true;
+		return array;
+	}
+
+	void reset(T* array_ = NULL)
+	{
+		if (!isReleased && array != NULL)
+		{
+			delete[] array;
+		}
+		array = array_;
+	}
+
+	T* operator+(int i)
+	{
+		return array + i;
+	}
+
+	T &operator[](int i)
+	{
+		return array[i];
+	}
+};
+
+class Image 
 {
 public:
 
-	Image(std::string path) : PlaceableObject()
+	Image(std::string path) : Image()
 	{
 		this->path = path;
 		loadImage();
 	}
-	Image() : PlaceableObject()
-	{
+	Image(){
+		setPositions(0, 0, 0);
+		setSizes(1, 1, 1);
+		setRotation(0, 0, 0, 1);
+		wrap = GL_REPEAT;
+		filter = GL_LINEAR;
 		isLoaded = false;
 	}
 
@@ -56,43 +138,103 @@ public:
 		loadImage();
 	}
 
-	void draw(){
+	void setPositions(double x, double y, double z){
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	}
 
+	void setSizes(double height, double width, double volume){
+		this->height = height;
+		this->width = width;
+		this->volume = volume;
+	}
+
+	//image sets
+	void setFilter(GLint filter){ this->filter = filter; }
+	void setWrap(GLint wrap){ this->wrap = wrap; }
+	void setRotation(double angleOfRotation, int X, int Y, int Z){
+		this->angleOfRotation = angleOfRotation;
+		rotX = X;
+		rotY = Y;
+		rotZ = Z;
+	}
+
+	void draw2D(){
 		if (isLoaded){
-			glEnable(GL_NORMALIZE);
+			//glEnable(GL_NORMALIZE);
 			glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, texture);
+
+			glBindTexture(GL_TEXTURE_2D, texture);//texture to apply next changes
+			//S T U = X Y Z
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);// rellenar vacios
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);// rellenar vacios
+
+			glTexImage2D(GL_TEXTURE_2D,     //Always GL_TEXTURE_2D
+				0,                          //0 for now
+				GL_RGB,                     //Format OpenGL uses for image
+				widthImg, heightImg,		//Width and height
+				0,                          //The border of the image
+				GL_RGB,						//GL_RGB, because pixels are stored in RGB format
+				GL_UNSIGNED_BYTE,			//GL_UNSIGNED_BYTE, because pixels are stored
+				//as unsigned numbers
+				imagen);
 
 			glPushMatrix();
-			glTranslatef(x - width / 2.0, y - height / 2.0, z - volume / 2.0);
+			glTranslatef(x, y, z - volume / 2.0); // so x y and z will be the center
+			glRotated(angleOfRotation, rotX, rotY, rotZ);
 			glScalef(width , height , volume);
 			glBegin(GL_QUADS);
+			//0 0
+			//X 0
 			glTexCoord3f(0.0f, 0.0f,0.0f);
-			glVertex3f(0.0f, 0.0f, 0);
-
+			glVertex3f(-0.5f, -0.5f, 0.0f);
+			
+			//0 0
+			//0 X
 			glTexCoord3f(1.0f, 0.0f,0.0f);
-			glVertex3f(1.0f, 0.0f, 0);
-
+			glVertex3f(0.5f, -0.5f, 0.0f);
+			
+			//0 X
+			//0 0
 			glTexCoord3f(1.0f, 1.0f,0.0f);
-			glVertex3f(1.0f, 1.0f, 0);
-
+			glVertex3f(0.5f, 0.5f, 0.0f);
+			
+			//X 0
+			//0 0
 			glTexCoord3f(0.0f, 1.0f,0.0f);
-			glVertex3f(0.0f, 1.0f, 0);
+			glVertex3f(-0.5f, 0.5f, 0.0f);
 			glEnd();
-
+			
 			glDisable(GL_TEXTURE_2D);
-
 			glPopMatrix();
 		}
 	}
 
 private:
+	double x;
+	double y;
+	double z;
+	double height;
+	double width;
+	double volume;
+	double angleOfRotation;
+	int rotX;
+	int rotY;
+	int rotZ;
+
 	std::string path;
 	bool isLoaded;
 	int widthImg;
 	int heightImg;
 	unsigned char *imagen;
+
 	GLuint texture;
+	GLint wrap;
+	GLint filter;
 
 	//Converts a four-character array to an integer, using little-endian form
 	int toInt(const char* bytes)
@@ -203,23 +345,5 @@ private:
 		if (imagen != NULL){
 			isLoaded = true;
 		}
-
-		loadTexture();
-	}
-	
-	void loadTexture(){
-		glBindTexture(GL_TEXTURE_2D, texture); //Tell OpenGL which texture to edit
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-										//Map the image to the texture
-		glTexImage2D(GL_TEXTURE_2D,     //Always GL_TEXTURE_2D
-			0,                          //0 for now
-			GL_RGB,                     //Format OpenGL uses for image
-			widthImg, heightImg,		//Width and height
-			0,                          //The border of the image
-			GL_RGB,						//GL_RGB, because pixels are stored in RGB format
-			GL_UNSIGNED_BYTE,			//GL_UNSIGNED_BYTE, because pixels are stored
-										//as unsigned numbers
-			imagen);					//The actual pixel data
 	}
 };

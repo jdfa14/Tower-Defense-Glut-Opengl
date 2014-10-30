@@ -101,7 +101,7 @@ void display(){
 	glutWireCube(1);
 	glPopMatrix();
 
-	img.draw();
+	img.draw2D();
 
 
 	glutSwapBuffers();
@@ -119,7 +119,7 @@ void begin(){
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
 	glShadeModel(GL_SMOOTH);//sombreado plano
-	img.setPath("Imagenes/background.bmp");
+	img.setPath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
 	img.setSizes(100, 100, 1);
 }
 

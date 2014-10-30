@@ -70,9 +70,6 @@
     <ClInclude Include="GlutWindow.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="auto_array.h">
-      <Filter>Structs</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

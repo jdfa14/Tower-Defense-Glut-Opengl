@@ -1,5 +1,6 @@
 #pragma once
 #include "StaticObject.h"
+#include "Image.h"
 class Button : 
 	public StaticObject
 {
