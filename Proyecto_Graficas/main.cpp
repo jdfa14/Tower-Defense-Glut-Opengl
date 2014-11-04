@@ -14,7 +14,7 @@ GameManager gameManager;
 Image img;
 StaticObject sObj;
 
-Button boton("123456789");
+Button boton("1234567890123456789");
 
 double angulo = 0;
 double x2 = 200, y2 = 200;

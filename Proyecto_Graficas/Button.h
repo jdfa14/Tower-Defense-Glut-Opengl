@@ -2,6 +2,8 @@
 #include "addGlut.h"
 #include "StaticObject.h"
 #include "Image.h"
+
+
 class Button : 
 	public StaticObject
 {
@@ -10,28 +12,80 @@ public:
 	Button(std::string text)
 	{
 		this->text = text;
-		img.setPath("Imagenes/background.bmp");
+
+		image.setPath("Imagenes/BotonNormal.bmp");
+		hover.setPath("Imagenes/BotonHover.bmp");
+		click.setPath("Imagenes/BotonClick.bmp");
+
 		setPositions(0, 0, 0);
-		setSizes(100, 100, 1);
+		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24,(unsigned char*) text.c_str()) * 2, 100, 1);
+		state = NORMAL;
 	}
 
 	~Button()
 	{
+
 	}
 
+	void setImageNormal(std::string path){ image.setPath(path); }
+	void setImageHover(std::string path){ hover.setPath(path); }
+	void setImageClick(std::string path){ click.setPath(path); }
+
 	void draw(){// another draw with text
-		img.draw2D();
+		//need to remove this switch and use pointers instead
+		switch (state)
+		{
+		case Button::HOVER:
+			hover.draw2D();
+			break;
+		case Button::NORMAL:
+			image.draw2D();
+			break;
+		case Button::CLICK:
+			click.draw2D();
+			break;
+		default:
+			break;
+		}
 		writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
 	}
 
+	void mouseHover(int xMouse, int yMouse, bool isClicked){
+		if (x + width / 2.0 > xMouse && xMouse > x - width / 2.0 && 
+			y + height/ 2.0 > yMouse && yMouse > y - height/ 2.0){
+			if (isClicked)
+			{
+				state = CLICK;
+				//perform action and controls pendings
+				//activate flag, that will be deactivated when the action is performed
+			}
+			else
+				state = HOVER;
+			return;
+		}
+		state = NORMAL;
+	}
+
 	void action(){}
+
+	static enum buttonState
+	{
+		HOVER,
+		NORMAL,
+		CLICK
+	};
+
 private:
+	//auxiliar images
+	Image hover;
+	Image click;
+
 	std::string text;
+	buttonState state;
 
 	void writeText(std::string text, double x, double y, void *font){
-		glutbitmapStr
 		glColor3ub(255, 255, 255);
-		glRasterPos2f((GLfloat) (x - glutBitmapLength(font,(unsigned char*)text.c_str())), (GLfloat)y);
+		glRasterPos2f((GLfloat) (x - glutBitmapLength(font,(unsigned char*)text.c_str())* 0.85), (GLfloat)y);
 		for (unsigned int i = 0; i < text.length(); i++) {
 			glutBitmapCharacter(font, text[i]);
 		}
