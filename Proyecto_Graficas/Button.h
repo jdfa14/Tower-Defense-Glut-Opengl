@@ -15,7 +15,7 @@ public:
 
 		image.setPath("Imagenes/BotonNormal.bmp");
 		hover.setPath("Imagenes/BotonHover.bmp");
-		click.setPath("Imagenes/BotonClick.bmp");
+		click.setPath("Imagenes/BotonPressed.bmp");
 
 		setPositions(0, 0, 0);
 		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24,(unsigned char*) text.c_str()) * 2, 100, 1);
