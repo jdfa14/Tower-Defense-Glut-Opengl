@@ -31,9 +31,18 @@ void keyboard(unsigned char key, int x, int y){
 	}
 }
 
+void mousePassive(int x, int y)
+{
+	double xMapped = win->getXMapped(x);
+	double yMapped = win->getYMapped(y);
+	//std::cout << "Im moving" << std::endl;
+	boton.mouseState(xMapped,yMapped,false);
+}
+
 void mouseFunc(int button, int state, int x, int y){//when user clicks
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
+	
 	if (state == GLUT_DOWN){
 		int asdasd = 3;
 		switch (button)
@@ -42,7 +51,8 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 			std::cout << "Left button";
 			x2 = xMapped;
 			y2 = yMapped;
-			img.setPositions(xMapped, yMapped, 0);
+			//img.setPositions(xMapped, yMapped, 0);
+			boton.mouseState(xMapped, yMapped,true);
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			std::cout << "Middle button";
@@ -61,6 +71,7 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 		{
 		case GLUT_LEFT_BUTTON:
 			std::cout << "Left button";
+			boton.mouseState(xMapped, yMapped, false);
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			std::cout << "Middle button";
@@ -118,8 +129,9 @@ void display(){
 
 void time(int x){
 	angulo++;
+	
 	glutPostRedisplay();
-	glutTimerFunc(5, time, 1);
+	glutTimerFunc(10, time, 1);
 }
 
 void begin(){
@@ -158,6 +170,7 @@ int main(int argc, char **argv){
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouseFunc);
+	glutPassiveMotionFunc(mousePassive);
 	glutMainLoop();
 	return 0;
 }

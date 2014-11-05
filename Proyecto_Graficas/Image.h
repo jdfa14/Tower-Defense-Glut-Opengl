@@ -276,10 +276,22 @@ private:
 
 		std::ifstream input;
 		input.open(path.c_str(), std::ifstream::binary);
-		assert(!input.fail() || !"Could not find file");
+		//assert(!input.fail() || !"Could not find file");
+		if (input.fail())
+		{
+			std::cout << "Could not load the file: \n" << path << std::endl;
+			return;
+		}
+
 		char buffer[2];
 		input.read(buffer, 2);
-		assert(buffer[0] == 'B' && buffer[1] == 'M' || !"Not a bitmap file");
+		//assert(buffer[0] == 'B' && buffer[1] == 'M' || !"Not a bitmap file");
+		if (!(buffer[0] == 'B' && buffer[1] == 'M'))
+		{
+			std::cout << "The file at \n:" << path << "\nis not a bitmap file " << std::endl;
+			return;
+		}
+		
 		input.ignore(8);
 		int dataOffset = readInt(input);
 

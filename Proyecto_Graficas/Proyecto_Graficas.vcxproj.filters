@@ -2,6 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="json\json.cpp">
+      <Filter>Json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -40,6 +43,9 @@
     <ClInclude Include="GlutWindow.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="json\json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -50,6 +56,9 @@
     </Filter>
     <Filter Include="Structs">
       <UniqueIdentifier>{b64fbb65-7273-45fa-a4c0-6208d4143d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{6a782caf-f491-4290-860a-fff0c68044b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

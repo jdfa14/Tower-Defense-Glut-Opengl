@@ -1,0 +1,64 @@
+Request 1.0 Quilla
+
+########### Clase Sprites : PlaceableObject ###########
+
+==Atributos:==
+Vector<Images> // arreglo que contendra todas las imagenes en orden que simularan la animacion
+double tiempoTransicion // variable que indicara el tiempo en el que la animacion entera debe ocurrir p.e. si es 1 segundo, las n imagenes deben verse en un segundo (si son 10 imagenes, cada 100 ms es una imagen, si son 2 imagenes cad 500 ms es una imagen etc)
+
+// tiempoTransicion se medira en ms, p.e. 1 segundo = 1000 ms, por tanto manejaras comparativas con milisegundos no segundos
+
+--heredados--
+x
+y
+z
+width
+Height
+volume
+
+Constructor Default
+Sprites()
+{
+	llama a setpositions y set size
+}
+
+--metodos
+void setPositions(double x 3)
+{
+	llama al setpositions de la clase padre y modifica las posiciones de todas las imagenes del vector
+}
+
+void setSizes(duble x 3) -> equivalente que setpositions
+
+bool addSprite(path)
+{
+	-> Crea una imagen, carga el path
+	-> usa setPosition y setsizes de la imagen y envia de parametros las de esta clase
+	-> Si la imagen se cargo (utiliza el isLoaded de Image para saber esto) se agrega al vector y regresa un true
+	-> Si la imagen no se cargo regresa un false
+}
+
+void deleteSprites() -> vacia el vector
+
+void draw(double tiempoTranscurrido){
+	//tiempoTranscurrido puede ser infinito, no creas que solo sera de 0 a tiempoAnimacion, para eso tienes que usar un mod para doubles
+	double mod = tiempoTranscurrido % tiempoAnimacion
+	
+	->de alguna manera tienes que saber que imagen imprimir y NO lo hagas Hard Coded
+
+	p.e. Si la animacion dura 1000 mSegundos, y tienes 5 imagenes , 
+	de 0 - 199 IMG 1 
+	200 - 399 IMG 2
+	400 - 599 img 3
+	600 - 799 img 4
+	800 - 999 img 5
+
+	tienes que aplicar una formila tal que por ejempli (int X = F(x)) te de un numero de 0-4 (en este caso particular por tener solo 5 imagenes , 0 - (n-1) para n imagenes) y utilizar la funcion (vector.get(i).draw2D();) en vez de hacer un switch case o muchos ifs
+}
+
+########### FIN DE CLASE ###########
+
+*Imagenes para un agente malvado
+Cantidad de sprites necesarias para que se vea un movimiento smooth sin salto de pixeles etremos (no hagas sobre trabajo, recuerda que seran pequeñas)
+
+*Pruebas de que la animacion funciona corectamente

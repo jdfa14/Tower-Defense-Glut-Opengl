@@ -22,16 +22,12 @@ public:
 	}
 
 	void setPositions(double x, double y, double z){
-		this->x = x;
-		this->y = y;
-		this->z = z;
+		PlaceableObject::setPositions(x, y, z);
 		image.setPositions(x, y, z);
 	}
 
 	void setSizes(double width, double height, double volume){
-		this->height = height;
-		this->width = width;
-		this->volume = volume;
+		PlaceableObject::setSizes(width, height, volume);
 		image.setSizes(width, height, volume);
 	}
 

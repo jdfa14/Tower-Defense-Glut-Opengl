@@ -31,6 +31,18 @@ public:
 	void setImageHover(std::string path){ hover.setPath(path); }
 	void setImageClick(std::string path){ click.setPath(path); }
 
+	void setPositions(double x, double y, double z){
+		StaticObject::setPositions(x, y, z);
+		hover.setPositions(x, y, z);
+		click.setPositions(x, y, z);
+	}
+
+	void setSizes(double width, double height, double volume){
+		StaticObject::setSizes(width, height, volume);
+		hover.setSizes(width, height, volume);
+		click.setSizes(width, height, volume);
+	}
+
 	void draw(){// another draw with text
 		//need to remove this switch and use pointers instead
 		switch (state)
@@ -50,20 +62,25 @@ public:
 		writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
 	}
 
-	void mouseHover(int xMouse, int yMouse, bool isClicked){
+	void mouseState(int xMouse, int yMouse, bool isClicked){
 		if (x + width / 2.0 > xMouse && xMouse > x - width / 2.0 && 
 			y + height/ 2.0 > yMouse && yMouse > y - height/ 2.0){
 			if (isClicked)
 			{
 				state = CLICK;
+				std::cout << "Clicked \n";
 				//perform action and controls pendings
 				//activate flag, that will be deactivated when the action is performed
 			}
 			else
+			{
 				state = HOVER;
+				std::cout << "Hover \n";
+			}
 			return;
 		}
 		state = NORMAL;
+		std::cout << "Normal \n";
 	}
 
 	void action(){}

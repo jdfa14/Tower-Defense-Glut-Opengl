@@ -8,16 +8,15 @@
 #include "BadAgent.h"
 #include "Button.h"
 #include "structs.h"
+#include "json\json.h"
 
 
 class GameManager
 {
 public:
 	GameManager(){
-		
 		isPlaying = false;
 		level = initMenu;
-		
 	}
 	
 	void init(){
@@ -34,6 +33,36 @@ public:
 
 	}
 
+	//gets
+	GlutWindow *getWin(){ return &win; }
+
+	//Mouse And keyboard
+	void pasiveMouse(int x, int y)
+	{
+		for each (Button but in buttons)
+		{
+			but.mouseState(x, y, false);
+		}
+	}
+
+	void rigthClick(int x, int y, int state)// state up or down
+	{
+		if (state == GLUT_DOWN)
+		{
+
+		}
+		else
+		{
+
+		}
+	}
+
+	void leftClick(int x, int y, int state)
+	{
+
+	}
+
+
 	void loadLevel(int x){
 
 	}
@@ -46,7 +75,6 @@ public:
 	void showGrid(bool wannaShow){}
 	void changeActiveWindow(int toWindow){}
 	void buttonAction(int thisButton){}
-	GlutWindow *getWin(){ return &win; }
 
 	void draw(double time){
 		bgInitMenu.draw2D();
@@ -79,7 +107,7 @@ private:
 
 
 	std::vector<Location> path;
-	std::vector<GLuint> spritesBackground; //sprites to draw as bg
+
 	std::vector<Tower> towers;
 	std::vector<BadAgent> enemies;
 	std::vector<Button> buttons;
