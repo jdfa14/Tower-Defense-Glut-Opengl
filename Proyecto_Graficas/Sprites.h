@@ -3,13 +3,16 @@ class Sprites {
 	Vector<Images> vectorImagenes;
 	double tiempoTransicion;
 	public:
+	Sprites();
 	void setPositions(double, double, double);
 	void setSizes(double, double, double);
 	bool addSprites(string);
 	bool deleteSprites();
 	void draw(double);
 };
+Sprites::Sprites() {
 
+}
 void Sprites::setPositions(double x, double y, double z) {
 
 }
