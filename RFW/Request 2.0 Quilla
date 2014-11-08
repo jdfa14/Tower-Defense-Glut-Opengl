@@ -1,0 +1,28 @@
+Request 2.0 Quilla
+
+
+Esta clase generalizara todas las clases que se puedan mover, ademas de que obtiene ya la clase sprite
+
+######### MOBILE #########
+
+Clase Mobile() : PlaceableObject
+attr protected:
+Sprite animation;
+
+double speedX,speedY,speedZ; // per second
+double accX, accY, accZ; // per second
+
+
+void setSpeeds( double x 3)// supongo ya sabes que hacee
+void setAccelerations(double x 3) //same
+
+gets para cada speed y acc
+
+addSprite(path) // pues.... agrega una sprite
+removeSprites()
+
+refresh()// aumenta la velocidad segun la aceleracion, cambia la posicion segun la velocidad se invocara una vez cada segundo
+
+draw() // manda llamar el draw de sprite que ya debe actualizarse automaticamente
+
+####### Fin de clase ####

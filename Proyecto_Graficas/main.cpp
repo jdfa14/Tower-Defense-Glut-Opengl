@@ -14,7 +14,6 @@ GameManager gameManager;
 Image img;
 StaticObject sObj;
 
-Button boton("1234567890123456789");
 
 double angulo = 0;
 double x2 = 200, y2 = 200;
@@ -36,13 +35,26 @@ void mousePassive(int x, int y)
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
 	//std::cout << "Im moving" << std::endl;
-	boton.mouseState(xMapped,yMapped,false);
+	gameManager.pasiveMouse(xMapped,yMapped);
 }
 
 void mouseFunc(int button, int state, int x, int y){//when user clicks
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
 	
+	switch (button)
+	{
+	case GLUT_LEFT_BUTTON:
+		gameManager.leftClick(xMapped, yMapped, state);
+		break;
+	case GLUT_RIGHT_BUTTON:
+		gameManager.rigthClick(xMapped, yMapped, state);
+		break;
+	default:
+		gameManager.middleClick(xMapped, yMapped, state);
+		break;
+	}
+
 	if (state == GLUT_DOWN){
 		int asdasd = 3;
 		switch (button)
@@ -52,7 +64,6 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 			x2 = xMapped;
 			y2 = yMapped;
 			//img.setPositions(xMapped, yMapped, 0);
-			boton.mouseState(xMapped, yMapped,true);
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			std::cout << "Middle button";
@@ -71,7 +82,6 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 		{
 		case GLUT_LEFT_BUTTON:
 			std::cout << "Left button";
-			boton.mouseState(xMapped, yMapped, false);
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			std::cout << "Middle button";
@@ -117,12 +127,14 @@ void display(){
 	glutWireCube(1);
 	glPopMatrix();
 
-	img.setRotation(angulo, 0, 0, 1);
-	img.draw2D();
+	//img.setRotation(angulo, 0, 0, 1);
+	//img.draw2D();
 
 	//sObj.draw();
 
-	boton.draw();
+	//boton.draw();
+	//boton2.draw();
+	//boton3.draw();
 
 	glutSwapBuffers();
 }
@@ -146,6 +158,7 @@ void begin(){
 	sObj.setImagePath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
 	sObj.setSizes(100, 100, 1);
 	sObj.setPositions(0, 0, 0);
+
 }
 
 int main(int argc, char **argv){

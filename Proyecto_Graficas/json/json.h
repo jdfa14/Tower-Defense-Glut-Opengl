@@ -23,6 +23,211 @@
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
+
+	CHANGELOG:
+	==========
+
+	8/31/2014:
+	---------
+	* Fixed bug from last update that broke false/true boolean usage. Courtesy of Vasi B.
+	* Change postfix increment of iterators in Serialize to prefix, courtesy of Vasi B.
+	* More improvements to validity checking of non string/object/array types. Should
+		catch even more invalid usage types such as -1jE5, falsee, trueeeeeee
+		{"key" : potato} (that should be {"key" : "potato"}), etc. 
+	* Switched to strtol and strtod from atof/atoi in Serialize for better error handling.
+	* Fix for GCC order of initialization warnings, courtsey of Vasi B.
+
+	8/17/2014:	
+	----------
+	* Better error handling (and bug fixing) for invalid JSON. Previously, something such as:
+			{"def": j[{"a": 100}],"abc": 123}
+		would result in at best, a crash, and at worst, nothing when this was passed to 
+		the Deserialize method. Note that the "j" is invalid in this example. This led
+		to further fixes for other invalid syntax:
+		- Use of multiple 'e', for example: 1ee4 is not valid 
+		- Use of '.' when not preceded by a digit is invalid. For example: .1 is
+			incorrect, but 0.1 is fine.
+		- Using 'e' when not preceded by a digit. For example, e4 isn't valid but 1e4 is.
+
+		The deserialize method should properly handle these problems and when there's an
+		error, it returns a Value object with the NULLVal type. Check this type to see
+		if there's an error.
+
+		Issue reported by Imre Pechan.
+
+	7/21/2014:
+	----------
+	* All asserts removed and replaced with exceptions, as per request from many users.
+		Instead of asserting, functions will throw a std::runtime_error with
+		appropriate error message.
+	* Added versions of the Value::To* functions that take a default parameter.
+		In the event of an error (like calling Value::ToInt() when it's type is an Object),
+		the default value you specified will be returned. Courtesy of PeterSvP 
+	* Fixed type mismatch warning, courtesy of Per Rovegård
+	* Initialized some variables in the various Value constructors to defaults for
+		better support with full blast g++ warnings, courtesy of Mark Odell.
+	* Changed Value::ToString to return a const std::string& instead of std::string
+		to avoid unnecessary copying.
+	* Improved some commenting
+	* Fixed a bug where a capital E for scientific notation numbers wasn't
+		recognized, only lowercase e.
+	* VASTLY OVERHAULED AND IMPROVED THE README FILE, PLEASE CONSULT IT FOR
+		IN DEPTH USAGE AND EXAMPLES.
+
+
+ 	2/8/2014:
+ 	--------- 
+ 	MAJOR BUG FIXES, all courtesy of Per Rovegård, Ph.D.
+ 	* Feature request: HasKey and HasKeys added to Value for convenience and
+ 		to avoid having to make a temporary object.
+ 	* Strings should now be properly unescaped. Previously, as an example, the
+ 		string "\/Date(1390431949211+0100)\/\" would be parsed as
+ 		\/Date(1390431949211+0100)\/. The string is now properly parsed as
+ 		/Date(1390431949211+0100)/.
+ 		As per http://www.json.org the other escape characters including
+ 		\u+4 hex digits will now be properly unescaped. So for example,
+ 		\u0061 now becomes "A".
+ 	* Serialize now supports serializing a toplevel array (which is valid JSON).
+ 		The parameter it takes is now a Value, but existing code doesn't
+ 		need to be changed.
+ 	* Fixed bug with checking for proper opening/closing sequence for braces/brackets.
+ 		Previously, this code: 
+			const char *json = "{\"arr\":[{}}]}";
+			auto val = json::Deserialize(json);
+		worked fine with no errors. That's a bug. I did a major overhaul so that
+ 		now improperly formatted pairs will now correctly result in an error.
+ 	* Made internal deserialize methods static
+ 
+ 	1/30/2014:
+ 	----------
+ 	* Changed #pragma once to the standard #ifndef header guard style for
+ 		better compatibility.
+ 	* Added a [] operator for Value that takes a const char* as an argument
+ 		to avoid having to explicitly (and annoyingly) cast to std::string.
+ 		Thus, my_value["asdf"] = "a string" should now work fine.
+ 		The same has been added to the Object class.
+ 	* Added non-operator methods of casting a Value to int/string/bool/etc.
+ 		Implicitly casting a Value to a std::string doesn't work as per C++
+ 		rules. As such, previously to assign a Value to a std::string you
+ 		had to do:
+ 			my_std_string = (std::string)my_value;
+ 		You can now instead do:
+ 			my_std_string = my_value.ToString();
+ 		If you want more information on why this can't be done, please read
+ 		this topic for more details:
+ 		http://stackoverflow.com/questions/3518145/c-overloading-conversion-operator-for-custom-type-to-stdstring
+ 
+ 	1/27/2014
+ 	----------
+ 	* Deserialize will now return a NULLVal Value instance if there was an
+ 		error instead of asserting. This way you can handle however you want to
+ 		invalid JSON being passed in. As a top level object must be either an
+ 		array or an object, a NULL value return indicates an invalid result.
+ 
+ 	1/11/2014
+ 	---------
+ 	* Major bug fix: Strings containing []{} characters could cause
+ 		parsing errors under certain conditions. I've just tested
+ 		the class parsing a 300KB JSON file with all manner of bizarre
+ 		characters and permutations and it worked, so hopefully this should
+ 		be the end of "major bug" fixes.
+ 
+ 	1/10/2014
+ 	---------
+ 	Bug fixes courtesy of Gerry Beauregard:
+ 	* Pretty big bug: was using wrong string paramter in ::Deserialize
+ 		and furthermore it wasn't being trimmed. 
+ 	* Object::HasKeys now casts the return value to avoid compiler warnings.
+ 	* Slight optimization to the Trim function
+ 	* Made asserts in ::Deserialize easier to read
+ 
+ 	1/9/2014
+ 	--------
+ 	* Major bug fix: for JSON strings containing \" (as in, two characters,
+ 		not the escaped " character), the lib would mess up and not parse
+ 		correctly.
+ 	* Major bug fix: I erroneously was assuming that all root JSON types
+ 		had to be an object. This was an oversight, as a root JSON
+ 		object can be an array. I have therefore changed the Deserialize
+ 		method to return a json::Value rather than a json::Object. This
+ 		will NOT impact any existing code you have, as a json::Value will
+ 		cast to a json::Object (if it is indeed an object). But for 
+ 		correctness, you should be using json::Value = Deserialize...
+ 		The Value type can be checked if it's an array (or any other type),
+ 		and furthermore can even be accessed with the [] operator for
+ 		convenience.
+ 	* I've made the NULL value type set numeric fields to 0 and bool to false.
+ 		This is for convenience for using the NULL type as a default return
+ 		value in your code.
+ 	* asserts added to casting (Gerry Beauregard)
+ 	* Added method HasKeys to json::Object which will check if all the keys
+ 		specified are in the object, returning the index of the first key
+ 		not found or -1 if all found (hoppe).
+ 
+	1/4/2014
+	--------
+	* Fixed bug where booleans were being parsed as doubles (Gerry Beauregard).
+
+	1/2/2014 v3
+	------------
+	* More missing headers added for VisualStudio 2012
+	* Switched to snprintf instead of sprintf (or sprintf_s in MSVC)
+
+	1/2/2014 v2
+	-----------
+	* Added yet more missing headers for compiling on GNU and Linux systems
+	* Made Deserialize copy the passed in string so it won't mangle it
+
+	1/2/2014
+	--------
+	* Fixed previous changelog years. Got ahead of myself and marked them
+		as 2014 when they were in fact done in 2013.
+	* Added const version of [] to Array/Object/Value
+	* Removed C++11 requirements, should work with older compilers
+		(thanks to Meng Wang for pointing that out)
+	* Made ValueMap and ValueVector typedefs in Object/Value public
+		so you can actually iterate over the class
+	* Added HasKey and HasValue to Object/Array for convenience
+		(note this could have been done comparing .find to .end)
+
+	12/29/2013 v2
+	-------------
+	* Added .size() field to Value. Returns 1 for non Array/Object types,
+		otherwise the number of elements contained.
+	* Added .find() to Object to search for a key. Returns Object::end()
+		if not found, otherwise the Value.
+		Example: bool found = my_obj.find("some key") != my_obj.end();
+	* Added .find() to Array to search for a value. Just a convenience
+		wrapper for std::find(Array::begin(), Array::end(), Value)
+	* Added ==, !=, <, >, <=, >= operators to Object/Array/Value.
+		For Objects/Arrays, the operators function just like they do for a
+		std::map and std::vector, respectively.
+	* Added IsNumeric to Value to indicate if it's an int/float/double type.
+
+	12/29/2013
+	----------
+	* Added the DoubleVal type which stores, you guessed it, double values.
+	* Bug fix for floats with an exact integer value. Now, setting any numerical
+		field will also set the fields for the other numerical types. So if you
+		have obj["value"] = 12, then the int/float/double cast methods will
+		return 12/12.0f/12.0. Previously, in the example above, only the int
+		value was set, making a cast to float return 0.
+	* Bug fix for deserializing JSON strings that contained large integer values.
+		Now if the numerical value of a key in a JSON string contains a number
+		less than INT_MIN or greater than INT_MAX it will be stored as a double.
+		Note that as mentioned above, all numerical fields are set.
+	* Should work fine with scientific notation values now.
+	
+	12/28/2013
+	----------
+
+	* Fixed a bug where if there were spaces around values or key names in a JSON
+	string passed in to Deserialize, invalid results or asserts would occur.
+	(Fix courtesy of Gerry Beauregard)
+
+	* Added method named "Clear()" to Object/Array/Value to reset state
+
+	* Added license to header file for easyness (totally valid word).
  */
 
 #ifndef __SUPER_EASY_JSON_H__
@@ -33,6 +238,8 @@
 #include <string>
 #include <stdexcept>
 
+
+// PLEASE SEE THE README FOR USAGE INFORMATION AND EXAMPLES. Comments will be kept to a minimum to reduce clutter.
 namespace json
 {
 	enum ValueType

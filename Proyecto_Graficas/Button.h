@@ -12,10 +12,10 @@ public:
 	Button(std::string text)
 	{
 		this->text = text;
-
-		image.setPath("Imagenes/BotonNormal.bmp");
-		hover.setPath("Imagenes/BotonHover.bmp");
-		click.setPath("Imagenes/BotonPressed.bmp");
+		// pred values
+		image.setPath("Images/BotonNormal.bmp");
+		hover.setPath("Images/BotonHover.bmp");
+		click.setPath("Images/BotonPressed.bmp");
 
 		setPositions(0, 0, 0);
 		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24,(unsigned char*) text.c_str()) * 2, 100, 1);

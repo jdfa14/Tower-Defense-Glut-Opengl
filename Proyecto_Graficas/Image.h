@@ -25,6 +25,7 @@
 
 #pragma once
 #include "addGlut.h"
+//#include <SDL\SDL.h>
 #include <fstream>
 #include <string>
 #include <assert.h>
@@ -127,12 +128,6 @@ public:
 		filter = GL_LINEAR;
 		isLoaded = false;
 	}
-
-	~Image()
-	{
-		free(imagen);
-	}
-
 	void setPath(std::string path){
 		this->path = path;
 		loadImage();
