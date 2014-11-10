@@ -11,12 +11,6 @@
 
 GlutWindow *win;
 GameManager gameManager;
-Image img;
-StaticObject sObj;
-
-
-double angulo = 0;
-double x2 = 200, y2 = 200;
 
 
 void keyboard(unsigned char key, int x, int y){
@@ -54,49 +48,6 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 		gameManager.middleClick(xMapped, yMapped, state);
 		break;
 	}
-
-	if (state == GLUT_DOWN){
-		int asdasd = 3;
-		switch (button)
-		{
-		case GLUT_LEFT_BUTTON:
-			std::cout << "Left button";
-			x2 = xMapped;
-			y2 = yMapped;
-			//img.setPositions(xMapped, yMapped, 0);
-			break;
-		case GLUT_MIDDLE_BUTTON:
-			std::cout << "Middle button";
-			break;
-		case GLUT_RIGHT_BUTTON:
-			std::cout << "Rigth button";
-			angulo++;
-			break;
-		default:
-			break;
-		}
-		std::cout << " pressed at ";
-	}
-	else{
-		switch (button)
-		{
-		case GLUT_LEFT_BUTTON:
-			std::cout << "Left button";
-			break;
-		case GLUT_MIDDLE_BUTTON:
-			std::cout << "Middle button";
-			break;
-		case GLUT_RIGHT_BUTTON:
-			std::cout << "Middle button";
-			break;
-		default:
-			break;
-		}
-		std::cout << " unpressed at ";
-	}
-
-	std::cout << "[" << x << ", " << y << "]" << std::endl;
-	std::cout << " Mapp: " << "[" << xMapped << ", " << yMapped << "]" << std::endl;
 }
 
 void reshape(int width, int height){
@@ -120,30 +71,16 @@ void display(){
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
 
 	//testing code below
-	glPushMatrix();
-	glTranslated(x2, y2, +49);
-	glScaled(100.0, 100.0, 100.0);
-	glRotated(angulo, 0, 1, 1);
-	glutWireCube(1);
-	glPopMatrix();
 
-	//img.setRotation(angulo, 0, 0, 1);
-	//img.draw2D();
-
-	//sObj.draw();
-
-	//boton.draw();
-	//boton2.draw();
-	//boton3.draw();
 
 	glutSwapBuffers();
 }
 
 void time(int x){
-	angulo++;
-	
 	glutPostRedisplay();
-	glutTimerFunc(10, time, 1);
+
+	gameManager.refresh();
+	glutTimerFunc(50, time, 1);
 }
 
 void begin(){
@@ -152,12 +89,6 @@ void begin(){
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
 	glShadeModel(GL_SMOOTH);//sombreado plano
-	img.setPath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
-	img.setSizes(100, 100, 1);
-
-	sObj.setImagePath("C:/Users/JesusDavid/Desktop/MontseMapa.bmp");
-	sObj.setSizes(100, 100, 1);
-	sObj.setPositions(0, 0, 0);
 
 }
 

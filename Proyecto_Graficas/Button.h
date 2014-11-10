@@ -1,7 +1,9 @@
 #pragma once
 #include "addGlut.h"
+#include <stack>
 #include "StaticObject.h"
 #include "Image.h"
+#include "Button.h"
 
 
 class Button : 
@@ -9,8 +11,7 @@ class Button :
 {
 public:
 
-	Button(std::string text)
-	{
+	Button(std::string text){
 		this->text = text;
 		// pred values
 		image.setPath("Images/BotonNormal.bmp");
@@ -18,13 +19,9 @@ public:
 		click.setPath("Images/BotonPressed.bmp");
 
 		setPositions(0, 0, 0);
-		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24,(unsigned char*) text.c_str()) * 2, 100, 1);
+		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str()) * 2, 100, 1);
 		state = NORMAL;
-	}
-
-	~Button()
-	{
-
+		
 	}
 
 	void setImageNormal(std::string path){ image.setPath(path); }
@@ -41,6 +38,10 @@ public:
 		StaticObject::setSizes(width, height, volume);
 		hover.setSizes(width, height, volume);
 		click.setSizes(width, height, volume);
+	}
+
+	std::string getText(){
+		return text;
 	}
 
 	void draw(){// another draw with text
@@ -68,22 +69,28 @@ public:
 			if (isClicked)
 			{
 				state = CLICK;
-				std::cout << "Clicked \n";
+				//std::cout << "Clicked \n";
 				//perform action and controls pendings
 				//activate flag, that will be deactivated when the action is performed
+				action();
 			}
 			else
 			{
 				state = HOVER;
-				std::cout << "Hover \n";
+				//std::cout << "Hover \n";
 			}
 			return;
 		}
 		state = NORMAL;
-		std::cout << "Normal \n";
+		//std::cout << "Normal \n";
 	}
 
-	void action(){}
+	void action(){
+		if (events)
+			events->push(ID);
+		else
+			std::cout << "No stack of events declared" << std::endl;
+	}
 
 	static enum buttonState
 	{
@@ -92,17 +99,33 @@ public:
 		CLICK
 	};
 
+	void setID(int ID){
+		this->ID = ID;
+	}
+
+	void setEventsStack(std::stack<int> *pointer){
+		events = pointer;
+	}
+
 private:
+	
+
 	//auxiliar images
 	Image hover;
 	Image click;
 
 	std::string text;
 	buttonState state;
+	int ID;
+	
+	std::stack<int> *events;
+
+	//controls flags for click
+	//bool toDo;
 
 	void writeText(std::string text, double x, double y, void *font){
 		glColor3ub(255, 255, 255);
-		glRasterPos2f((GLfloat) (x - glutBitmapLength(font,(unsigned char*)text.c_str())* 0.85), (GLfloat)y);
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.85), (GLfloat)y);
 		for (unsigned int i = 0; i < text.length(); i++) {
 			glutBitmapCharacter(font, text[i]);
 		}

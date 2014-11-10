@@ -1,0 +1,45 @@
+{
+  "type" : "Menu",
+  "level" : 1,
+  "data" : {
+  "background" : "backgrounds/menuPlayer.bmp",
+  "buttons" : [
+      {
+        "text" : "Player 1",
+        "ID" : 3,
+        "positions" : [-300,-50,0],
+        "sizes" : [250,700,1]
+      },
+      {
+        "text" : "Player 2",
+        "ID" : 3,
+        "positions" : [0,-50,0],
+        "sizes" : [250,700,1]
+      },
+      {
+        "text" : "Player 3",
+        "ID" : 3,
+        "positions" : [300,-50,0],
+        "sizes" : [250,700,1]
+      },
+      {
+        "text" : "Back",
+        "ID" : 99,
+        "positions" : [-375,475,0],
+        "sizes" : [250,50,1]
+      }
+    ],
+    "Images" : [
+      {
+        "path" : "Imagenes/Cuack.bmp",
+        "positions" : null,
+        "sizes" : null
+      },
+      {
+        "path" : "Imagenes/Cuack2.bmp",
+        "positions" : null,
+        "sizes" : null
+      }
+      ]
+  }
+}

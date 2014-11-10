@@ -1,38 +1,51 @@
 {
-  "type" : "Menu",
-  "level" : 0,
-  "data" : {
-  "background" : "backgrouds/menuInit.bmp",
-  "buttons" : [
+  "type": "Menu",
+  "level": 0,
+  "data": {
+    "background": "backgrounds/menuInit.bmp",
+    "buttons": [
       {
-        "text" : "Play",
-        "ID" : 0,
-        "positions" : [0,0,0],
-        "sizes" : [250,100,1]
+        "text": "Play",
+        "ID": 0,
+        "positions": [
+          0,
+          0,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
       },
       {
-        "text" : "Options",
-        "ID" : 1,
-        "positions" : [0,-150,0],
-        "sizes" : [250,100,1]
+        "text": "Options",
+        "ID": 1,
+        "positions": [
+          0,
+          -150,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
       },
       {
-        "text" : "Credits",
-        "ID" : 2,
-        "positions" : [0,-300,0]
+        "text": "Credits",
+        "ID": 2,
+        "positions": [
+          0,
+          -300,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
       }
-    ],
-    "Images" : [
-      {
-        "path" : "Imagenes/Cuack.bmp",
-        "positions" : null,
-        "sizes" : null
-      },
-      {
-        "path" : "Imagenes/Cuack2.bmp",
-        "positions" : null,
-        "sizes" : null
-      }
-      ]
+    ]
   }
 }

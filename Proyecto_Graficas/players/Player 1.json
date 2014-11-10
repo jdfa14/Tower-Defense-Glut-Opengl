@@ -1,0 +1,58 @@
+{
+  "type": "Player",
+  "name" : "David",
+  "newPlayer" : false,
+  "levels": 
+    [
+      {
+        "completed" : true,
+        "score" : 132452,
+        "locked" : false
+      },
+      {
+        "completed" : true,
+        "score" : 132452,
+        "locked" : false
+      },
+      {
+        "completed" : true,
+        "score" : 123354,
+        "locked" : false
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : false
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      },
+      {
+        "completed" : true,
+        "score" : 0,
+        "locked" : true
+      }
+    ]
+}
