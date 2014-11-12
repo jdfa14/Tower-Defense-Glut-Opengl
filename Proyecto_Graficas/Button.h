@@ -21,7 +21,7 @@ public:
 		setPositions(0, 0, 0);
 		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str()) * 2, 100, 1);
 		state = NORMAL;
-		
+		enable = true;
 	}
 
 	void setImageNormal(std::string path){ image.setPath(path); }
@@ -42,6 +42,13 @@ public:
 
 	std::string getText(){
 		return text;
+	}
+	bool isEnable(){
+		return enable;
+	}
+
+	void setEnable(bool enable){
+		this->enable = enable;
 	}
 
 	void draw(){// another draw with text
@@ -64,24 +71,26 @@ public:
 	}
 
 	void mouseState(int xMouse, int yMouse, bool isClicked){
-		if (x + width / 2.0 > xMouse && xMouse > x - width / 2.0 && 
-			y + height/ 2.0 > yMouse && yMouse > y - height/ 2.0){
-			if (isClicked)
-			{
-				state = CLICK;
-				//std::cout << "Clicked \n";
-				//perform action and controls pendings
-				//activate flag, that will be deactivated when the action is performed
-				action();
+		if (enable){
+			if (x + width / 2.0 > xMouse && xMouse > x - width / 2.0 &&
+				y + height / 2.0 > yMouse && yMouse > y - height / 2.0){
+				if (isClicked)
+				{
+					state = CLICK;
+					//std::cout << "Clicked \n";
+					//perform action and controls pendings
+					//activate flag, that will be deactivated when the action is performed
+					action();
+				}
+				else
+				{
+					state = HOVER;
+					//std::cout << "Hover \n";
+				}
+				return;
 			}
-			else
-			{
-				state = HOVER;
-				//std::cout << "Hover \n";
-			}
-			return;
+			state = NORMAL;
 		}
-		state = NORMAL;
 		//std::cout << "Normal \n";
 	}
 
@@ -113,6 +122,7 @@ private:
 	//auxiliar images
 	Image hover;
 	Image click;
+	bool enable;
 
 	std::string text;
 	buttonState state;

@@ -156,22 +156,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameManager_Display.cpp" />
+    <ClCompile Include="GameManager_Loading.cpp" />
+    <ClCompile Include="GameManager_Mouse.cpp" />
     <ClCompile Include="json\json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Screen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadAgent.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="TempGameManager.h" />
     <ClInclude Include="addGlut.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="wave.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="PlaceableObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="Tower.h" />

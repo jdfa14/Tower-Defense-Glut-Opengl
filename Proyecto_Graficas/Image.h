@@ -28,6 +28,7 @@
 //#include <SDL\SDL.h>
 #include <fstream>
 #include <string>
+#include <iostream>
 #include <assert.h>
 #include "PlaceableObject.h"
 

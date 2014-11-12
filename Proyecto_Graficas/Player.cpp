@@ -19,8 +19,12 @@ std::string Player::getFileName(){
 	return fileName;
 }
 
-std::vector<Level> Player::getAllLevels(){
-	return levels;
+std::vector<Level>* Player::getAllLevels(){
+	return &levels;
+}
+
+std::vector<Button>* Player::getLevelButtons(){
+	return &levelButtons;
 }
 
 Level Player::getLevel(int i){
@@ -48,7 +52,15 @@ void Player::addLevel(bool c, unsigned int s, bool l){
 }
 
 void Player::resetLevels(){
+	double spaceX = 50;
+	double spaceY = 50;
+	double width = (1000 - 200) / 5.0 - spaceX;
+	double height = (1000 - 200) / 2.0 - spaceY;
+	double xP = -500 + 100 + width / 2.0 + spaceX / 2.0;
+	double yP = 500 - 100 - height / 2.0 - spaceY / 2.0;
+	
 	levels.clear();
+	levelButtons.clear();
 
 	Level aux;
 	aux.completed = false;
@@ -63,6 +75,20 @@ void Player::resetLevels(){
 		toLoad.locked = true;
 		levels.push_back(toLoad);
 	}
+
+	for (int i = 0; i < 2; i++){
+		for (int j = 0; j < 5; j++){
+			Button newOne("Level " + std::to_string(i * 5 + j + 1));
+			newOne.setID(i * 5 + j + 9);
+			newOne.setSizes(width, height, 1);
+			newOne.setPositions(xP, yP, 0);
+			newOne.setEnable(!levels[(i * 5 + j)].locked);
+			levelButtons.push_back(newOne);
+			xP += spaceX + width;
+		}
+		xP = -500 + 100 + width / 2.0 + spaceX / 2.0;
+		yP -= (spaceY + height);
+	}
 }
 
 bool Player::loadPlayer(){
@@ -73,7 +99,7 @@ bool Player::loadPlayer(){
 	json::Value json_value;
 	json::Object json;
 	json::Object saved_lvl;
-	json::Array saved_levels;
+	json::Array saved_levels;	
 
 	json_file.open(path);
 
@@ -119,9 +145,13 @@ bool Player::loadPlayer(){
 			toLoad.completed = saved_lvl["completed"];
 			toLoad.score = saved_lvl["score"];
 			toLoad.locked = saved_lvl["locked"];
-
 			levels.push_back(toLoad);
 		}
+
+		for (unsigned int i = 0; i < levels.size(); i++){
+			levelButtons[i].setEnable(!levels[i].locked);
+		}
+
 	}
 	else{
 		name = "New Player";

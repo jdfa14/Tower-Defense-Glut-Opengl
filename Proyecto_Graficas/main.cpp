@@ -79,7 +79,7 @@ void display(){
 void time(int x){
 	glutPostRedisplay();
 
-	gameManager.refresh();
+	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
 	glutTimerFunc(50, time, 1);
 }
 
@@ -94,7 +94,7 @@ void begin(){
 
 int main(int argc, char **argv){
 	win = gameManager.getWin();
-	win->setWindowSize(0, 600, 0, 600);
+	win->setWindowSize(0, 900, 0, 700);
 	win->setOrthoSize(-500, 500, -500, 500, 100,300);
 	win->setCamera(0, 0, 200, 0, 0, 0, 0, 1, 0);
 	win->setName("Tower Defense");
@@ -104,7 +104,7 @@ int main(int argc, char **argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(win->getWindowWidth(), win->getWindowsHeight());
-	glutInitWindowPosition(100, 100);
+	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
 	begin();
 	glEnable(GL_DEPTH_TEST); //para diferenciar que vertices estan al frente y detras ver ejemplo del documento de word

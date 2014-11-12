@@ -8,6 +8,21 @@
     <ClCompile Include="Player.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager_Mouse.cpp">
+      <Filter>Objects\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager_Loading.cpp">
+      <Filter>Objects\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Objects\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager_Display.cpp">
+      <Filter>Objects\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -34,9 +49,6 @@
     <ClInclude Include="addGlut.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>Managers</Filter>
     </ClInclude>
@@ -55,6 +67,18 @@
     <ClInclude Include="level.h">
       <Filter>Structs</Filter>
     </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="wave.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="TempGameManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -71,6 +95,9 @@
     </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{2095d02e-87da-4eed-a1cb-e0113bb32f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\GameManager">
+      <UniqueIdentifier>{add92b26-3958-4d0a-94ad-2238b3687224}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

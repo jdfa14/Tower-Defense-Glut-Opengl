@@ -1,258 +1,78 @@
 #pragma once
-#include "addGlut.h"
-#include <vector>
+#include <string>
 #include <stack>
-
-#include <iostream>
-#include <fstream>
-
-#include "Image.h"
+#include <vector>	
 #include "GlutWindow.h"
-#include "Tower.h"
-#include "BadAgent.h"
-#include "Button.h"
-#include "structs.h"
-#include "json\json.h"
 #include "Player.h"
-
+#include "Tower.h"
+#include "Button.h"
+#include "Screen.h"
+#include "Level.h"
 
 class GameManager
 {
+private:
+	// only 3 static players could be created
+	std::vector<Player> players;
+	Player *selectedPlayer;
+	std::vector<Level> *levels;
+
+	GlutWindow win;// all the data from the window
+
+	std::stack<int> events;
+
+	//Objects
+	std::vector<Tower> *towers;
+	//std::vector<BadAgent> enemies;//maybe it will be not implemented
+
+	//visual controls
+	std::vector<Screen> screens;
+	std::vector<Button> *buttons;
+	std::vector<Image> *images;
+	Image *bgImage;
+
+	Screen mainScreen;
+	bool playing;
+
+	//Matriz de navegacion
+	int screenState;
+	//0 back, 1 foward1, 2 foward2... 
+	int **hereYouAre;
+
 public:
 	const std::string MENU = "Menu";
 	const std::string LEVEL = "Level";
 
-
-	GameManager(){
-		player1.setFileName("Player 1");
-		player2.setFileName("Player 2");
-		player3.setFileName("Player 3");
-		
-		isPlaying = false;
-		loadLevel(0);
-	}
+	enum SCREENTYPE{
+		MAIN,
+		PLAYERSELECT,
+		INSTRUCTIONS,
+		CREDITS,
+		LEVELSELECT,
+		PLAYLEVEL,
+		NUMBER_OF_SCREENS,
+		ERRORNAV
+	};
 	
-	void init(){
-		// we need to add a loading screen
-
-		double width = win.getOrthoWidth();
-		double height = win.getOrthoHeight();
-		//images
-		bgInitMenu.setPositions(0, 0, -99);
-		bgInitMenu.setSizes(width,height, 1);
-
-		//Loading Players
-		player1.loadPlayer();
-		player2.loadPlayer();
-		player3.loadPlayer();
-		players.push_back(player1);
-		players.push_back(player2);
-		players.push_back(player3);
-
-	}
+	GameManager();
 
 	//gets
-	GlutWindow *getWin(){ return &win; }
+	GlutWindow *getWin();
 
-	//Mouse And keyboard
-	void pasiveMouse(int x, int y)
-	{
-		for (unsigned int i = 0; i < buttons.size(); i++){
-			buttons[i].mouseState(x, y, false);
-		}
-	}
+	//sets
 
-	void rigthClick(int x, int y, int state)// state up or down
-	{
-		if (state == GLUT_DOWN)
-		{
-			
-		}
-		else
-		{
+	//methods
+	void init(); // this will load everything necesary also will show an loading screen or something
+	void pasiveMouse(int x, int y); // this will triger events from mouse moving
+	void rigthClick(int x, int y, int state);//actions for right click
+	void leftClick(int x, int y, int state);//same but for left
+	void middleClick(int x, int y, int state);
+	void button_listener(int id);//it will do the actions from buttons
+	void draw(double time);//it will draw all the objects (time in miliseconds)
+	void refresh(double time);//it will actualice everything that is needed
 
-		}
-	}
+	//functions
+	bool loadScreen(int i);
 
-	void leftClick(int x, int y, int state)
-	{
-		if (state == GLUT_DOWN){
-			for (unsigned int i = 0; i < buttons.size(); i++){
-				buttons[i].mouseState(x, y, true);
-			}
-		}
-		else {
-
-		}
-	}
-
-	void middleClick(int x, int y, int state){
-		if (state == GLUT_DOWN){
-
-		}
-		else {
-
-		}
-	}
-
-	bool loadLevel(int levelNum){
-		Button *btnPtr;
-		std::string path;
-		std::string json_string;
-		std::string type;
-		std::ifstream json_file;
-		std::string line;
-		json::Value my_json;
-		json::Object root;
-		json::Object data;
-		json::Object auxObj;
-		json::Array auxArr;
-
-		buttons.clear();// erase all current buttons
-
-		path = "levels/level" + std::to_string(levelNum) + ".json";
-		json_file.open(path);
-
-		if (!json_file.is_open()){
-			std::cout << "Error: could not load the json file at " << path << std::endl;
-			return false;
-		}
-
-		while (!json_file.eof())
-		{
-			json_file >> line;
-			json_string += line;
-		}
-		json_file.close();
-
-		my_json = json::Deserialize(json_string);
-
-		if (my_json.GetType() == json::NULLVal){
-			std::cout << "Error: Not json file: " << json_string << std::endl;
-			return false;
-		}
-
-		root = my_json.ToObject();// has to be an object
-		level = root["level"];
-		type = (std::string)root["type"];
-		data = root["data"];
-
-		if (type == MENU){// here we will load a menu
-			json::Array positions;
-			json::Array sizes;
-			path = "Images/" + (std::string)data["background"];
-			bgInitMenu.setPath(path);
-
-			auxArr = data["buttons"];
-			for (unsigned int i = 0; i < auxArr.size(); i++){// ADD BUTTON
-				auxObj = auxArr[i];
-
-				btnPtr = new Button((std::string)auxObj["text"]);
-				btnPtr->setEventsStack(&events);// sending the address of this event stack
-
-				if (auxObj["ID"].GetType() != json::NULLVal){
-					btnPtr->setID(auxObj["ID"]);
-				}
-
-				if (auxObj["positions"].GetType() != json::NULLVal){
-					positions = auxObj["positions"];
-					btnPtr->setPositions(positions[0], positions[1], positions[2]);
-				}
-				if (auxObj["sizes"].GetType() != json::NULLVal){
-					sizes = auxObj["sizes"];
-					btnPtr->setSizes(sizes[0], sizes[1], sizes[2]);
-				}
-
-				buttons.push_back(*btnPtr);
-				free(btnPtr);// this is no longer needed
-			}
-		}
-		else if (type == LEVEL){
-			//construct map and things
-		}
-
-		return true;
-	}
-
-	void button_listener(int id){
-		std::cout << id << std::endl;
-		// ids from 0 to 99 are transicion buttons
-		// ids 99 - 999 are action functions
-
-		// 0 = NEXT
-		// 99 = BACK
-		switch (id)
-		{
-		case 0:
-			//NEXT
-			loadLevel(level + 1);
-			break;
-		case 3:
-			loadLevel(2);
-			break;
-		case 99:
-			//BACK
-			loadLevel(level - 1);
-			break;
-		default:
-			break;
-		}
-	}
-
-
-	void prepareList(){}
-	void prepareLevel(){}
-	void prepareMaps(std::string levelname){
-
-	}
-	void showGrid(bool wannaShow){}
-	void changeActiveWindow(int toWindow){}
-
-	void draw(double time){
-
-		bgInitMenu.draw2D();
-
-		for (unsigned int i = 0; i < buttons.size(); i++)
-			buttons[i].draw();
-		for (unsigned int i = 0; i < images.size(); i++)
-			images[i].draw2D();
-		//also we need to draw all other objects
-	}
-
-	void refresh(){
-		while (!events.empty())
-		{
-			button_listener(events.top());
-			events.pop();
-		}
-	}
-
-	Image bgInitMenu;
-private:
-
-	bool isPlaying;// true if playing a level false if not
-	int level;// level that will be played
-	Player player1;
-	Player player2;
-	Player player3;
-
-	//PathManager
-	//int goTo[10][3] = {
-	//	[], [], []
-	//};
-
-	GlutWindow win;
-	std::stack<int> events;
-	std::map<char, std::string> sprites_map;//
-	std::vector<Location> path;
-
-	//
-	std::vector<Tower> towers;
-	std::vector<BadAgent> enemies;
-	std::vector<Player> players;
-
-	//visual controls
-	std::vector<Button> buttons;
-	std::vector<Image> images;
 };
 

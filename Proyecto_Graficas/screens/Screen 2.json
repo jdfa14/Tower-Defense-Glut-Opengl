@@ -1,0 +1,16 @@
+{
+  "type" : "Menu",
+  "level" : 1,
+  "name" : "Instructions",
+  "data" : {
+  "background" : "instructions.bmp",
+  "buttons" : [
+      {
+        "text" : "Back",
+        "ID" : 0,
+        "positions" : [-375,-475,0],
+        "sizes" : [250,50,1]
+      }
+    ]
+  }
+}

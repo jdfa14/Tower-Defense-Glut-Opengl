@@ -234,6 +234,7 @@
 #define __SUPER_EASY_JSON_H__
 
 #include <vector>
+#include <fstream>
 #include <map>
 #include <string>
 #include <stdexcept>
@@ -611,6 +612,36 @@ namespace json
 			default:
 				return true;
 		}
+	}
+
+	inline json::Value loadJson(std::string path, int &e){
+		std::string json_string;
+		std::string line;
+		std::ifstream json_file;
+		json::Value my_json;
+		e = 0; //no problems
+
+		json_file.open(path);
+
+		if (!json_file.is_open()){
+			e = 1; //no file open
+			return json::NULLVal;
+		}
+
+		while (!json_file.eof())
+		{
+			json_file >> line;
+			json_string += line;
+		}
+		json_file.close();
+
+		my_json = json::Deserialize(json_string);
+
+		if (my_json.GetType() == json::NULLVal){
+			e = 2;//no valid json string
+			return json::NULLVal;
+		}
+		return my_json;
 	}
 }
 

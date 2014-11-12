@@ -1,0 +1,52 @@
+{
+  "type": "Menu",
+  "level": 0,
+  "name" : "Main_menu",
+  "data": {
+    "background": "menu.bmp",
+    "buttons": [
+      {
+        "text": "Play",
+        "ID": 1,
+        "positions": [
+          0,
+          0,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
+      },
+      {
+        "text": "Options",
+        "ID": 2,
+        "positions": [
+          0,
+          -150,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
+      },
+      {
+        "text": "Credits",
+        "ID": 3,
+        "positions": [
+          0,
+          -300,
+          0
+        ],
+        "sizes": [
+          250,
+          100,
+          1
+        ]
+      }
+    ]
+  }
+}
