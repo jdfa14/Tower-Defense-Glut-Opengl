@@ -2,14 +2,11 @@
 #include "StaticObject.h"
 class Tower : public StaticObject
 {
-public:
+    public:
 
-	Tower()
-	{
-	}
+        Tower()
+        {
 
-	~Tower()
-	{
-	}
+        }
 };
 
