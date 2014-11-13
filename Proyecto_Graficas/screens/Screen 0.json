@@ -3,7 +3,7 @@
   "level": 0,
   "name" : "Main_menu",
   "data": {
-    "background": "menu.bmp",
+    "background": "menu.png",
     "buttons": [
       {
         "text": "Play",

@@ -106,6 +106,7 @@
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cMonster2.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cArrow.h" />
@@ -127,6 +128,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cMonster2.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

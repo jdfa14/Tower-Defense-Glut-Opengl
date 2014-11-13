@@ -30,7 +30,7 @@ public:
 	//std::vector<std::vector<BadAgent>> getEnemies(); pending... i need to know if i will use a class or a struct
 	std::string getScreenName();
 	std::string getType();
-	Image * getBGImage();
+	Image* getBGImage();
 	bool isLoaded();
 
 	//sets

@@ -2,6 +2,7 @@
 
 cGame::cGame(void)
 {
+	imagen.load("C:/Users/JesusDavid/Documents/GitHub/Tower-Defense-Glut-Opengl/Proyecto2D/Project/Textures/player1.png",GL_RGBA);
 }
 
 cGame::~cGame(void)
@@ -601,14 +602,14 @@ void cGame::Render()
 		Shader.SetUniform("tex", 0);
 		Shader.SetUniform("flatcolor", 0);
 	}
-
+	
 	//Pintado
 	Data.GetSize(IMG_TILESET,&tex_w,&tex_h);
 	Scene.Draw(Data.GetID(IMG_TILESET),tex_w,tex_h,run);
 
 	Data.GetSize(IMG_PLAYER1,&tex_w,&tex_h);
 	if(Player1.GetCharge() >= CHARGE_BREAK && Player1.GetCharge()%4 < 2) Player1.Draw(Data.GetID(IMG_SUPERP1),tex_w,tex_h,run);
-	else Player1.Draw(Data.GetID(IMG_PLAYER1),tex_w,tex_h,run);
+	else Player1.Draw(imagen.tex_id,tex_w,tex_h,run);
 
 	Data.GetSize(IMG_PLAYER2,&tex_w,&tex_h);
 	if(Player2.GetCharge() >= CHARGE_BREAK && Player2.GetCharge()%4 < 2) Player2.Draw(Data.GetID(IMG_SUPERP2),tex_w,tex_h,run);

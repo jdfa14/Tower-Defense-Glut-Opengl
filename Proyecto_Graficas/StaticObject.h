@@ -1,5 +1,5 @@
 #pragma once
-#include "Image.h"
+#include "Texture.h"
 #include "PlaceableObject.h"
 class StaticObject :
 	public PlaceableObject
@@ -18,7 +18,7 @@ public:
 	}
 
 	void setImagePath(std::string imagePath){
-		image.setPath(imagePath);
+		image.load(imagePath);
 	}
 
 	void setPositions(double x, double y, double z){
@@ -32,9 +32,9 @@ public:
 	}
 
 	void draw(){//draw image in position override
-		image.draw2D();
+		image.draw();
 	}
 protected:
-	Image image;
+	Texture image;
 };
 

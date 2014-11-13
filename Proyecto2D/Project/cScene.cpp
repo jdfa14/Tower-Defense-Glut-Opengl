@@ -473,6 +473,7 @@ void cScene::DrawAnimatedTiles(int tex_id,int tex_w,int tex_h)
 		glEnd();
 	}
 }
+
 bool* cScene::GetCollisionMap()
 {
 	return collision_map;

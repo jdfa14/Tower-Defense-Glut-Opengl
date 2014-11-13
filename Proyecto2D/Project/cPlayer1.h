@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cPlayer.h"
+#include "Texture.h"
 
 class cPlayer1: public cPlayer
 {
@@ -24,4 +25,5 @@ public:
 
 private:
 	int logic_state;
+	Texture aux;
 };

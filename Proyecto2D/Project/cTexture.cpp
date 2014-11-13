@@ -42,17 +42,16 @@ bool cTexture::Load(char *filename,int type,int wraps,int wrapt,int magf,int min
 
 	if(!mipmap)
 	{
-		glTexImage2D(GL_TEXTURE_2D,0,components,width,height,0,type,
-					 GL_UNSIGNED_BYTE,img->getPixels());
+		glTexImage2D(GL_TEXTURE_2D,0,components,width,height,0,type,GL_UNSIGNED_BYTE,img->getPixels());
 	}
 	else
 	{
-		gluBuild2DMipmaps(GL_TEXTURE_2D,components,width,height,type,
-						  GL_UNSIGNED_BYTE,img->getPixels());
+		gluBuild2DMipmaps(GL_TEXTURE_2D,components,width,height,type,GL_UNSIGNED_BYTE,img->getPixels());
 	}
 
 	return true;
 }
+
 int cTexture::GetID()
 {
 	return id;

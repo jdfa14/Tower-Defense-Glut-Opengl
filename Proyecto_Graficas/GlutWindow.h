@@ -2,7 +2,7 @@
 #include <string>
 #include <iomanip>
 #include <cmath>
-#include "addGlut.h"
+#include "Globals.h"
 class GlutWindow
 {
 public:

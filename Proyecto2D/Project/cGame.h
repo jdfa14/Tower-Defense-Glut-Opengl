@@ -10,6 +10,7 @@
 #include "cData.h"
 #include "cSound.h"
 #include "cShader.h"
+#include "Texture.h"
 
 //dimensiones de la window inicial
 #define GAME_WIDTH	((SCENE_WIDTH-2)*TILE_SIZE + SCENE_Xo*2) //valores compuestos de #define siempre encerrados en parentesis
@@ -45,7 +46,7 @@ class cGame
 public:
 	cGame(void);
 	virtual ~cGame(void);
-
+	Texture imagen;
 	bool Init(int level);
 	bool Loop();
 	void Finalize();

@@ -6,12 +6,14 @@
 #include "Image.h"
 #include "StaticObject.h"
 #include "Button.h"
+#include "Texture.h"
 
 
 
 GlutWindow *win;
 GameManager gameManager;
 
+Texture test1,test2;
 
 void keyboard(unsigned char key, int x, int y){
 	switch (key)
@@ -30,6 +32,8 @@ void mousePassive(int x, int y)
 	double yMapped = win->getYMapped(y);
 	//std::cout << "Im moving" << std::endl;
 	gameManager.pasiveMouse(xMapped,yMapped);
+	test1.setPositions(xMapped + 100, yMapped, 0);
+	test2.setPositions(xMapped - 100, yMapped,0);
 }
 
 void mouseFunc(int button, int state, int x, int y){//when user clicks
@@ -65,11 +69,11 @@ void reshape(int width, int height){
 
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Al inicio
-
 	//real code
 
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
-
+	test1.draw();
+	test2.draw();
 	//testing code below
 
 
@@ -90,6 +94,8 @@ void begin(){
 	//glLoadIdentity();
 	glShadeModel(GL_SMOOTH);//sombreado plano
 
+	test1.load("Images/botonHover.png", GL_RGBA);
+	test2.load("Images/botonNormal.png", GL_RGBA);
 }
 
 int main(int argc, char **argv){
@@ -102,12 +108,14 @@ int main(int argc, char **argv){
 	gameManager.init();// loading images, positions, sizes
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(win->getWindowWidth(), win->getWindowsHeight());
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow(argv[0]);
 	begin();
 	glEnable(GL_DEPTH_TEST); //para diferenciar que vertices estan al frente y detras ver ejemplo del documento de word
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glutDisplayFunc(display);
 	glutTimerFunc(5, time, 1);

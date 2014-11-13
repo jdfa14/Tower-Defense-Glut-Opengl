@@ -9,6 +9,7 @@ cPlayer1::cPlayer1()
 	SetCharge(0);
 	SetDamage(10);
 	SetLogicState(STATE_LOOKDOWN);
+	aux.load("C:/Users/JesusDavid/Documents/GitHub/Tower-Defense-Glut-Opengl/Proyecto2D/Project/Textures/player1.png");
 }
 cPlayer1::~cPlayer1(){}
 

@@ -1,36 +1,15 @@
-/* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above notice and this permission notice shall be included in all copies
-* or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
-/* File for "Textures" lesson of the OpenGL tutorial on
-* www.videotutorialsrock.com
-*/
-/* Modified by Jesus De La Fuente Amaya on 10/25/2014
-*  All rights are reserved
-*/
-
 #pragma once
-#include "addGlut.h"
+#include "Globals.h"
 //#include <SDL\SDL.h>
 #include <fstream>
 #include <string>
 #include <iostream>
 #include <assert.h>
 #include "PlaceableObject.h"
+#include "corona.h"
+
+#define TILE_SIZE		  16   //el tamaño en px del lado de una tile en pantalla
+#define TEXTURE_TILE_SIZE 16   //el tamaño en px del lado de una tile en la textura (tipicamente 16 o 32)
 
 //Just like auto_ptr, but for arrays
 template<class T>
@@ -40,6 +19,7 @@ private:
 	T* array;
 	mutable bool isReleased;
 public:
+
 	explicit auto_array(T* array_ = NULL) :
 		array(array_), isReleased(false)
 	{
@@ -129,6 +109,10 @@ public:
 		filter = GL_LINEAR;
 		isLoaded = false;
 	}
+
+	bool load(int type = GL_RGBA, int wraps = GL_REPEAT, int wrapt = GL_REPEAT,
+		int magf = GL_NEAREST, int minf = GL_NEAREST, bool mipmap = false);
+
 	void setPath(std::string path){
 		this->path = path;
 		loadImage();
@@ -155,6 +139,8 @@ public:
 		rotY = Y;
 		rotZ = Z;
 	}
+
+	void loadList();
 
 	void draw2D(){
 		if (isLoaded){
@@ -209,6 +195,8 @@ public:
 			glPopMatrix();
 		}
 	}
+	void draw();
+	void prepare(int tex_id, int tex_w, int tex_h);
 
 private:
 	double x;
@@ -231,6 +219,7 @@ private:
 	GLuint texture;
 	GLint wrap;
 	GLint filter;
+	int glList;
 
 	//Converts a four-character array to an integer, using little-endian form
 	int toInt(const char* bytes)

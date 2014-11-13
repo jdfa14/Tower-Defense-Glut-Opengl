@@ -11,6 +11,7 @@ cPlayer::cPlayer()
 	frame_texture_tiles = 4;
 	step_length = STEP_LENGTH;
 	cooldown = 0;
+	
 }
 cPlayer::~cPlayer(){}
 

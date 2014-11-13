@@ -14,7 +14,7 @@ public:
 	Button(std::string text){
 		this->text = text;
 		// pred values
-		image.setPath("Images/BotonNormal.bmp");
+		image.load("Images/BotonNormal.png");
 		hover.setPath("Images/BotonHover.bmp");
 		click.setPath("Images/BotonPressed.bmp");
 
@@ -24,7 +24,7 @@ public:
 		enable = true;
 	}
 
-	void setImageNormal(std::string path){ image.setPath(path); }
+	void setImageNormal(std::string path){ image.load(path); }
 	void setImageHover(std::string path){ hover.setPath(path); }
 	void setImageClick(std::string path){ click.setPath(path); }
 
@@ -59,7 +59,7 @@ public:
 			hover.draw2D();
 			break;
 		case Button::NORMAL:
-			image.draw2D();
+			image.draw();
 			break;
 		case Button::CLICK:
 			click.draw2D();
