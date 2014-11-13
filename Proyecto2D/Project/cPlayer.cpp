@@ -27,7 +27,6 @@ void cPlayer::DrawRect(int tex_id,float xo,float yo,float xf,float yf)
 	hitbox_h = hitbox.top - hitbox.bottom;
 
 	glEnable(GL_TEXTURE_2D);
-	
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 	glBegin(GL_QUADS);
 		glTexCoord2f(xo,yo);	glVertex3i(screen_x - (TILE_SIZE*frame_texture_tiles - hitbox_w)/2,screen_y - (TILE_SIZE*frame_texture_tiles - hitbox_h)/2,screen_y);

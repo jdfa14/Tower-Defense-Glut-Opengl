@@ -12,29 +12,30 @@ public:
 		setSizes(100, 100, 1);
 	}
 
-	~StaticObject()
-	{
-		//img.~Image();//Mmm... this make me think
-	}
-
 	void setImagePath(std::string imagePath){
-		image.load(imagePath);
 	}
 
 	void setPositions(double x, double y, double z){
 		PlaceableObject::setPositions(x, y, z);
-		image.setPositions(x, y, z);
 	}
 
 	void setSizes(double width, double height, double volume){
 		PlaceableObject::setSizes(width, height, volume);
-		image.setSizes(width, height, volume);
 	}
 
-	void draw(){//draw image in position override
-		image.draw();
+	void drawText(int tex_id){
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex_id);
+		glPushMatrix();
+		glBegin(GL_QUADS);
+			glTexCoord2f(0, 0);	glVertex3i(x - width / 2.0, y + height / 2.0, -1);
+			glTexCoord2f(1, 0);	glVertex3i(x + width / 2.0, y + height / 2.0, -1);
+			glTexCoord2f(1, 1);	glVertex3i(x + width / 2.0, y - height / 2.0, -1);
+			glTexCoord2f(0, 1);	glVertex3i(x - width / 2.0, y - height / 2.0, -1);
+		glEnd();
+		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
 	}
 protected:
-	Texture image;
 };
 

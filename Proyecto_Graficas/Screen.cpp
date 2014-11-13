@@ -12,7 +12,7 @@ std::vector<Button>* Screen::getButtons(){
 	return &buttons;
 }
 
-std::vector<Image>* Screen::getImages(){
+std::vector<Texture>* Screen::getImages(){
 	return &images;
 }
 
@@ -32,7 +32,7 @@ std::string Screen::getType(){
 	return type;
 }
 
-Image* Screen::getBGImage(){
+Texture* Screen::getBGImage(){
 	return &background;
 }
 
@@ -65,7 +65,7 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 
 	type = (std::string)json["type"];
 	data = json["data"];
-	background.setPath("Images/backgrounds/" + (std::string)data["background"]);
+	background.load("Images/backgrounds/" + (std::string)data["background"]);
 
 	//load buttons
 	if (data["buttons"].GetType() != json::NULLVal){
@@ -95,13 +95,4 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 		//pending
 	}
 	return true;
-}
-
-void Screen::draw(){
-	for (unsigned int i = 0; i < buttons.size(); i++)
-		buttons[i].draw();
-	for (unsigned int i = 0; i < images.size(); i++)
-		images[i].draw2D();
-	for (unsigned int i = 0; i < towers.size(); i++)
-		towers[i].draw();
 }

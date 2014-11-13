@@ -2,7 +2,6 @@
 #include "addGlut.h"
 #include <stack>
 #include "StaticObject.h"
-#include "Image.h"
 #include "Button.h"
 
 
@@ -14,31 +13,20 @@ public:
 	Button(std::string text){
 		this->text = text;
 		// pred values
-		image.load("Images/BotonNormal.png");
-		hover.setPath("Images/BotonHover.bmp");
-		click.setPath("Images/BotonPressed.bmp");
+		//image.load("Images/BotonNormal.png");
+		//hover.load("Images/BotonHover.png");
+		//click.load("Images/BotonPressed.png");
 
 		setPositions(0, 0, 0);
 		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str()) * 2, 100, 1);
 		state = NORMAL;
 		enable = true;
+		toDo = false;
 	}
 
-	void setImageNormal(std::string path){ image.load(path); }
-	void setImageHover(std::string path){ hover.setPath(path); }
-	void setImageClick(std::string path){ click.setPath(path); }
-
-	void setPositions(double x, double y, double z){
-		StaticObject::setPositions(x, y, z);
-		hover.setPositions(x, y, z);
-		click.setPositions(x, y, z);
-	}
-
-	void setSizes(double width, double height, double volume){
-		StaticObject::setSizes(width, height, volume);
-		hover.setSizes(width, height, volume);
-		click.setSizes(width, height, volume);
-	}
+	//void setImageNormal(std::string path){ image.load(path); }
+	//void setImageHover(std::string path){ hover.load(path); }
+	//void setImageClick(std::string path){ click.load(path); }
 
 	std::string getText(){
 		return text;
@@ -51,21 +39,31 @@ public:
 		this->enable = enable;
 	}
 
-	void draw(){// another draw with text
-		//need to remove this switch and use pointers instead
+	//void draw(){// another draw with text
+	//	//need to remove this switch and use pointers instead
+	//	switch (state)
+	//	{
+	//	case Button::HOVER:
+	//		hover.draw();
+	//		break;
+	//	case Button::NORMAL:
+	//		image.draw();
+	//		break;
+	//	case Button::CLICK:
+	//		click.draw();
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//	writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
+	//}
+
+	void drawText(int normal, int hover, int pressed){
 		switch (state)
 		{
-		case Button::HOVER:
-			hover.draw2D();
-			break;
-		case Button::NORMAL:
-			image.draw();
-			break;
-		case Button::CLICK:
-			click.draw2D();
-			break;
-		default:
-			break;
+		case HOVER: StaticObject::drawText(hover); break;
+		case CLICK: StaticObject::drawText(pressed); break;
+		default: StaticObject::drawText(normal);break;
 		}
 		writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
 	}
@@ -80,14 +78,21 @@ public:
 					//std::cout << "Clicked \n";
 					//perform action and controls pendings
 					//activate flag, that will be deactivated when the action is performed
-					action();
+					toDo = true;
 				}
 				else
 				{
 					state = HOVER;
 					//std::cout << "Hover \n";
+					if (toDo){
+						toDo = false;
+						action();
+					}
 				}
 				return;
+			}
+			if (toDo){
+				toDo = false;
 			}
 			state = NORMAL;
 		}
@@ -117,11 +122,6 @@ public:
 	}
 
 private:
-	
-
-	//auxiliar images
-	Image hover;
-	Image click;
 	bool enable;
 
 	std::string text;
@@ -131,7 +131,7 @@ private:
 	std::stack<int> *events;
 
 	//controls flags for click
-	//bool toDo;
+	bool toDo;
 
 	void writeText(std::string text, double x, double y, void *font){
 		glColor3ub(255, 255, 255);

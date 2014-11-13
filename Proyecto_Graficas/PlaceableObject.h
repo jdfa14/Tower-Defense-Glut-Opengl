@@ -23,8 +23,6 @@ public:
 		this->volume = volume;
 	}
 
-	virtual void draw() = 0;
-
 protected:
 	double x;
 	double y;

@@ -8,6 +8,9 @@ void GameManager::init(){
 	double height = win.getOrthoHeight();
 	const int cant = 4;
 
+	test3 = new Button("asdasdasd");
+	test3->setPositions(0, 200, 0);
+
 	//we load players info from jsons
 	std::cout << "Loading players \n";
 	for (int i = 1; i < 4; i++){
@@ -82,4 +85,17 @@ bool GameManager::loadScreen(int i){
 
 	screenState = i;
 	return true;
+}
+
+void GameManager::begin(){
+	glClearColor(0.5, 0.0, 1.0, 0.0);
+	glColor3ub(255, 255, 255);//color de linea
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	glShadeModel(GL_SMOOTH);//sombreado plano
+
+	//loading images
+	std::cout << "Loading Images \n";
+	data.Load();
+
 }

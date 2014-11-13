@@ -3,7 +3,7 @@
 #include <iostream>
 #include "GameManager.h"
 #include "GlutWindow.h"
-#include "Image.h"
+#include "Texture.h"
 #include "StaticObject.h"
 #include "Button.h"
 #include "Texture.h"
@@ -12,8 +12,10 @@
 
 GlutWindow *win;
 GameManager gameManager;
+//cData *Data;
 
 Texture test1,test2;
+int testid;
 
 void keyboard(unsigned char key, int x, int y){
 	switch (key)
@@ -34,6 +36,7 @@ void mousePassive(int x, int y)
 	gameManager.pasiveMouse(xMapped,yMapped);
 	test1.setPositions(xMapped + 100, yMapped, 0);
 	test2.setPositions(xMapped - 100, yMapped,0);
+	//test3.mouseState(xMapped, yMapped,false);
 }
 
 void mouseFunc(int button, int state, int x, int y){//when user clicks
@@ -44,6 +47,7 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 	{
 	case GLUT_LEFT_BUTTON:
 		gameManager.leftClick(xMapped, yMapped, state);
+		testid = (testid + 1) % 3;
 		break;
 	case GLUT_RIGHT_BUTTON:
 		gameManager.rigthClick(xMapped, yMapped, state);
@@ -72,10 +76,6 @@ void display(){
 	//real code
 
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
-	test1.draw();
-	test2.draw();
-	//testing code below
-
 
 	glutSwapBuffers();
 }
@@ -88,18 +88,22 @@ void time(int x){
 }
 
 void begin(){
-	glClearColor(0.5, 0.0, 1.0, 0.0);
-	glColor3ub(255, 255, 255);//color de linea
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	glShadeModel(GL_SMOOTH);//sombreado plano
+	gameManager.begin();
 
+	testid = 0;
 	test1.load("Images/botonHover.png", GL_RGBA);
 	test2.load("Images/botonNormal.png", GL_RGBA);
+	//test3.setPositions(0, 200, 0);
+	std::cout << "Loading Data \n";
+	//Data->Load();
+	std::cout << "Loaded Data \n";
+
+	
 }
 
 int main(int argc, char **argv){
 	win = gameManager.getWin();
+	//Data = &gameManager.data;
 	win->setWindowSize(0, 900, 0, 700);
 	win->setOrthoSize(-500, 500, -500, 500, 100,300);
 	win->setCamera(0, 0, 200, 0, 0, 0, 0, 1, 0);

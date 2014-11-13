@@ -22,9 +22,16 @@ private:
 	int rotZ;
 	bool loaded;
 
-	corona::Image *img;
+	GLvoid *pixels;
 	int imgW;
 	int imgH;
+	bool mipmap;
+	int wraps;
+	int wrapt;
+	int type;
+	int minf;
+	int magf;
+	int components;
 
 public:
 	Texture();

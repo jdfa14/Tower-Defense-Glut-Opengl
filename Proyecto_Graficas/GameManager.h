@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Screen.h"
 #include "Level.h"
+#include "cData.h"
 
 class GameManager
 {
@@ -28,8 +29,10 @@ private:
 	//visual controls
 	std::vector<Screen> screens;
 	std::vector<Button> *buttons;
-	std::vector<Image> *images;
-	Image *bgImage;
+	std::vector<Texture> *images;
+	Texture *bgImage;
+	
+	
 
 	Screen mainScreen;
 	bool playing;
@@ -39,7 +42,12 @@ private:
 	//0 back, 1 foward1, 2 foward2... 
 	int **hereYouAre;
 
+
 public:
+
+	Button *test3;
+	cData data;
+
 	const std::string MENU = "Menu";
 	const std::string LEVEL = "Level";
 
@@ -73,6 +81,10 @@ public:
 
 	//functions
 	bool loadScreen(int i);
+
+	//Glut functions
+	void begin();
+	void drawBG();
 
 };
 

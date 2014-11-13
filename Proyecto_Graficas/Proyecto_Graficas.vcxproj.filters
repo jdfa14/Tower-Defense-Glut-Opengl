@@ -23,10 +23,16 @@
     <ClCompile Include="GameManager_Display.cpp">
       <Filter>Source FIles\GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
+    <ClCompile Include="Texture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="old Image.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="cData.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="cTexture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,8 +94,14 @@
     <ClInclude Include="Texture.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
+    <ClInclude Include="old Image.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="cData.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cTexture.h">
+      <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

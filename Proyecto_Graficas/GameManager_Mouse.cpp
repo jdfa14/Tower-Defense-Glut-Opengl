@@ -52,6 +52,7 @@ void GameManager::pasiveMouse(int x, int y){
 	for (unsigned int i = 0; i < buttons->size(); i++){
 		(*buttons)[i].mouseState(x, y, false);
 	}
+	test3->mouseState(x, y,false);
 }
 
 void GameManager::rigthClick(int x, int y, int state)// state up or down
@@ -74,7 +75,6 @@ void GameManager::leftClick(int x, int y, int state)
 		}
 	}
 	else {
-
 	}
 }
 

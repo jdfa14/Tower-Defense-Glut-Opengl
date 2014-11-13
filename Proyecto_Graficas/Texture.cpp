@@ -12,7 +12,6 @@ bool Texture::load(std::string filename, int type, int wraps, int wrapt, int mag
 	tex_id = 0;
 
 	corona::Image* img;
-	int components;
 
 	img = corona::OpenImage(filename.c_str());
 	if (!img){
@@ -34,10 +33,19 @@ bool Texture::load(std::string filename, int type, int wraps, int wrapt, int mag
 
 	if (img == NULL) return false;
 
-	int width = img->getWidth();
-	int height = img->getHeight();
-	glGenTextures(1, &tex_id);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
+	imgW = img->getWidth();
+	imgH = img->getHeight();
+	pixels = img->getPixels();
+	this->mipmap = mipmap;
+	this->wraps = wraps;
+	this->wrapt = wrapt;
+	this->type = type;
+	this->minf = minf;
+	this->magf = magf;
+	
+
+	//glGenTextures(1, &tex_id);
+	/*glBindTexture(GL_TEXTURE_2D, tex_id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wraps);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapt);
@@ -52,8 +60,10 @@ bool Texture::load(std::string filename, int type, int wraps, int wrapt, int mag
 	else
 	{
 		gluBuild2DMipmaps(GL_TEXTURE_2D, components, width, height, type, GL_UNSIGNED_BYTE, img->getPixels());
-	}
+	}*/
+
 	loaded = true;
+
 	return true;
 }
 
@@ -62,6 +72,21 @@ void Texture::draw(){
 		
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex_id);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wraps);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapt);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magf);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minf);
+
+		if (!mipmap)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, components, imgW, imgH, 0, type, GL_UNSIGNED_BYTE,pixels);
+		}
+		else
+		{
+			gluBuild2DMipmaps(GL_TEXTURE_2D, components, imgH, imgH, type, GL_UNSIGNED_BYTE, pixels);
+		}
 
 		glPushMatrix();
 		glTranslatef(x, y, z - volume / 2.0); // so x y and z will be the center
