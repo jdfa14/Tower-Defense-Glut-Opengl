@@ -37,7 +37,7 @@ bool cData::Load()
 	res = LoadImage(IMG_BGPLAY, path + "play.png", GL_RGBA); if (!res) return false;
 
 	// loading towers
-	path = "Images/towersPNG";
+	path = "Images/towersPNG/";
 	// Pills
 	res = LoadImage(IMG_TOWER1NORMAL, path + "tower1Normal.png", GL_RGBA); if (!res) return false;
 	res = LoadImage(IMG_TOWER1UPGRADED, path + "tower1Upgraded.png", GL_RGBA); if (!res) return false;
