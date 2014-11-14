@@ -49,7 +49,7 @@ void Mobile::update(double elapsedTimeMiliSec){
 	speedX += accX * t; // vf = vo + a * t
 	speedY += accY * t;
 
-	actualSpeed = speedX * speedX + speedY * speedY;
+	actualSpeed = speedX * speedX + speedY * speedY + 1;//+1 to avoid div by 0
 
 	if (actualSpeed > maxSpeed){
 		ratio = sqrt(maxSpeed / actualSpeed);

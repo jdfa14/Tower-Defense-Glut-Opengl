@@ -35,12 +35,18 @@
     <ClCompile Include="cTexture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="Wave.cpp" />
     <ClCompile Include="Mobile.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="BadAgent.cpp" />
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="BadAgent.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -106,10 +112,10 @@
     <ClInclude Include="cTexture.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wave.h">
-      <Filter>Structs</Filter>
-    </ClInclude>
     <ClInclude Include="Location.h" />
+    <ClInclude Include="Wave.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">

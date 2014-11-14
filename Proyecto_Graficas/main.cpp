@@ -8,6 +8,8 @@
 #include "Button.h"
 #include "Texture.h"
 #include "Mobile.h"
+#include "BadAgent.h"
+#include "Bullet.h"
 
 
 GlutWindow *win;
@@ -15,7 +17,9 @@ GameManager gameManager;
 cData Data;
 
 Mobile mobileTest;
-Mobile second;
+BadAgent second;
+BadAgent enemieTest;
+Bullet *bulletPointer;
 
 void keyboard(unsigned char key, int x, int y){
 	switch (key)
@@ -46,7 +50,12 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 	case GLUT_LEFT_BUTTON:
 		gameManager.leftClick(xMapped, yMapped, state);
 		mobileTest.setPositions(xMapped, yMapped,0);
-		second.setPositions(xMapped, yMapped, 0);
+		//second.setPositions(xMapped, yMapped, 0);
+		if (bulletPointer == NULL){
+			bulletPointer = new Bullet(second, 100, 100);
+			bulletPointer->setPositions(xMapped, yMapped, 0);
+		}
+			
 		break;
 	case GLUT_RIGHT_BUTTON:
 		gameManager.rigthClick(xMapped, yMapped, state);
@@ -77,6 +86,10 @@ void display(){
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
 	mobileTest.draw(Data.GetID(IMG_BGCREDITS));
 	second.draw(Data.GetID(IMG_BGCREDITS));
+	enemieTest.draw(Data.GetID(IMG_BGCREDITS));
+	if (bulletPointer != NULL)
+		bulletPointer->draw(Data.GetID(IMG_BGCREDITS));
+
 	glutSwapBuffers();
 }
 
@@ -86,6 +99,9 @@ void time(int x){
 	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
 	mobileTest.update(50);
 	second.update(50);
+	enemieTest.update(50);
+	if (bulletPointer != NULL)
+		bulletPointer->update(50);
 	glutTimerFunc(50, time, 1);
 }
 
@@ -95,9 +111,13 @@ void begin(){
 	mobileTest.setInitialSpeeds(0, 0);
 	mobileTest.setAccelerations(0, -100);
 	mobileTest.setMaxSpeed(30);
+	enemieTest.setPositions(100, 100, 0);
 	second.setInitialSpeeds(0, 0);
-	second.setAccelerations(-100, 0);
-	second.setMaxSpeed(30);
+	second.setAccelerations(-200, 0);
+	second.setMaxSpeed(40);
+	if (bulletPointer != NULL){
+		bulletPointer->setInitialSpeeds(20, 20);
+	}
 }
 
 int main(int argc, char **argv){

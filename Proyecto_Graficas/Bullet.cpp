@@ -33,7 +33,8 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 		timeToArrive = 0.1;
 	else
 		timeToArrive -= elapsedTimeMiliSeconds / 1000.0;
-
-	//accX = (toChase->getX() - x - speedX * timeToArrive) / (timeToArrive * timeToArrive);
-	//accY = (toChase->getY() - y - speedY * timeToArrive) / (timeToArrive * timeToArrive);
+	double xMonster, yMonster;
+	toChase->getPositions(xMonster, yMonster);
+	accX = (xMonster - x - speedX * timeToArrive) / (timeToArrive * timeToArrive);
+	accY = (yMonster - y - speedY * timeToArrive) / (timeToArrive * timeToArrive);
 }
