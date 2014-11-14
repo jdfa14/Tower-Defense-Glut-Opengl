@@ -15,7 +15,7 @@ void GameManager::init(){
 	std::cout << "Loading players \n";
 	for (int i = 1; i < 4; i++){
 		Player aux("Player " + std::to_string(i));
-		aux.loadPlayer();
+		aux.loadPlayer(events);
 		std::cout << "Player " << i << " loaded\n";
 		players.push_back(aux);
 	}

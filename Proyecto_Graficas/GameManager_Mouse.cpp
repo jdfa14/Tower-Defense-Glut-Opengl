@@ -11,7 +11,7 @@ void GameManager::button_listener(int id){
 		}
 		loadScreen(hereYouAre[screenState][id]);
 	}
-	else{
+	else{//where is 4 and five?? its a magical mistery
 		std::vector<Button> *levelbuttons;
 		//6 show player data
 		switch (id)
@@ -22,6 +22,7 @@ void GameManager::button_listener(int id){
 			selectedPlayer = &players[id - 6];
 			levels = selectedPlayer->getAllLevels();
 			levelbuttons = selectedPlayer->getLevelButtons();
+			loadScreen(hereYouAre[screenState][1]);
 
 			if (buttons->size() > 1)//delete previous buttons if the case
 				for (unsigned int i = 0; i < levelbuttons->size(); i++)
@@ -31,12 +32,10 @@ void GameManager::button_listener(int id){
 				buttons->push_back((*levelbuttons)[i]);
 			}
 
-			if (hereYouAre[screenState][1] == ERRORNAV){
+			if (screenState == ERRORNAV){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;
 			}
-			loadScreen(hereYouAre[screenState][1]);
-
 			break;
 
 		case 9://level selection
@@ -49,8 +48,6 @@ void GameManager::button_listener(int id){
 		case 16:
 		case 17:
 		case 18:
-
-
 			if (hereYouAre[screenState][1] == ERRORNAV){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;

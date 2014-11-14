@@ -47,6 +47,9 @@
     <ClCompile Include="Wave.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="Tower.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -85,9 +88,6 @@
     <ClInclude Include="Player.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="level.h">
-      <Filter>Structs</Filter>
-    </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
@@ -114,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="Location.h" />
     <ClInclude Include="Wave.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>

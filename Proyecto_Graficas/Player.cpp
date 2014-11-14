@@ -91,7 +91,7 @@ void Player::resetLevels(){
 	}
 }
 
-bool Player::loadPlayer(){
+bool Player::loadPlayer(std::stack<int> &events){
 	std::string path = "players/" + fileName + ".json";
 	std::string line;
 	std::string json_string;
@@ -107,7 +107,7 @@ bool Player::loadPlayer(){
 		
 		// If no file, we have to save one and then invoque this same method
 		if (savePlayer()){
-			return loadPlayer();// after this, you should no see the error
+			return loadPlayer(events);// after this, you should no see the error
 		}
 		else{
 			std::cout << "Error: could not load the json file at " << path << std::endl;
@@ -150,6 +150,7 @@ bool Player::loadPlayer(){
 
 		for (unsigned int i = 0; i < levels.size(); i++){
 			levelButtons[i].setEnable(!levels[i].locked);
+			levelButtons[i].setEventsStack(&events);
 		}
 
 	}

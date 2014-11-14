@@ -41,6 +41,6 @@ public:
 
 	//files
 	bool savePlayer();
-	bool loadPlayer();
+	bool loadPlayer(std::stack<int> &events);
 };
 

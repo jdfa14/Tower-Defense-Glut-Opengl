@@ -10,9 +10,6 @@ public:
 	{
 	}
 
-	void setImagePath(std::string imagePath){
-	}
-
 	void setPositions(double x, double y, double z){
 		PlaceableObject::setPositions(x, y, z);
 	}

@@ -8,8 +8,32 @@
       {
         "text" : "Back",
         "ID" : 0,
-        "positions" : [-375,-475,0],
-        "sizes" : [250,50,1]
+        "positions" : [375,-450,0],
+        "sizes" : [250,100,1]
+      },
+      {
+        "text" : "Type 1",
+        "ID" : 20,
+        "positions" : [315,287,0],
+        "sizes" : [125,145,1]
+      },
+      {
+        "text" : "Type 2",
+        "ID" : 21,
+        "positions" : [440,287,0],
+        "sizes" : [125,145,1]
+      },
+      {
+        "text" : "Type 4",
+        "ID" : 22,
+        "positions" : [315,142,0],
+        "sizes" : [125,146,1]
+      },
+      {
+        "text" : "Type 3",
+        "ID" : 23,
+        "positions" : [440,142,0],
+        "sizes" : [125,146,1]
       }
     ]
   }

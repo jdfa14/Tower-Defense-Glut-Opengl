@@ -14,12 +14,16 @@
 
 GlutWindow *win;
 GameManager gameManager;
-cData Data;
 
+
+// just test
+cData Data;
 Mobile mobileTest;
 BadAgent second;
 BadAgent enemieTest;
-Bullet *bulletPointer;
+
+std::vector<BadAgent> testEnemies;
+Tower *testTower;
 
 void keyboard(unsigned char key, int x, int y){
 	switch (key)
@@ -44,21 +48,23 @@ void mousePassive(int x, int y)
 void mouseFunc(int button, int state, int x, int y){//when user clicks
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
-	
+	BadAgent *aux;
 	switch (button)
 	{
 	case GLUT_LEFT_BUTTON:
 		gameManager.leftClick(xMapped, yMapped, state);
 		mobileTest.setPositions(xMapped, yMapped,0);
 		//second.setPositions(xMapped, yMapped, 0);
-		if (bulletPointer == NULL){
-			bulletPointer = new Bullet(second, 100, 100);
-			bulletPointer->setPositions(xMapped, yMapped, 0);
-		}
 			
 		break;
 	case GLUT_RIGHT_BUTTON:
 		gameManager.rigthClick(xMapped, yMapped, state);
+		aux = new BadAgent();
+		aux->setPositions(xMapped, yMapped, 0);
+		aux->setInitialSpeeds(0, 0);
+		aux->setAccelerations(-200, 0);
+		aux->setMaxSpeed(40);
+		testEnemies.push_back(*aux);
 		break;
 	default:
 		gameManager.middleClick(xMapped, yMapped, state);
@@ -84,30 +90,44 @@ void display(){
 	//real code
 
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
+	///TEST
 	mobileTest.draw(Data.GetID(IMG_BGCREDITS));
 	second.draw(Data.GetID(IMG_BGCREDITS));
 	enemieTest.draw(Data.GetID(IMG_BGCREDITS));
-	if (bulletPointer != NULL)
-		bulletPointer->draw(Data.GetID(IMG_BGCREDITS));
+	for (unsigned int i = 0; i < testEnemies.size(); i++){
+		testEnemies[i].draw(Data.GetID(IMG_BGCREDITS));
+	}
+	testTower->draw();
+
+	//TEST
 
 	glutSwapBuffers();
 }
 
 void time(int x){
 	glutPostRedisplay();
-
 	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
+
+	//TEST
 	mobileTest.update(50);
 	second.update(50);
 	enemieTest.update(50);
-	if (bulletPointer != NULL)
-		bulletPointer->update(50);
+
+	for (unsigned int i = 0; i < testEnemies.size(); i++){
+		testEnemies[i].update(50);
+	}
+
+	testTower->update(50);
+	//TEST
+
 	glutTimerFunc(50, time, 1);
 }
 
 void begin(){
 	gameManager.begin();
 	Data.Load();
+
+	//TEST
 	mobileTest.setInitialSpeeds(0, 0);
 	mobileTest.setAccelerations(0, -100);
 	mobileTest.setMaxSpeed(30);
@@ -115,9 +135,9 @@ void begin(){
 	second.setInitialSpeeds(0, 0);
 	second.setAccelerations(-200, 0);
 	second.setMaxSpeed(40);
-	if (bulletPointer != NULL){
-		bulletPointer->setInitialSpeeds(20, 20);
-	}
+
+	testTower = new Tower(Data, testEnemies, -200, 400, 0, 200, 1);
+	//TEST
 }
 
 int main(int argc, char **argv){

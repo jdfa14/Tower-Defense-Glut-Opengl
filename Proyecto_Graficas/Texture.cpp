@@ -45,7 +45,7 @@ bool Texture::load(std::string filename, int type, int wraps, int wrapt, int mag
 	
 
 	//glGenTextures(1, &tex_id);
-	/*glBindTexture(GL_TEXTURE_2D, tex_id);
+	glBindTexture(GL_TEXTURE_2D, tex_id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wraps);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapt);
@@ -60,7 +60,7 @@ bool Texture::load(std::string filename, int type, int wraps, int wrapt, int mag
 	else
 	{
 		gluBuild2DMipmaps(GL_TEXTURE_2D, components, width, height, type, GL_UNSIGNED_BYTE, img->getPixels());
-	}*/
+	}
 
 	loaded = true;
 
@@ -72,7 +72,7 @@ void Texture::draw(){
 		
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex_id);
-
+		/*
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wraps);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapt);
 
@@ -87,7 +87,7 @@ void Texture::draw(){
 		{
 			gluBuild2DMipmaps(GL_TEXTURE_2D, components, imgH, imgH, type, GL_UNSIGNED_BYTE, pixels);
 		}
-
+		*/
 		glPushMatrix();
 		glTranslatef(x, y, z - volume / 2.0); // so x y and z will be the center
 		glRotated(angleOfRotation, rotX, rotY, rotZ);
