@@ -84,8 +84,8 @@ void time(int x){
 	glutPostRedisplay();
 
 	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
-	mobileTest.update(glutGet(GLUT_ELAPSED_TIME));
-	second.update(glutGet(GLUT_ELAPSED_TIME));
+	mobileTest.update(50);
+	second.update(50);
 	glutTimerFunc(50, time, 1);
 }
 

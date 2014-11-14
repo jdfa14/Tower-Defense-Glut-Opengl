@@ -1,13 +1,10 @@
 #include "Mobile.h"
 
 Mobile::Mobile() : PlaceableObject(){
-	accelerating = false;
-	turning = false;
 	setMaxSpeed(1);
 	setInitialSpeeds(0, 0);
 	setAccelerations(0, 0);
 	actualSpeed = 0;
-	timeSinceLastTime = 0;
 	direction = 0;
 }
 
@@ -37,7 +34,6 @@ void Mobile::setAccelerations(double accX, double accY){
 	this->accX = accX;
 	this->accY = accY;
 	acc = accX * accX + accY * accY;
-	accelerating = true;
 }
 
 
@@ -45,26 +41,17 @@ void Mobile::setMaxSpeed(double maxSpeed){
 	this->maxSpeed = maxSpeed * maxSpeed;
 }
 
-void Mobile::update(double timeInMiliSec){
-	if (timeSinceLastTime == 0){
-		timeSinceLastTime = timeInMiliSec;
-	}
-	double t = (timeInMiliSec - timeSinceLastTime) / 100.0;
-	double xAux;
-	double yAux;
+void Mobile::update(double elapsedTimeMiliSec){
+	double t = elapsedTimeMiliSec / 999.0;//Bad magic happends when i div by 1000
 	double ratio;
 	double angleAux;
 
 	speedX += accX * t; // vf = vo + a * t
 	speedY += accY * t;
 
-	xAux = speedX * speedX;
-	yAux = speedY * speedY;
-
-	actualSpeed = xAux + yAux;
+	actualSpeed = speedX * speedX + speedY * speedY;
 
 	if (actualSpeed > maxSpeed){
-		//accelerating = false;
 		ratio = sqrt(maxSpeed / actualSpeed);
 		speedX *= ratio;
 		speedY *= ratio;
@@ -75,5 +62,4 @@ void Mobile::update(double timeInMiliSec){
 
 	x += speedX * t;
 	y += speedY * t;
-	timeSinceLastTime = timeInMiliSec;
 }
