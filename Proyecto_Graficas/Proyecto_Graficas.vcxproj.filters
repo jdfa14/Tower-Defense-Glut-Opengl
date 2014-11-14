@@ -39,6 +39,8 @@
     <ClCompile Include="Mobile.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BadAgent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -107,6 +109,7 @@
     <ClInclude Include="Wave.h">
       <Filter>Structs</Filter>
     </ClInclude>
+    <ClInclude Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">

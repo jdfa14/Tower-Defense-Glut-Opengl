@@ -156,6 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BadAgent.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="cData.cpp" />
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -178,6 +180,7 @@
     <ClInclude Include="cData.h" />
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="TempGameManager.h" />
     <ClInclude Include="addGlut.h" />
     <ClInclude Include="GameManager.h" />
