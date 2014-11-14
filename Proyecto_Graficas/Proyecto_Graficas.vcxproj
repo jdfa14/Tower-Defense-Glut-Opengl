@@ -162,12 +162,14 @@
     <ClCompile Include="GameManager_Display.cpp" />
     <ClCompile Include="GameManager_Loading.cpp" />
     <ClCompile Include="GameManager_Mouse.cpp" />
+    <ClCompile Include="Mobile.cpp" />
     <ClCompile Include="old Image.cpp" />
     <ClCompile Include="json\json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadAgent.h" />
@@ -180,7 +182,7 @@
     <ClInclude Include="addGlut.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="wave.h" />
+    <ClInclude Include="Wave.h" />
     <ClInclude Include="old Image.h" />
     <ClInclude Include="json\json.h" />
     <ClInclude Include="level.h" />

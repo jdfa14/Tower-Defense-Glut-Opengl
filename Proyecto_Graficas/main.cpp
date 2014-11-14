@@ -7,15 +7,15 @@
 #include "StaticObject.h"
 #include "Button.h"
 #include "Texture.h"
-
+#include "Mobile.h"
 
 
 GlutWindow *win;
 GameManager gameManager;
-//cData *Data;
+cData Data;
 
-Texture test1,test2;
-int testid;
+Mobile mobileTest;
+Mobile second;
 
 void keyboard(unsigned char key, int x, int y){
 	switch (key)
@@ -34,8 +34,6 @@ void mousePassive(int x, int y)
 	double yMapped = win->getYMapped(y);
 	//std::cout << "Im moving" << std::endl;
 	gameManager.pasiveMouse(xMapped,yMapped);
-	test1.setPositions(xMapped + 100, yMapped, 0);
-	test2.setPositions(xMapped - 100, yMapped,0);
 	//test3.mouseState(xMapped, yMapped,false);
 }
 
@@ -47,7 +45,8 @@ void mouseFunc(int button, int state, int x, int y){//when user clicks
 	{
 	case GLUT_LEFT_BUTTON:
 		gameManager.leftClick(xMapped, yMapped, state);
-		testid = (testid + 1) % 3;
+		mobileTest.setPositions(xMapped, yMapped,0);
+		second.setPositions(xMapped, yMapped, 0);
 		break;
 	case GLUT_RIGHT_BUTTON:
 		gameManager.rigthClick(xMapped, yMapped, state);
@@ -76,7 +75,8 @@ void display(){
 	//real code
 
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
-
+	mobileTest.draw(Data.GetID(IMG_BGCREDITS));
+	second.draw(Data.GetID(IMG_BGCREDITS));
 	glutSwapBuffers();
 }
 
@@ -84,21 +84,20 @@ void time(int x){
 	glutPostRedisplay();
 
 	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
+	mobileTest.update(glutGet(GLUT_ELAPSED_TIME));
+	second.update(glutGet(GLUT_ELAPSED_TIME));
 	glutTimerFunc(50, time, 1);
 }
 
 void begin(){
 	gameManager.begin();
-
-	testid = 0;
-	test1.load("Images/botonHover.png", GL_RGBA);
-	test2.load("Images/botonNormal.png", GL_RGBA);
-	//test3.setPositions(0, 200, 0);
-	std::cout << "Loading Data \n";
-	//Data->Load();
-	std::cout << "Loaded Data \n";
-
-	
+	Data.Load();
+	mobileTest.setInitialSpeeds(0, 0);
+	mobileTest.setAccelerations(0, -100);
+	mobileTest.setMaxSpeed(30);
+	second.setInitialSpeeds(0, 0);
+	second.setAccelerations(-100, 0);
+	second.setMaxSpeed(30);
 }
 
 int main(int argc, char **argv){

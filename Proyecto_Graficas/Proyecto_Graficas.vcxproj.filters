@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="json\json.cpp">
-      <Filter>Json</Filter>
+      <Filter>Managers\Json</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source FIles</Filter>
@@ -33,6 +33,10 @@
       <Filter>Source FIles</Filter>
     </ClCompile>
     <ClCompile Include="cTexture.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave.cpp" />
+    <ClCompile Include="Mobile.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +72,7 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="json\json.h">
-      <Filter>Json</Filter>
+      <Filter>Managers\Json</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Headers Files</Filter>
@@ -78,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="Screen.h">
       <Filter>Headers Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wave.h">
-      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="TempGameManager.h">
       <Filter>Managers</Filter>
@@ -103,6 +104,9 @@
     <ClInclude Include="cTexture.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
+    <ClInclude Include="Wave.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -110,9 +114,6 @@
     </Filter>
     <Filter Include="Structs">
       <UniqueIdentifier>{b64fbb65-7273-45fa-a4c0-6208d4143d71}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Json">
-      <UniqueIdentifier>{6a782caf-f491-4290-860a-fff0c68044b6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source FIles">
       <UniqueIdentifier>{2095d02e-87da-4eed-a1cb-e0113bb32f94}</UniqueIdentifier>
@@ -122,6 +123,9 @@
     </Filter>
     <Filter Include="Headers Files">
       <UniqueIdentifier>{4b9dd677-50b3-42e7-a392-c0fceb331133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Json">
+      <UniqueIdentifier>{6a782caf-f491-4290-860a-fff0c68044b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

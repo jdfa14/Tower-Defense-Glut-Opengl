@@ -47,10 +47,10 @@ void GameManager::init(){
 	int mat[NUMBER_OF_SCREENS][cant] = {
 		//Back			fwrd1			fwrd1 //fwrd1
 		{ ERRORNAV,		PLAYERSELECT,	INSTRUCTIONS, CREDITS }, // Main
-		{ MAIN,			LEVELSELECT, ERRORNAV, ERRORNAV }, // Player select
+		{ MAIN,			LEVELSELECT,    ERRORNAV, ERRORNAV }, // Player select
 		{ MAIN,			ERRORNAV,		ERRORNAV, ERRORNAV }, // Instructions
 		{ MAIN,			ERRORNAV,		ERRORNAV, ERRORNAV }, // Credits
-		{ PLAYERSELECT, ERRORNAV,		ERRORNAV, ERRORNAV }, // Level Select
+		{ PLAYERSELECT, PLAYLEVEL,		ERRORNAV, ERRORNAV }, // Level Select
 		{ LEVELSELECT,	ERRORNAV,		ERRORNAV, ERRORNAV }  // Playing level
 	};
 
@@ -76,8 +76,10 @@ void GameManager::init(){
 
 bool GameManager::loadScreen(int i){
 	std::cout << "Showing screen: " << i << std::endl;
-	if (i >= NUMBER_OF_SCREENS)
+	if (i >= NUMBER_OF_SCREENS){
+		std::cout << "A wild potato has appeared!" << std::endl;
 		return false;
+	}
 	bgImage = screens[i].getBGImage();
 	buttons = screens[i].getButtons();
 	images = screens[i].getImages();

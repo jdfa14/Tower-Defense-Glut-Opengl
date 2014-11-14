@@ -1,7 +1,11 @@
-#include <vector>
+#include "Globals.h"
 #include "BadAgent.h"
 
-typedef struct wave{
+class Wave
+{
+private:
 	std::vector<BadAgent> enemies;
-	//this is not yet completed, maybe it will be trash, if u see this line, ignore this struct
+public:
+	Wave();
+	~Wave();
 };

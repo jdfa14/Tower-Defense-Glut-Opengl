@@ -34,6 +34,7 @@ bool cData::Load()
 	path = "Images/backgrounds/";
 	res = LoadImage(IMG_BGMAIN, path + "menu.png", GL_RGBA); if (!res) return false;
 	res = LoadImage(IMG_BGCREDITS, path + "credits.png", GL_RGBA); if (!res) return false;
+	res = LoadImage(IMG_BGPLAY, path + "play.png", GL_RGBA); if (!res) return false;
 
 	// loading towers
 	path = "Images/towersPNG";

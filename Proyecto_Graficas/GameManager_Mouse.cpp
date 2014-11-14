@@ -5,8 +5,10 @@ void GameManager::button_listener(int id){
 	// bigger than that are action orders
 	if (id < 4){
 		//loading screen
-		if (hereYouAre[screenState][id] > 4)
-			return;//error
+		if (hereYouAre[screenState][id] == ERRORNAV){
+			std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << id << std::endl;
+			return;
+		}
 		loadScreen(hereYouAre[screenState][id]);
 	}
 	else{
@@ -18,7 +20,6 @@ void GameManager::button_listener(int id){
 		case 7:
 		case 8:
 			selectedPlayer = &players[id - 6];
-			loadScreen(hereYouAre[screenState][1]);
 			levels = selectedPlayer->getAllLevels();
 			levelbuttons = selectedPlayer->getLevelButtons();
 
@@ -29,6 +30,13 @@ void GameManager::button_listener(int id){
 			for (unsigned int i = 0; i < levelbuttons->size(); i++){
 				buttons->push_back((*levelbuttons)[i]);
 			}
+
+			if (hereYouAre[screenState][1] == ERRORNAV){
+				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
+				return;
+			}
+			loadScreen(hereYouAre[screenState][1]);
+
 			break;
 
 		case 9://level selection
@@ -41,6 +49,13 @@ void GameManager::button_listener(int id){
 		case 16:
 		case 17:
 		case 18:
+
+
+			if (hereYouAre[screenState][1] == ERRORNAV){
+				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
+				return;
+			}
+			loadScreen(hereYouAre[screenState][1]);
 			break;
 		default:
 			break;

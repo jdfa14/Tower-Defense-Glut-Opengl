@@ -8,7 +8,7 @@ public:
 	PlaceableObject()
 	{
 		setPositions(0, 0, 0);
-		setSizes(1, 1, 1);
+		setSizes(100, 100, 1);
 	}
 
 	void setPositions(double x, double y, double z){

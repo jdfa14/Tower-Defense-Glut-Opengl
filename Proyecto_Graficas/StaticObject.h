@@ -8,8 +8,6 @@ public:
 
 	StaticObject() : PlaceableObject()
 	{
-		setPositions(0, 0, 0);
-		setSizes(100, 100, 1);
 	}
 
 	void setImagePath(std::string imagePath){
