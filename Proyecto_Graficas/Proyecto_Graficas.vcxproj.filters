@@ -50,6 +50,12 @@
     <ClCompile Include="Tower.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager_Play.cpp">
+      <Filter>Source FIles\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager_keyboard.cpp">
+      <Filter>Source FIles\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="level.h">
       <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

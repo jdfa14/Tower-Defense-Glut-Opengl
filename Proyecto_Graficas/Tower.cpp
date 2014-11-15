@@ -16,26 +16,28 @@ void Tower::setType(int type){
 		dmgAntiBacterial = 10;
 		dmgAntiViral = 3;
 		setTimeToShot(1);
+		setRange(300);
 		break;
 	case YELLOW_TOWER:
 		dmgAntiBacterial = 2;
 		dmgAntiViral = 0.7;
 		setTimeToShot(0.5);
+		setRange(200);
 		break;
 	case PILL_TOWER:
 		dmgAntiBacterial = 0;
 		dmgAntiViral = 0;
 		setTimeToShot(0);
+		setRange(200);
 		break;
 	}
 }
 
-Tower::Tower(cData &data, std::vector<BadAgent> &enemies, double x, double, double z, double range, int type){
+Tower::Tower(cData &data, std::vector<BadAgent> &enemies, double x, double y, double z, int type){
 	StaticObject::StaticObject();
 	this->data = &data;
 	this->enemies = &enemies;
 
-	setRange(range);
 	setPositions(x, y, z);
 	setSizes(50, 50, 1);
 	timeBetweenShots = 0;
@@ -77,9 +79,9 @@ void Tower::update(double elapsedTimeMiliSec){
 }
 
 void Tower::draw(){
-	drawText(data->GetID(IMG_TOWER1NORMAL * type + level - 1));
+	drawText(data->GetID(IMG_TOWER1NORMAL + (type * 3) + level));
 	for (unsigned int i = 0; i < bullets.size(); i++)
-		bullets[i].draw(data->GetID(IMG_BGCREDITS));// NEEED CHANGE IMG!
+		bullets[i].draw(data->GetID(IMG_TOWER1NORMAL));// NEEED CHANGE IMG!
 }
 
 void Tower::shot(int pos){

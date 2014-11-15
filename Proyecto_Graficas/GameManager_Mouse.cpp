@@ -38,7 +38,7 @@ void GameManager::button_listener(int id){
 			}
 			break;
 
-		case 9://level selection
+		case 9://level selection goTo Play
 		case 10:
 		case 11:
 		case 12:
@@ -52,7 +52,30 @@ void GameManager::button_listener(int id){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;
 			}
+			playing = true;
+
+			// load stuff from level objects
+
 			loadScreen(hereYouAre[screenState][1]);
+			break;
+			//special back from playing
+		case 19:
+			playing = false;
+			showingGrid = false;
+			for (int i = 0; i < rc * rc; i++){
+				grids[i].placeable = true;
+				grids[i].state = GRD_STATE_PLACEABLE;
+			}
+
+			loadScreen(hereYouAre[screenState][0]);
+			//tower buttons
+			break;
+		case 20:
+		case 21:
+		case 22:
+		case 23:
+			typeOfPlacingTower = id - 20;
+			showingGrid = true;
 			break;
 		default:
 			break;
@@ -64,7 +87,21 @@ void GameManager::pasiveMouse(int x, int y){
 	for (unsigned int i = 0; i < buttons->size(); i++){
 		(*buttons)[i].mouseState(x, y, false);
 	}
-	test3->mouseState(x, y,false);
+
+	//seleccionado
+	if (playing){
+		mouseTracking.posX = x;
+		mouseTracking.posY = y;
+
+		if (x >= -500 && x < 250 && y >= -500 && y <= 357){ // isOnMap
+			isOnMap = true;
+			selectGrid(x, y);
+		}
+		else{
+			isOnMap = false;
+		}
+	}
+	
 }
 
 void GameManager::rigthClick(int x, int y, int state)// state up or down
@@ -87,6 +124,27 @@ void GameManager::leftClick(int x, int y, int state)
 		}
 	}
 	else {
+		if (playing){
+			if (showingGrid){
+				if (isOnMap){
+					if (canPlace){
+						Tower toPlace(data, enemies, grids[selectedIndexes[0]].x + grids[selectedIndexes[0]].width / 2.0, grids[selectedIndexes[0]].y - grids[selectedIndexes[0]].heith / 2.0, 0, typeOfPlacingTower);
+						toPlace.setSizes(grids[selectedIndexes[0]].width * 2, grids[selectedIndexes[0]].heith * 2, 1);
+						towers.push_back(toPlace);
+						grids[selectedIndexes[0]].placeable = false;
+						grids[selectedIndexes[1]].placeable = false;
+						grids[selectedIndexes[2]].placeable = false;
+						grids[selectedIndexes[3]].placeable = false;
+						grids[selectedIndexes[0]].state = GRD_STATE_NOTPLACEABLE;
+						grids[selectedIndexes[1]].state = GRD_STATE_NOTPLACEABLE;
+						grids[selectedIndexes[2]].state = GRD_STATE_NOTPLACEABLE;
+						grids[selectedIndexes[3]].state = GRD_STATE_NOTPLACEABLE;
+
+						showingGrid = false;
+					}
+				}
+			}
+		}
 	}
 }
 

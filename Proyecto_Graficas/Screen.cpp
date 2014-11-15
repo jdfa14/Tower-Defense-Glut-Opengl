@@ -77,6 +77,10 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 			newButton.setID(jsonBut["ID"]);
 			newButton.setEventsStack(events);
 
+			if (jsonBut["enable"].GetType() != json::NULLVal){
+				newButton.setEnable(jsonBut["enable"]);
+			}
+
 			if (jsonBut["positions"].GetType() != json::NULLVal){
 				json::Array arr;
 				arr = jsonBut["positions"];

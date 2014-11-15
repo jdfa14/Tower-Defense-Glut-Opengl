@@ -24,7 +24,10 @@ bool cTexture::Load(std::string filename, int type, int wraps, int wrapt, int ma
 		//img = corona::OpenImage(filename,corona::PF_R8G8B8A8);
 		components = 4;
 	}
-	else return false;
+	else{
+		std::cout << "Unable to load image: " << filename << std::endl;
+		return false;
+	}
 
 	if (img == NULL){
 		std::cout << "Unable to load image: " << filename << std::endl;

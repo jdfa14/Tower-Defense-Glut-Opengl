@@ -5,9 +5,9 @@
 #include "BadAgent.h"
 #include "cData.h"
 
-#define WHITE_TOWER 1
-#define YELLOW_TOWER 2
-#define PILL_TOWER 3
+#define WHITE_TOWER 0
+#define YELLOW_TOWER 1
+#define PILL_TOWER 2
 
 class Tower : public StaticObject
 {
@@ -25,7 +25,7 @@ class Tower : public StaticObject
 		void setType(int type);
 
     public:
-		Tower(cData &data, std::vector<BadAgent> &enemies, double x = 0, double y = 0, double z = 0, double range = 50,int type = WHITE_TOWER);
+		Tower(cData &data, std::vector<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
 		
 		//editions
 		

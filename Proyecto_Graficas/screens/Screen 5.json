@@ -7,7 +7,7 @@
   "buttons" : [
       {
         "text" : "Back",
-        "ID" : 0,
+        "ID" : 19,
         "positions" : [375,-450,0],
         "sizes" : [250,100,1]
       },
@@ -24,16 +24,17 @@
         "sizes" : [125,145,1]
       },
       {
-        "text" : "Type 4",
+        "text" : "Type 3",
         "ID" : 22,
         "positions" : [315,142,0],
         "sizes" : [125,146,1]
       },
       {
-        "text" : "Type 3",
+        "text" : "Type 4",
         "ID" : 23,
         "positions" : [440,142,0],
-        "sizes" : [125,146,1]
+        "sizes" : [125,146,1],
+        "enable" : false
       }
     ]
   }

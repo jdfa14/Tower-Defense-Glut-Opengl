@@ -24,10 +24,16 @@
 #define IMG_TOWER3UPGRADED	16
 #define IMG_TOWER3SUPER		17
 
+#define IMG_TOWER_1_TOPLACE	19
+#define IMG_TOWER_2_TOPLACE	20
+#define IMG_TOWER_3_TOPLACE	21
 
+#define IMG_GRIDGREEN		22
+#define IMG_GRIDRED			23
+#define IMG_GRIDSELECTED	24
 
 //Image array size
-#define NUM_TEX				18
+#define NUM_TEX				25
 
 
 class cData
@@ -39,6 +45,7 @@ public:
 	int  GetID(int img);
 	void GetSize(int img, int *w, int *h);
 	bool Load();
+	void Draw(int img, double x = 0, double y = 0, double z = 0, double width = 100, double height = 100);
 
 private:
 	cTexture textures[NUM_TEX];

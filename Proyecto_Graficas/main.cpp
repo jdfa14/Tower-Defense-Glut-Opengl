@@ -26,14 +26,7 @@ std::vector<BadAgent> testEnemies;
 Tower *testTower;
 
 void keyboard(unsigned char key, int x, int y){
-	switch (key)
-	{
-	case 27:
-		exit(1);
-		break;
-	default: 
-		break;
-	}
+	gameManager.keyboard(key, x, y);
 }
 
 void mousePassive(int x, int y)
@@ -89,7 +82,7 @@ void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Al inicio
 	//real code
 
-	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
+	
 	///TEST
 	mobileTest.draw(Data.GetID(IMG_BGCREDITS));
 	second.draw(Data.GetID(IMG_BGCREDITS));
@@ -101,12 +94,14 @@ void display(){
 
 	//TEST
 
+	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
+
 	glutSwapBuffers();
 }
 
 void time(int x){
 	glutPostRedisplay();
-	gameManager.refresh(glutGet(GLUT_ELAPSED_TIME));
+	gameManager.refresh(50);
 
 	//TEST
 	mobileTest.update(50);
@@ -136,7 +131,7 @@ void begin(){
 	second.setAccelerations(-200, 0);
 	second.setMaxSpeed(40);
 
-	testTower = new Tower(Data, testEnemies, -200, 400, 0, 200, 1);
+	testTower = new Tower(Data, testEnemies, -200, 400, 0, 1);
 	//TEST
 }
 

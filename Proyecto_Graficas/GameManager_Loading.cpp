@@ -8,9 +8,6 @@ void GameManager::init(){
 	double height = win.getOrthoHeight();
 	const int cant = 4;
 
-	test3 = new Button("asdasdasd");
-	test3->setPositions(0, 200, 0);
-
 	//we load players info from jsons
 	std::cout << "Loading players \n";
 	for (int i = 1; i < 4; i++){
@@ -40,6 +37,41 @@ void GameManager::init(){
 
 		screens.push_back(newScreen);
 		std::cout << "Screen " << i << " loaded\n";
+	}
+
+	//setting grids positions
+	rc = 30;
+	
+	double gridWidth = 24.333333;
+	double gridHeight = 27.90533333;
+
+	double widthAux = gridWidth * rc;
+	double heightAux = gridHeight * rc;
+
+	double initX;
+	double initY = heightAux / 2.0 - gridHeight / 2.0 + (double)MAP_INIT_Y;
+	std::cout << "Postitioning grids\n";
+	for (int i = 0; i < rc; i++){
+		initX = -widthAux / 2.0 + gridWidth / 2.0 + (double)MAP_INIT_X;
+		for (int j = 0; j < rc; j++){
+			Grid aux;
+			aux.x =  initX;
+			aux.y =  initY;
+			aux.width = gridWidth;
+			aux.heith = gridHeight;
+			aux.state = GRD_STATE_PLACEABLE;
+			aux.placeable = true;
+			if (i == 24 && j == 10){
+				aux.placeable = false;
+				aux.state = 1;
+			}
+
+			grids.push_back(aux);
+			initX += gridWidth;
+			
+
+		}
+		initY -= gridHeight;
 	}
 
 	// we initialize the navigation path mat

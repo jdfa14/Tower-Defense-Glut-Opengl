@@ -9,6 +9,10 @@
 #include "Screen.h"
 #include "Level.h"
 #include "cData.h"
+#include "Grid.h"
+
+#define MAP_INIT_X -125
+#define MAP_INIT_Y -71.42
 
 class GameManager
 {
@@ -18,34 +22,45 @@ private:
 	Player *selectedPlayer;
 	std::vector<Level> *levels;
 
+
 	GlutWindow win;// all the data from the window
 
 	std::stack<int> events;
 
 	//Objects
-	std::vector<Tower> *towers;
-	//std::vector<BadAgent> enemies;//maybe it will be not implemented
+	std::vector<Tower> towers;
+	std::vector<BadAgent> enemies;//maybe it will be not implemented
 
 	//visual controls
 	std::vector<Screen> screens;
 	std::vector<Button> *buttons;
 	std::vector<Texture> *images;
+	std::vector<Grid> grids;
+
 	Texture *bgImage;
-	
+	Screen mainScreen;
 	
 
-	Screen mainScreen;
-	bool playing;
+	//cantidad de rectangulos de la grid por renglon
+	
 
 	//Matriz de navegacion
 	int screenState;
 	//0 back, 1 foward1, 2 foward2... 
 	int **hereYouAre;
 
+	//grid and playing stuff
+	bool playing;
+	bool showingGrid;// only if placing a towa will be true
+	bool isOnMap;
+	bool canPlace;
+	int typeOfPlacingTower;
+	Location mouseTracking;
+	void selectGrid(double x, double y);
+	int selectedIndexes[4];
+	int rc; // 30 x 30 little grids
 
 public:
-
-	Button *test3;
 	cData data;
 
 	const std::string MENU = "Menu";
@@ -85,6 +100,7 @@ public:
 	//Glut functions
 	void begin();
 	void drawBG();
+	void keyboard(unsigned char key, int x, int y);
 
 };
 

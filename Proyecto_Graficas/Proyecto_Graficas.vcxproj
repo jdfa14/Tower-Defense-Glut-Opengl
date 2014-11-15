@@ -162,8 +162,10 @@
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameManager_Display.cpp" />
+    <ClCompile Include="GameManager_keyboard.cpp" />
     <ClCompile Include="GameManager_Loading.cpp" />
     <ClCompile Include="GameManager_Mouse.cpp" />
+    <ClCompile Include="GameManager_Play.cpp" />
     <ClCompile Include="Mobile.cpp" />
     <ClCompile Include="old Image.cpp" />
     <ClCompile Include="json\json.cpp" />
@@ -181,6 +183,7 @@
     <ClInclude Include="cData.h" />
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="TempGameManager.h" />
     <ClInclude Include="addGlut.h" />

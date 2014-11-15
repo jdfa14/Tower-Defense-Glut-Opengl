@@ -9,6 +9,7 @@ Mobile::Mobile() : PlaceableObject(){
 }
 
 void Mobile::draw(int tex_id){
+	glDepthMask(false);
 	glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex_id);
 		glPushMatrix();
@@ -22,6 +23,7 @@ void Mobile::draw(int tex_id){
 			glEnd();
 		glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+	glDepthMask(true);
 }
 
 void Mobile::setInitialSpeeds(double speedX, double speedY){
