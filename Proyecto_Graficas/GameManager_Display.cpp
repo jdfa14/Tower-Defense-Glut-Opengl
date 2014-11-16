@@ -13,14 +13,22 @@ void GameManager::draw(double time){
 	
 	if (playing){
 
+		for (unsigned int i = 0; i < grids.size(); i++){
+			data.Draw(grids[i].img, grids[i].x, grids[i].y, -1, grids[i].width + 1, grids[i].heith + 1.5);
+		}
+
+		for (unsigned int i = 0; i < enemies.size(); i++){
+			enemies[i].draw();
+		}
+
 		for (unsigned int i = 0; i < towers.size(); i++){
 			towers[i].draw();
 		}
 
 		if (showingGrid){//all towers and monsters must be draw before the grid, so the transparency will work properly
-			int limit = rc * rc;
+			//int limit = rc * rc;
 			data.Draw(IMG_TOWER_1_TOPLACE + typeOfPlacingTower, mouseTracking.posX, mouseTracking.posY, 1, grids[0].width * 2, grids[0].heith * 2);
-			for (int i = 0; i < limit; i++){
+			for (int i = 0; i < grids.size(); i++){
 				data.Draw(IMG_GRIDGREEN + grids[i].state, grids[i].x, grids[i].y, 0, grids[i].width, grids[i].heith);
 			}
 			
@@ -37,6 +45,9 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 	}
 
 	if (playing){
+		for (unsigned int i = 0; i < enemies.size(); i++){
+			enemies[i].update(elapsedTimeMiliSec);
+		}
 		for (unsigned int i = 0; i < towers.size(); i++){
 			towers[i].update(elapsedTimeMiliSec);
 		}

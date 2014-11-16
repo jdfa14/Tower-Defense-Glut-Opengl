@@ -16,13 +16,13 @@ void Tower::setType(int type){
 		dmgAntiBacterial = 10;
 		dmgAntiViral = 3;
 		setTimeToShot(1);
-		setRange(300);
+		setRange(200);
 		break;
 	case YELLOW_TOWER:
 		dmgAntiBacterial = 2;
 		dmgAntiViral = 0.7;
 		setTimeToShot(0.5);
-		setRange(200);
+		setRange(100);
 		break;
 	case PILL_TOWER:
 		dmgAntiBacterial = 0;
@@ -37,18 +37,31 @@ Tower::Tower(cData &data, std::vector<BadAgent> &enemies, double x, double y, do
 	StaticObject::StaticObject();
 	this->data = &data;
 	this->enemies = &enemies;
-
+	srand(time(NULL));
 	setPositions(x, y, z);
 	setSizes(50, 50, 1);
 	timeBetweenShots = 0;
 	setType(type);
 }
 
+Tower::~Tower(){
+	bullets.clear();
+}
+
 void Tower::update(double elapsedTimeMiliSec){
-	if (type != 3){
+	if (type != 2){// tower # 2 cant shot
 		//updating every bullet
-		for (unsigned int i = 0; i < bullets.size(); i++)
-			bullets[i].update(elapsedTimeMiliSec);
+		for (std::vector<Bullet>::iterator i = bullets.begin(); i != bullets.end(); i++){
+			if (i->isReadyToDestroy()){
+				bullets.erase(i);
+				break;
+			}
+		}
+
+		for (std::vector<Bullet>::iterator i = bullets.begin(); i != bullets.end(); i++){
+				i->update(elapsedTimeMiliSec);
+		}
+			
 
 		// update time
 		if (timeBetweenShots > 0)
@@ -81,11 +94,13 @@ void Tower::update(double elapsedTimeMiliSec){
 void Tower::draw(){
 	drawText(data->GetID(IMG_TOWER1NORMAL + (type * 3) + level));
 	for (unsigned int i = 0; i < bullets.size(); i++)
-		bullets[i].draw(data->GetID(IMG_TOWER1NORMAL));// NEEED CHANGE IMG!
+		bullets[i].draw(data->GetID(IMG_TOWER1NORMAL + type * 3));// NEEED CHANGE IMG!
 }
 
 void Tower::shot(int pos){
 	Bullet toShot(enemies,pos, dmgAntiViral, dmgAntiBacterial, type);
-	toShot.setPositions(x, y, z);
+	toShot.setPositions(x, y, z + 1);
+	toShot.setInitialSpeeds(0, 0);
+	toShot.setSizes(25, 25, 1);
 	bullets.push_back(toShot);
 }

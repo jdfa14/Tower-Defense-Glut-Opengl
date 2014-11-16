@@ -13,6 +13,8 @@ void GameManager::button_listener(int id){
 	}
 	else{//where is 4 and five?? its a magical mistery
 		std::vector<Button> *levelbuttons;
+		std::vector<Grid> *auxGridData;
+		
 		//6 show player data
 		switch (id)
 		{
@@ -55,17 +57,30 @@ void GameManager::button_listener(int id){
 			playing = true;
 
 			// load stuff from level objects
+			// Need to change level selector, only loading one
+#pragma warninrg // por los loles
+			auxGridData = levelsData[0].getGridData();
+
+			for (unsigned i = 0; i < grids.size(); i++){
+				grids[i].placeable = (*auxGridData)[i].placeable;
+				grids[i].img = (*auxGridData)[i].img;
+				grids[i].state = (*auxGridData)[i].state;
+				grids[i].tileType = (*auxGridData)[i].tileType;
+			}
 
 			loadScreen(hereYouAre[screenState][1]);
 			break;
 			//special back from playing
 		case 19:
+			// resetomg al game stuff
 			playing = false;
 			showingGrid = false;
 			for (int i = 0; i < rc * rc; i++){
 				grids[i].placeable = true;
 				grids[i].state = GRD_STATE_PLACEABLE;
 			}
+			enemies.clear();
+			towers.clear();
 
 			loadScreen(hereYouAre[screenState][0]);
 			//tower buttons

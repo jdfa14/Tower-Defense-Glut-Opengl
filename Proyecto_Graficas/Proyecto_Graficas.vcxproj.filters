@@ -56,6 +56,9 @@
     <ClCompile Include="GameManager_keyboard.cpp">
       <Filter>Source FIles\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="LevelData.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelData.h">
+      <Filter>Headers Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

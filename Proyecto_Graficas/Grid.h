@@ -10,4 +10,6 @@ typedef struct Grid{
 	double heith;
 	bool placeable;
 	int state; //0 green, 1 red, 2 selected
+	int img;
+	char tileType;
 }Grid;

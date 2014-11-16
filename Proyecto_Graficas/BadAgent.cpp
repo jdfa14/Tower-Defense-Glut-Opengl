@@ -1,6 +1,9 @@
 #include "BadAgent.h"
 
-BadAgent::BadAgent() : Mobile() {
+BadAgent::BadAgent(cData &data, int type) : Mobile() {
+	this->data = &data;
+	setType(type);
+	
 	hitPoints = 10;
 	setDefs(0, 0);
 	vulnerable = true;
@@ -58,10 +61,15 @@ void BadAgent::update(double elapsedTimeMiliSec){
 	}
 }
 
-void BadAgent::draw(int tex_id){
-	Mobile::draw(tex_id);
+void BadAgent::draw(){
+	Mobile::draw(img);
 }
 
 bool BadAgent::isAlive(){
 	return !destroying;
+}
+
+void BadAgent::setType(int type){
+	img = IMG_BADAGENT1_1 + type; // * number of images for BA
+	this->type = type;
 }

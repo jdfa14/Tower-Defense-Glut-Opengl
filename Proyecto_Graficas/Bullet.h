@@ -21,8 +21,11 @@ private:
 public:
 
 	Bullet(std::vector<BadAgent> *enemies, int pos , double antiViral, double antiBacterial, int type = 1, double time = 3);
+	Bullet& operator=(const Bullet& element);
 	//get
-	bool isReadyToDestroy();
+	inline bool isReadyToDestroy(){
+		return readyToDestroy;
+	}
 
 	//sets
 	void setDamages(double antiViral, double antiBacterial);

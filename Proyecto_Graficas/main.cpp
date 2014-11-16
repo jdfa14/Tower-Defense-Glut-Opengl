@@ -16,12 +16,6 @@ GlutWindow *win;
 GameManager gameManager;
 
 
-// just test
-cData Data;
-Mobile mobileTest;
-BadAgent second;
-BadAgent enemieTest;
-
 std::vector<BadAgent> testEnemies;
 Tower *testTower;
 
@@ -41,23 +35,14 @@ void mousePassive(int x, int y)
 void mouseFunc(int button, int state, int x, int y){//when user clicks
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
-	BadAgent *aux;
 	switch (button)
 	{
 	case GLUT_LEFT_BUTTON:
 		gameManager.leftClick(xMapped, yMapped, state);
-		mobileTest.setPositions(xMapped, yMapped,0);
-		//second.setPositions(xMapped, yMapped, 0);
 			
 		break;
 	case GLUT_RIGHT_BUTTON:
 		gameManager.rigthClick(xMapped, yMapped, state);
-		aux = new BadAgent();
-		aux->setPositions(xMapped, yMapped, 0);
-		aux->setInitialSpeeds(0, 0);
-		aux->setAccelerations(-200, 0);
-		aux->setMaxSpeed(40);
-		testEnemies.push_back(*aux);
 		break;
 	default:
 		gameManager.middleClick(xMapped, yMapped, state);
@@ -80,17 +65,7 @@ void reshape(int width, int height){
 
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Al inicio
-	//real code
-
-	
 	///TEST
-	mobileTest.draw(Data.GetID(IMG_BGCREDITS));
-	second.draw(Data.GetID(IMG_BGCREDITS));
-	enemieTest.draw(Data.GetID(IMG_BGCREDITS));
-	for (unsigned int i = 0; i < testEnemies.size(); i++){
-		testEnemies[i].draw(Data.GetID(IMG_BGCREDITS));
-	}
-	testTower->draw();
 
 	//TEST
 
@@ -104,15 +79,6 @@ void time(int x){
 	gameManager.refresh(50);
 
 	//TEST
-	mobileTest.update(50);
-	second.update(50);
-	enemieTest.update(50);
-
-	for (unsigned int i = 0; i < testEnemies.size(); i++){
-		testEnemies[i].update(50);
-	}
-
-	testTower->update(50);
 	//TEST
 
 	glutTimerFunc(50, time, 1);
@@ -120,18 +86,8 @@ void time(int x){
 
 void begin(){
 	gameManager.begin();
-	Data.Load();
 
 	//TEST
-	mobileTest.setInitialSpeeds(0, 0);
-	mobileTest.setAccelerations(0, -100);
-	mobileTest.setMaxSpeed(30);
-	enemieTest.setPositions(100, 100, 0);
-	second.setInitialSpeeds(0, 0);
-	second.setAccelerations(-200, 0);
-	second.setMaxSpeed(40);
-
-	testTower = new Tower(Data, testEnemies, -200, 400, 0, 1);
 	//TEST
 }
 

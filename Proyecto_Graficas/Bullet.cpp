@@ -14,6 +14,35 @@ Bullet::Bullet(std::vector<BadAgent> *enemies, int pos, double antiViral, double
 	this->enemies = enemies;
 }
 
+Bullet& Bullet::operator=(const Bullet& element){
+	
+	//placeableObjects
+	setSizes(element.width, element.height, element.volume);
+	setPositions(element.x, element.y, element.z);
+
+	//mobile
+	setAccelerations(element.accX, element.accY);
+	setInitialSpeeds(element.speedX, element.speedY);
+	direction = element.direction;
+	maxSpeed = element.maxSpeed;
+	
+	//bullet
+	pos = element.pos;
+	std::vector<BadAgent> *enemies = element.enemies;
+	antiVDmg = element.antiVDmg;
+	antiBDmg = element.antiBDmg;
+	timeToArrive = element.timeToArrive;
+	rangeOfAction = element.rangeOfAction;
+	xDif = element.xDif;
+	yDif = element.yDif;
+	type = element.type;
+	time = element.time;
+	readyToDestroy = element.readyToDestroy;
+	hit = element.hit;
+	
+	return *this;
+}
+
 void Bullet::setSizes(double width, double height, double volume){
 	Mobile::setSizes(width, height, volume);
 }
@@ -61,7 +90,7 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 		if (distance < 0){
 			hit = true;
 			xDif = x - xMonster;
-			yDif = y = yMonster;
+			yDif = y - yMonster;
 		}
 	}
 	else if (!readyToDestroy)
@@ -69,17 +98,23 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 		
 		switch (type)
 		{
-		case 1:
+		case 0:// normall towar
 			(*enemies)[pos].takeDamaged(antiVDmg, antiBDmg);
+			(*enemies)[pos].chaserHasDoneHisJob();
 			readyToDestroy = true;
 			std::cout << "I HIT!";
 			break;
-		case 2:
+		case 1:// 
 			(*enemies)[pos].takeDamaged(antiVDmg, antiBDmg);
 			time -= elapsedTimeMiliSeconds / 1000;
 			setPositions(xMonster + xDif, yMonster + yDif, 0);
-			if (time <= 0)
+			if (time <= 0){
+				(*enemies)[pos].chaserHasDoneHisJob();
 				readyToDestroy = true;
+			}
+			break;
+		case 2:
+			readyToDestroy = true;
 		default:
 			break;
 		}

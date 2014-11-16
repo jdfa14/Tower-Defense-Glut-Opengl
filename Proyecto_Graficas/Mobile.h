@@ -16,9 +16,6 @@ protected:
 	double accY;
 	double maxSpeed;
 	double actualSpeed;
-	double toX;
-	double toY;
-	bool turning;
 	double direction;
 	const double RAD_DEG = 180 / 3.1415926535;
 	//display

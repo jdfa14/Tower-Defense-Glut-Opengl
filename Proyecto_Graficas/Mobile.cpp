@@ -9,21 +9,21 @@ Mobile::Mobile() : PlaceableObject(){
 }
 
 void Mobile::draw(int tex_id){
-	glDepthMask(false);
+	//glDepthMask(false);
 	glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex_id);
 		glPushMatrix();
 			glTranslated(x, y, z);
 			glRotated(direction + 90, 0, 0, 1);
 			glBegin(GL_QUADS);
-				glTexCoord2f(0, 0);	glVertex3i(- width / 2.0,   height / 2.0, -1);
-				glTexCoord2f(1, 0);	glVertex3i(  width / 2.0,   height / 2.0, -1);
-				glTexCoord2f(1, 1);	glVertex3i(  width / 2.0, - height / 2.0, -1);
-				glTexCoord2f(0, 1);	glVertex3i(- width / 2.0, - height / 2.0, -1);
+				glTexCoord2f(0, 0);	glVertex3i(- width / 2.0,   height / 2.0, 0);
+				glTexCoord2f(1, 0);	glVertex3i(  width / 2.0,   height / 2.0, 0);
+				glTexCoord2f(1, 1);	glVertex3i(  width / 2.0, - height / 2.0, 0);
+				glTexCoord2f(0, 1);	glVertex3i(- width / 2.0, - height / 2.0, 0);
 			glEnd();
 		glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
-	glDepthMask(true);
+	//glDepthMask(true);
 }
 
 void Mobile::setInitialSpeeds(double speedX, double speedY){
@@ -46,7 +46,6 @@ void Mobile::setMaxSpeed(double maxSpeed){
 void Mobile::update(double elapsedTimeMiliSec){
 	double t = elapsedTimeMiliSec / 999.0;//Bad magic happends when i div by 1000
 	double ratio;
-	double angleAux;
 
 	speedX += accX * t; // vf = vo + a * t
 	speedY += accY * t;

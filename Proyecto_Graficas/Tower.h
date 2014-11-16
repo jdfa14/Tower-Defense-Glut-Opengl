@@ -4,7 +4,8 @@
 #include "Bullet.h"
 #include "BadAgent.h"
 #include "cData.h"
-
+#include <time.h>
+#include <stdlib.h>
 #define WHITE_TOWER 0
 #define YELLOW_TOWER 1
 #define PILL_TOWER 2
@@ -26,7 +27,7 @@ class Tower : public StaticObject
 
     public:
 		Tower(cData &data, std::vector<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
-		
+		~Tower();
 		//editions
 		
 

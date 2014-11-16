@@ -74,6 +74,15 @@ void GameManager::init(){
 		initY -= gridHeight;
 	}
 
+	std::cout << "Loading data from leves... 00%";
+	for (int i = 0; i < 1; i++){
+		LevelData level;
+		level.loadData("levels/level_" + std::to_string(i) + ".json");
+		std::cout << "\b\b\b" + std::to_string((i + 1) * 10) + "%";
+		levelsData.push_back(level);
+	}
+	std::cout << "\n";
+
 	// we initialize the navigation path mat
 	std::cout << "Just a few more thinghs... \n";
 	int mat[NUMBER_OF_SCREENS][cant] = {
