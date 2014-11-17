@@ -33,7 +33,7 @@ void Tower::setType(int type){
 	}
 }
 
-Tower::Tower(cData &data, std::vector<BadAgent> &enemies, double x, double y, double z, int type){
+Tower::Tower(cData &data, LinkedList &enemies, double x, double y, double z, int type){
 	StaticObject::StaticObject();
 	this->data = &data;
 	this->enemies = &enemies;
@@ -79,20 +79,34 @@ void Tower::update(double elapsedTimeMiliSec){
 
 		//check perimeter
 		if (timeBetweenShots <= 0){
-			for (unsigned int i = 0; i < enemies->size(); i++){
-				//check if is in range
+			for (Node *i = enemies->getHead(); i != NULL; i = i->next){
 				double xEnem, yEnem, distance;
-				(*enemies)[i].getPositions(xEnem, yEnem);
-				if ((*enemies)[i].isAlive()){// ignore already death
+				BadAgent *bad = i->data;
+				bad->getPositions(xEnem, yEnem);
+				if (bad->isAlive()){
 					distance = pow(x - xEnem, 2) + pow(y - yEnem, 2);
-					//std::cout << "Distance: " << distance << " range:  " << range << std::endl;
 					if (distance < range){
-						shot(i);
+						shot(bad);
 						timeBetweenShots = timeToShot;
 						break;
 					}
 				}
 			}
+
+			//for (unsigned int i = 0; i < enemies->size(); i++){
+			//	//check if is in range
+			//	double xEnem, yEnem, distance;
+			//	(*enemies)[i].getPositions(xEnem, yEnem);
+			//	if ((*enemies)[i].isAlive()){// ignore already death
+			//		distance = pow(x - xEnem, 2) + pow(y - yEnem, 2);
+			//		//std::cout << "Distance: " << distance << " range:  " << range << std::endl;
+			//		if (distance < range){
+			//			shot(i);
+			//			timeBetweenShots = timeToShot;
+			//			break;
+			//		}
+			//	}
+			//}
 			
 		}
 	}
@@ -107,8 +121,8 @@ void Tower::draw(){
 		bullets[i].draw(data->GetID(IMG_TOWER1NORMAL + type * 3));// NEEED CHANGE IMG!
 }
 
-void Tower::shot(int pos){
-	Bullet toShot(enemies,pos, dmgAntiViral, dmgAntiBacterial, type);
+void Tower::shot(BadAgent* toChase){
+	Bullet toShot(toChase, dmgAntiViral, dmgAntiBacterial, type);
 	toShot.setPositions(x, y, z + 1);
 	toShot.setInitialSpeeds(0, 0);
 	toShot.setSizes(25, 25, 1);

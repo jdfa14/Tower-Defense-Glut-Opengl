@@ -167,6 +167,7 @@
     <ClCompile Include="GameManager_Mouse.cpp" />
     <ClCompile Include="GameManager_Play.cpp" />
     <ClCompile Include="LevelData.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Mobile.cpp" />
     <ClCompile Include="old Image.cpp" />
     <ClCompile Include="json\json.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LevelData.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="TempGameManager.h" />
     <ClInclude Include="addGlut.h" />

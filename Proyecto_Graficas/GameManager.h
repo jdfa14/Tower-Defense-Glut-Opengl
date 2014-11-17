@@ -11,6 +11,7 @@
 #include "cData.h"
 #include "Grid.h"
 #include "LevelData.h"
+#include "LinkedList.h"
 
 #define MAP_INIT_X -125
 #define MAP_INIT_Y -71.42
@@ -30,7 +31,8 @@ private:
 
 	//Objects
 	std::vector<Tower> towers;
-	std::vector<BadAgent> enemies;//maybe it will be not implemented
+	LinkedList enemies;
+	//std::vector<BadAgent> enemies;//maybe it will be not implemented
 	std::vector<LevelData> levelsData;
 
 	//visual controls

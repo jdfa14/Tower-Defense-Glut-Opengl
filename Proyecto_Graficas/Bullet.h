@@ -5,8 +5,9 @@
 class Bullet : public Mobile
 {
 private:
-	int pos;
-	std::vector<BadAgent> *enemies;
+	//int pos;
+	//std::vector<BadAgent> *enemies;
+	BadAgent *enemyToChase;
 	double antiVDmg;
 	double antiBDmg;
 	double timeToArrive;
@@ -20,7 +21,7 @@ private:
 
 public:
 
-	Bullet(std::vector<BadAgent> *enemies, int pos , double antiViral, double antiBacterial, int type = 1, double time = 3);
+	Bullet(BadAgent *toChase, double antiViral, double antiBacterial, int type = 1, double time = 3);
 	Bullet& operator=(const Bullet& element);
 	//get
 	inline bool isReadyToDestroy(){
@@ -32,6 +33,6 @@ public:
 	void setTimeToArrive(double timeInSeconds);
 	void setSizes(double width, double height,double volume);
 
-	void chaseHim(int pos);
+	void chaseHim(BadAgent *toChase);
 	void update(double elapsedTimeMiliSeconds);// update positions and do magic to chase
 };

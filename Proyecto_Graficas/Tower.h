@@ -6,6 +6,9 @@
 #include "cData.h"
 #include <time.h>
 #include <stdlib.h>
+
+#include "LinkedList.h"
+
 #define WHITE_TOWER 0
 #define YELLOW_TOWER 1
 #define PILL_TOWER 2
@@ -13,7 +16,7 @@
 class Tower : public StaticObject
 {
     private:
-		std::vector<BadAgent> *enemies;//array where it will check
+		LinkedList *enemies;//array where it will check
 		std::vector<Bullet> bullets; // my array of bullets
 		double dmgAntiViral;
 		double dmgAntiBacterial;
@@ -29,7 +32,7 @@ class Tower : public StaticObject
 		void goTo(double x, double y);//change 
 
     public:
-		Tower(cData &data, std::vector<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
+		Tower(cData &data, LinkedList &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
 		~Tower();
 		//editions
 		
@@ -41,6 +44,6 @@ class Tower : public StaticObject
 		//Display
 		void update(double elapsedTimeMiliSec); //time to shot, update every Bullet
 		void draw();//draw all images
-		void shot(int pos);
+		void shot(BadAgent *toChase);
 };
 

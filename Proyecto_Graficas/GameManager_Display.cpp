@@ -17,9 +17,13 @@ void GameManager::draw(double time){
 			data.Draw(grids[i].img, grids[i].posXY.posX, grids[i].posXY.posY, -1, grids[i].width + 1, grids[i].heith + 1.5);
 		}
 
-		for (unsigned int i = 0; i < enemies.size(); i++){
-			enemies[i].draw();
+		for (Node * i = enemies.getHead(); i != NULL; i = i->next){
+			i->data->draw();
 		}
+
+		/*for (unsigned int i = 0; i < enemies.size(); i++){
+			enemies[i].draw();
+		}*/
 
 		for (unsigned int i = 0; i < towers.size(); i++){
 			towers[i].draw();
@@ -45,7 +49,21 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 	}
 
 	if (playing){
-		for (unsigned int i = 0; i < enemies.size();){
+		for (Node * i = enemies.getHead(); i != NULL; i = i->next){
+			BadAgent *bad = i->data;
+			if (bad->isReadyToDestroy()){
+				Node *aux = i;
+				i = i->prev;
+				enemies.remove(aux);
+			}
+			else{
+				bad->update(elapsedTimeMiliSec);
+			}
+			if (i == NULL)// in case tha prev returns null
+				break;
+		}
+
+		/*for (unsigned int i = 0; i < enemies.size();){
 			if (enemies[i].isReadyToDestroy()){
 				enemies.erase(enemies.begin() + i);
 			}
@@ -53,7 +71,7 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 				enemies[i].update(elapsedTimeMiliSec);
 				i++;
 			}
-		}
+		}*/
 		/*for (unsigned int i = 0; i < enemies.size(); i++){
 			enemies[i].update(elapsedTimeMiliSec);
 		}*/

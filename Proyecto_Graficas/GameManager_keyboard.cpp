@@ -25,7 +25,7 @@ void GameManager::keyboard(unsigned char key, int x, int y){
 		//enemies.push_back(*enemy);
 		enemy = new BadAgent(data, *path);
 		enemy->setSizes(grids[0].width, grids[0].heith, 1);
-		enemies.push_back(*enemy);
+		enemies.addAtTail(enemy);
 		break;
 	default:
 		break;

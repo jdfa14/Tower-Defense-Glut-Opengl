@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(std::vector<BadAgent> *enemies, int pos, double antiViral, double antiBacterial, int type, double time) : Mobile(){
+Bullet::Bullet(BadAgent *toChase, double antiViral, double antiBacterial, int type, double time) : Mobile(){
 	setDamages(antiViral, antiBacterial);
 	setMaxSpeed(500);
 	setInitialSpeeds(100, 100);
@@ -10,8 +10,7 @@ Bullet::Bullet(std::vector<BadAgent> *enemies, int pos, double antiViral, double
 	hit = false;
 	this->type = type;
 	this->time = time;
-	this->enemies = enemies;
-	chaseHim(pos);
+	chaseHim(toChase);
 }
 
 Bullet& Bullet::operator=(const Bullet& element){
@@ -27,8 +26,7 @@ Bullet& Bullet::operator=(const Bullet& element){
 	maxSpeed = element.maxSpeed;
 	
 	//bullet
-	pos = element.pos;
-	std::vector<BadAgent> *enemies = element.enemies;
+	enemyToChase = element.enemyToChase;
 	antiVDmg = element.antiVDmg;
 	antiBDmg = element.antiBDmg;
 	timeToArrive = element.timeToArrive;
@@ -60,9 +58,9 @@ void Bullet::setDamages(double antiViral, double antiBacterial){
 	antiBDmg = antiBacterial;
 }
 
-void Bullet::chaseHim(int pos){
-	this->pos = pos;
-	(*enemies)[pos].addChaser();
+void Bullet::chaseHim(BadAgent *toChase){
+	this->enemyToChase = toChase;
+	toChase->addChaser();
 }
 
 void Bullet::update(double elapsedTimeMiliSeconds){
@@ -70,8 +68,8 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 	if (!hit && !readyToDestroy){
 		double distance;
 		double wMonster, hMonster;
-		(*enemies)[pos].getPositions(xMonster, yMonster);
-		(*enemies)[pos].getSizes(wMonster, hMonster);
+		enemyToChase->getPositions(xMonster, yMonster);
+		enemyToChase->getSizes(wMonster, hMonster);
 
 		distance = sqrt(pow(x - xMonster, 2) + pow(y - yMonster, 2)) - wMonster / 2.0 - width / 2.0;
 
@@ -94,21 +92,21 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 	}
 	else if (!readyToDestroy)
 	{
-		(*enemies)[pos].getPositions(xMonster, yMonster);
+		enemyToChase->getPositions(xMonster, yMonster);
 		switch (type)
 		{
 		case 0:// normall towar
-			(*enemies)[pos].takeDamaged(antiVDmg, antiBDmg);
-			(*enemies)[pos].chaserHasDoneHisJob();
+			enemyToChase->takeDamaged(antiVDmg, antiBDmg);
+			enemyToChase->chaserHasDoneHisJob();
 			readyToDestroy = true;
 			std::cout << "I HIT!";
 			break;
 		case 1:// 
-			(*enemies)[pos].takeDamaged(antiVDmg, antiBDmg);
+			enemyToChase->takeDamaged(antiVDmg, antiBDmg);
 			time -= elapsedTimeMiliSeconds / 1000;
 			setPositions(xMonster + xDif, yMonster + yDif, 0);
 			if (time <= 0){
-				(*enemies)[pos].chaserHasDoneHisJob();
+				enemyToChase->chaserHasDoneHisJob();
 				readyToDestroy = true;
 			}
 			break;
