@@ -40,23 +40,23 @@ void GameManager::init(){
 	}
 
 	//setting grids positions
-	rc = 30;
-	
-	double gridWidth = 24.333333;
-	double gridHeight = 27.90533333;
+	rc = 30.0;
 
-	double widthAux = gridWidth * rc;
-	double heightAux = gridHeight * rc;
+	double mapWidth = (win.getOrthoWidth() + ((double)MAP_INIT_X * 2.0) - 20); // 750 - 20 margins
+	double mapHeight = (win.getOrthoHeight() + ((double)MAP_INIT_Y * 2.0) - 20);// 857.15 - 20
+
+	double gridWidth = mapWidth / rc; //24.333333;
+	double gridHeight = mapHeight / rc; //27.90533333;
 
 	double initX;
-	double initY = heightAux / 2.0 - gridHeight / 2.0 + (double)MAP_INIT_Y;
+	double initY = mapHeight / 2.0 - gridHeight / 2.0 + (double)MAP_INIT_Y;
 	std::cout << "Postitioning grids\n";
 	for (int i = 0; i < rc; i++){
-		initX = -widthAux / 2.0 + gridWidth / 2.0 + (double)MAP_INIT_X;
+		initX = -mapWidth / 2.0 + gridWidth / 2.0 + (double)MAP_INIT_X;
 		for (int j = 0; j < rc; j++){
 			Grid aux;
-			aux.x =  initX;
-			aux.y =  initY;
+			aux.posXY.posX =  initX;
+			aux.posXY.posY =  initY;
 			aux.width = gridWidth;
 			aux.heith = gridHeight;
 			aux.state = GRD_STATE_PLACEABLE;
@@ -74,10 +74,11 @@ void GameManager::init(){
 		initY -= gridHeight;
 	}
 
+	//loading Levels
 	std::cout << "Loading data from leves... 00%";
 	for (int i = 0; i < 1; i++){
 		LevelData level;
-		level.loadData("levels/level_" + std::to_string(i) + ".json");
+		level.loadData("levels/level_" + std::to_string(i) + ".json", grids);
 		std::cout << "\b\b\b" + std::to_string((i + 1) * 10) + "%";
 		levelsData.push_back(level);
 	}

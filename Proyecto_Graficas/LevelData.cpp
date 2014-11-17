@@ -5,11 +5,14 @@ LevelData::LevelData()
 {
 }
 
-bool LevelData::loadData(std::string filename){
+bool LevelData::loadData(std::string filename, std::vector<Grid> &positionsInMap){
 	int errorH;
 	json::Object json;
 	json::Object data;
 	json::Array map;
+	json::Array pPath;
+	json::Array sPath;
+
 	std::string mapTile;
 	std::cout << "\b\b1%";
 	json = json::loadJson(filename, errorH);
@@ -18,9 +21,18 @@ bool LevelData::loadData(std::string filename){
 		std::cout << "Error loading level: " << errorH << std::endl;
 		return false;
 	}
-	std::cout << "\b\b7%";
+	
 	data = json["data"];
+	pPath = data["pathPrimary"];
+	sPath = data["pathSecondary"];
+	std::cout << "\b\b7%";
+#pragma warning
+	for (unsigned int i = 0; i < pPath.size(); i++){
+		json::Array auxLoc = pPath[i];
+		path.push_back(positionsInMap[(int)auxLoc[0] + (int)auxLoc[1] * 30].posXY);
+	}
 	std::cout << "\b\b8%";
+	//loading map data
 	map = data["map"];
 	std::cout << "\b\b9%";
 	for (unsigned int i = 0; i < map.size(); i++){
@@ -44,4 +56,8 @@ bool LevelData::loadData(std::string filename){
 
 std::vector<Grid> *LevelData::getGridData(){
 	return &gridData;
+}
+
+std::vector<Location>* LevelData::getPathData(){
+	return &path;
 }

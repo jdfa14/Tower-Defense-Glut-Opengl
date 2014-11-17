@@ -5,19 +5,21 @@
 #include "cTexture.h"
 #include "PlaceableObject.h"
 
+#define RAD_TO_DEG (180.0 / 3.141592)
+#define DEG_TO_RAD (3.141592 / 180.0)
+
 
 class Mobile : public PlaceableObject
 {
 protected:
 	double speedX;
 	double speedY;
-	double acc;
+	double acc; // total acc ^2
 	double accX;
-	double accY;
-	double maxSpeed;
-	double actualSpeed;
-	double direction;
-	const double RAD_DEG = 180 / 3.1415926535;
+	double accY; 
+	double maxSpeed;// max Speed ^2
+	double actualSpeed; // total speed ^2
+	double direction; // in Degrees
 	//display
 	
 

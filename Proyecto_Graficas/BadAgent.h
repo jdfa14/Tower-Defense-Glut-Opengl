@@ -8,29 +8,46 @@
 #define BA_STATE_NORMAL 0
 #define BA_STATE_GOTHIT 1
 
+#define BA_DIF_EASY		0
+#define BA_DIF_NORMAL	1
+#define BA_DIF_HARD		2
+
+#define BA_TYPE_VIRUS			0
+#define BA_TYPE_BACTERIA		1
+#define BA_TYPE_BOSS_VIRUS		2
+#define BA_TYPE_BOSS_BACTERIA	3
+
 class BadAgent : public Mobile
 {
 private:
 	double hitPoints;
-	double defAntiV;
-	double defAntiB;
+	double defAntiV;// in %
+	double defAntiB;// in % of reduction
 	cData *data;
-	std::vector<Location> path;
-	void goTo(double toX, double toY);// change direction with the same speed
-	int type;
+	
 	int img;
-	int state; // not implementated 
-	int waitForMultipleObjects;
+	int state; // not necesary if you see this comment
+	int waitForMultipleObjects; //:B
 	bool vulnerable;//if not, you will not be able to shot him
 	bool destroying;
 	bool readyToDestroy;
 
+	//Autobot...MOVE!
+	bool nextStept();
+	bool amICloseEnought();
+	void goTo(double toX, double toY);// change direction with the same speed
+
+	//Movement stuff for the autobot
+	std::vector<Location> *path;
+	int pathIndex;
+	double distanceToTarget; // distance ^2
+
 public:
-	BadAgent(cData &data, int type);
+	BadAgent(cData &data, std::vector<Location> &path, int type = BA_TYPE_VIRUS, int dificulty = BA_DIF_EASY);
 
 	//sets
 	void setDefs(double defAntiVirus, double defAntiBacterial);
-	void setType(int type);
+	
 
 	//gets
 	void getPositions(double &x, double &y);
@@ -47,4 +64,5 @@ public:
 	//editions
 	void addChaser();
 	void chaserHasDoneHisJob();
+	void getReadyToFight(int type, int dificulty);
 };

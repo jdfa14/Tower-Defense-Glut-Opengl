@@ -52,10 +52,11 @@
 #define IMG_TILE_Q			41
 #define IMG_TILE_X			42
 
-#define IMG_BADAGENT1_1		43
+#define IMG_VIRUS			43
+#define IMG_BACTERIA		44
 
 //Image array size
-#define NUM_TEX				44
+#define NUM_TEX				45
 
 
 class cData

@@ -51,7 +51,7 @@ Tower::~Tower(){
 void Tower::update(double elapsedTimeMiliSec){
 	if (type != 2){// tower # 2 cant shot
 		//updating every bullet
-		for (std::vector<Bullet>::iterator i = bullets.begin(); i != bullets.end(); i++){
+		/*for (std::vector<Bullet>::iterator i = bullets.begin(); i != bullets.end(); i++){
 			if (i->isReadyToDestroy()){
 				bullets.erase(i);
 				break;
@@ -60,6 +60,16 @@ void Tower::update(double elapsedTimeMiliSec){
 
 		for (std::vector<Bullet>::iterator i = bullets.begin(); i != bullets.end(); i++){
 				i->update(elapsedTimeMiliSec);
+		}*/
+
+		for (unsigned int i = 0; i < bullets.size();){
+			if (bullets[i].isReadyToDestroy()){
+				bullets.erase(bullets.begin() + i);
+			}
+			else{
+				bullets[i].update(elapsedTimeMiliSec);
+				i++;
+			}
 		}
 			
 

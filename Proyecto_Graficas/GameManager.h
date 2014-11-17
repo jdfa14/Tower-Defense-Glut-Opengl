@@ -43,15 +43,13 @@ private:
 	Screen mainScreen;
 	
 
-	//cantidad de rectangulos de la grid por renglon
-	
-
 	//Matriz de navegacion
 	int screenState;
 	//0 back, 1 foward1, 2 foward2... 
 	int **hereYouAre;
 
 	//grid and playing stuff
+	std::vector<Location> *path;
 	bool playing;
 	bool showingGrid;// only if placing a towa will be true
 	bool isOnMap;

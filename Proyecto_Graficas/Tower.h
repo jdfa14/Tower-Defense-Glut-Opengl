@@ -25,6 +25,9 @@ class Tower : public StaticObject
 		cData *data;
 		void setType(int type);
 
+		//shot
+		void goTo(double x, double y);//change 
+
     public:
 		Tower(cData &data, std::vector<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
 		~Tower();

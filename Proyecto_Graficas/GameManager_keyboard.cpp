@@ -22,10 +22,8 @@ void GameManager::keyboard(unsigned char key, int x, int y){
 		}
 		break;
 	case 'E':
-		enemy = new BadAgent(data,0);
-		enemy->setPositions(xMapped, yMapped,0);
-		enemy->setMaxSpeed(100);
-		enemy->setInitialSpeeds(100, 0);
+		//enemies.push_back(*enemy);
+		enemy = new BadAgent(data, *path);
 		enemy->setSizes(grids[0].width, grids[0].heith, 1);
 		enemies.push_back(*enemy);
 		break;

@@ -2,7 +2,6 @@
 
 Bullet::Bullet(std::vector<BadAgent> *enemies, int pos, double antiViral, double antiBacterial, int type, double time) : Mobile(){
 	setDamages(antiViral, antiBacterial);
-	this->pos = pos;
 	setMaxSpeed(500);
 	setInitialSpeeds(100, 100);
 	timeToArrive = 3;
@@ -12,6 +11,7 @@ Bullet::Bullet(std::vector<BadAgent> *enemies, int pos, double antiViral, double
 	this->type = type;
 	this->time = time;
 	this->enemies = enemies;
+	chaseHim(pos);
 }
 
 Bullet& Bullet::operator=(const Bullet& element){
@@ -62,16 +62,15 @@ void Bullet::setDamages(double antiViral, double antiBacterial){
 
 void Bullet::chaseHim(int pos){
 	this->pos = pos;
+	(*enemies)[pos].addChaser();
 }
 
 void Bullet::update(double elapsedTimeMiliSeconds){
-	
 	double xMonster, yMonster;
-	(*enemies)[pos].getPositions(xMonster, yMonster);
-	
-	if (!hit){
+	if (!hit && !readyToDestroy){
 		double distance;
 		double wMonster, hMonster;
+		(*enemies)[pos].getPositions(xMonster, yMonster);
 		(*enemies)[pos].getSizes(wMonster, hMonster);
 
 		distance = sqrt(pow(x - xMonster, 2) + pow(y - yMonster, 2)) - wMonster / 2.0 - width / 2.0;
@@ -95,7 +94,7 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 	}
 	else if (!readyToDestroy)
 	{
-		
+		(*enemies)[pos].getPositions(xMonster, yMonster);
 		switch (type)
 		{
 		case 0:// normall towar

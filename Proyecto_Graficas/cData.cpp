@@ -90,7 +90,7 @@ bool cData::Load()
 	LoadImage(IMG_TILE_X, path + "x.png"); i++;
 
 	path = "Images/enemies/badAgent_";
-	LoadImage(IMG_BADAGENT1_1, path + "1_1.png");
+	//LoadImage(IMG_BADAGENT1_1, path + "1_1.png");
 
 	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	std::cout << "\n";

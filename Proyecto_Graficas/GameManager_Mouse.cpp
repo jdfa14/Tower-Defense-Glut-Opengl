@@ -58,7 +58,7 @@ void GameManager::button_listener(int id){
 
 			// load stuff from level objects
 			// Need to change level selector, only loading one
-#pragma warninrg // por los loles
+#pragma warning // por los loles
 			auxGridData = levelsData[0].getGridData();
 
 			for (unsigned i = 0; i < grids.size(); i++){
@@ -67,7 +67,7 @@ void GameManager::button_listener(int id){
 				grids[i].state = (*auxGridData)[i].state;
 				grids[i].tileType = (*auxGridData)[i].tileType;
 			}
-
+			path = levelsData[0].getPathData();
 			loadScreen(hereYouAre[screenState][1]);
 			break;
 			//special back from playing
@@ -143,7 +143,7 @@ void GameManager::leftClick(int x, int y, int state)
 			if (showingGrid){
 				if (isOnMap){
 					if (canPlace){
-						Tower toPlace(data, enemies, grids[selectedIndexes[0]].x + grids[selectedIndexes[0]].width / 2.0, grids[selectedIndexes[0]].y - grids[selectedIndexes[0]].heith / 2.0, 0, typeOfPlacingTower);
+						Tower toPlace(data, enemies, grids[selectedIndexes[0]].posXY.posX + grids[selectedIndexes[0]].width / 2.0, grids[selectedIndexes[0]].posXY.posY - grids[selectedIndexes[0]].heith / 2.0, 0, typeOfPlacingTower);
 						toPlace.setSizes(grids[selectedIndexes[0]].width * 2, grids[selectedIndexes[0]].heith * 2, 1);
 						towers.push_back(toPlace);
 						grids[selectedIndexes[0]].placeable = false;

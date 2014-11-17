@@ -59,7 +59,7 @@ void Mobile::update(double elapsedTimeMiliSec){
 		actualSpeed = maxSpeed;
 	}
 
-	direction = speedX >= 0 ? asin(speedY / sqrt(actualSpeed)) * RAD_DEG : 180 + asin(speedY / sqrt(actualSpeed)) * RAD_DEG;
+	direction = speedX >= 0 ? asin(speedY / sqrt(actualSpeed)) * RAD_TO_DEG : 180 + asin(speedY / sqrt(actualSpeed)) * RAD_TO_DEG;
 
 	x += speedX * t;
 	y += speedY * t;

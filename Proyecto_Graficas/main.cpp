@@ -14,10 +14,8 @@
 
 GlutWindow *win;
 GameManager gameManager;
-
-
-std::vector<BadAgent> testEnemies;
-Tower *testTower;
+double timeInMiliSeconds;
+double elapsedTimeMS;
 
 void keyboard(unsigned char key, int x, int y){
 	gameManager.keyboard(key, x, y);
@@ -27,9 +25,7 @@ void mousePassive(int x, int y)
 {
 	double xMapped = win->getXMapped(x);
 	double yMapped = win->getYMapped(y);
-	//std::cout << "Im moving" << std::endl;
 	gameManager.pasiveMouse(xMapped,yMapped);
-	//test3.mouseState(xMapped, yMapped,false);
 }
 
 void mouseFunc(int button, int state, int x, int y){//when user clicks
@@ -56,7 +52,6 @@ void reshape(int width, int height){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(win->getLeft(), win->getRigth(), win->getBottom(), win->getTop(), win->getNear(), win->getFar());
-	//glFrustum(win->getLeft(), win->getRigth(), win->getBottom(), win->getTop(), win->getNear(), win->getFar());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -64,10 +59,7 @@ void reshape(int width, int height){
 }
 
 void display(){
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Al inicio
-	///TEST
-
-	//TEST
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	gameManager.draw(glutGet(GLUT_ELAPSED_TIME));
 
@@ -76,11 +68,11 @@ void display(){
 
 void time(int x){
 	glutPostRedisplay();
+	elapsedTimeMS = timeInMiliSeconds - glutGet(GLUT_ELAPSED_TIME);
+	
 	gameManager.refresh(50);
 
-	//TEST
-	//TEST
-
+	timeInMiliSeconds += elapsedTimeMS;
 	glutTimerFunc(50, time, 1);
 }
 
