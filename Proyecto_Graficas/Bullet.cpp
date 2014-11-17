@@ -103,7 +103,10 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 			break;
 		case 1:// 
 			enemyToChase->takeDamaged(antiVDmg, antiBDmg);
-			time -= elapsedTimeMiliSeconds / 1000;
+			if (!enemyToChase->isAlive())
+				time = 0;
+			else
+				time -= elapsedTimeMiliSeconds / 1000;
 			setPositions(xMonster + xDif, yMonster + yDif, 0);
 			if (time <= 0){
 				enemyToChase->chaserHasDoneHisJob();
