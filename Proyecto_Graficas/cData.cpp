@@ -45,6 +45,7 @@ bool cData::Load()
 	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++;
 	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
+	
 	// loading towers
 	path = "Images/towers/";
 	// Pills
@@ -91,6 +92,12 @@ bool cData::Load()
 
 	path = "Images/enemies/badAgent_";
 	//LoadImage(IMG_BADAGENT1_1, path + "1_1.png");
+
+
+	// Agrega virus inicio
+	path = "Images/enemies/";
+	LoadImage(IMG_BACTERIA, path + "bad.png"); i++;
+	// Agrega virus fin
 
 	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	std::cout << "\n";
