@@ -96,7 +96,7 @@ bool cData::Load()
 
 	// Agrega virus inicio
 	path = "Images/enemies/";
-	LoadImage(IMG_BACTERIA, path + "bad.png"); i++;
+	LoadImage(IMG_VIRUS, path + "bad.png"); i++;
 	// Agrega virus fin
 
 	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";

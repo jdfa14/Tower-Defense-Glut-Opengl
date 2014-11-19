@@ -71,7 +71,7 @@ void BadAgent::update(double elapsedTimeMiliSec){
 }
 
 void BadAgent::draw(){
-	Mobile::draw(img);
+	Mobile::draw(data->GetID(img));
 }
 
 bool BadAgent::isAlive(){
