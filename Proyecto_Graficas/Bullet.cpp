@@ -4,7 +4,7 @@ Bullet::Bullet(BadAgent *toChase, double antiViral, double antiBacterial, int ty
 	setDamages(antiViral, antiBacterial);
 	setMaxSpeed(500);
 	setInitialSpeeds(100, 100);
-	timeToArrive = 3;
+	timeToArrive = 0.2;
 	setSizes(50, 50, 1);
 	readyToDestroy = false;
 	hit = false;

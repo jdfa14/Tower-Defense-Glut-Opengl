@@ -90,8 +90,9 @@ bool cData::Load()
 	LoadImage(IMG_TILE_Q, path + "q.png"); i++;*/
 	LoadImage(IMG_TILE_X, path + "x.png"); i++;
 
-	path = "Images/enemies/badAgent_";
-	//LoadImage(IMG_BADAGENT1_1, path + "1_1.png");
+	path = "Images/enemies/";
+	LoadImage(IMG_VIRUS, path + "bad.png");
+	LoadImage(IMG_BACTERIA, path + "bad.png");
 
 
 	// Agrega virus inicio

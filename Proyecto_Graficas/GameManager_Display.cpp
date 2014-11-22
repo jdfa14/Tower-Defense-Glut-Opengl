@@ -41,13 +41,7 @@ void GameManager::draw(double time){
 	}
 }
 
-void GameManager::refresh(double elapsedTimeMiliSec){
-	while (!events.empty())
-	{
-		button_listener(events.top());
-		events.pop();
-	}
-
+void GameManager::updateEnemies(double elapsedTimeMiliSec){
 	if (playing){
 		for (Node * i = enemies.getHead(); i != NULL; i = i->next){
 			BadAgent *bad = i->data;
@@ -62,23 +56,24 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 			if (i == NULL)// in case tha prev returns null
 				break;
 		}
+	}
+}
 
-		/*for (unsigned int i = 0; i < enemies.size();){
-			if (enemies[i].isReadyToDestroy()){
-				enemies.erase(enemies.begin() + i);
-			}
-			else{
-				enemies[i].update(elapsedTimeMiliSec);
-				i++;
-			}
-		}*/
-		/*for (unsigned int i = 0; i < enemies.size(); i++){
-			enemies[i].update(elapsedTimeMiliSec);
-		}*/
+void GameManager::updateTowers(double elapsedTimeMiliSec){
+	if (playing){
 		for (unsigned int i = 0; i < towers.size(); i++){
 			towers[i].update(elapsedTimeMiliSec);
 		}
 	}
+}
+
+void GameManager::refresh(double elapsedTimeMiliSec){
+	while (!events.empty())
+	{
+		button_listener(events.top());
+		events.pop();
+	}
+
 }
 
 void GameManager::drawBG(){

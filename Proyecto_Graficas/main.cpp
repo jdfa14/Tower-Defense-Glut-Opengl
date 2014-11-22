@@ -68,12 +68,22 @@ void display(){
 
 void time(int x){
 	glutPostRedisplay();
-	elapsedTimeMS = timeInMiliSeconds - glutGet(GLUT_ELAPSED_TIME);
+	switch (x)
+	{
+	case 1:
+		gameManager.refresh(50);
+		break;
+	case 2:
+		gameManager.updateEnemies(50);
+		break;
+	case 3:
+		gameManager.updateTowers(50);
+		break;
+	default:
+		break;
+	}
 	
-	gameManager.refresh(50);
-
-	timeInMiliSeconds += elapsedTimeMS;
-	glutTimerFunc(50, time, 1);
+	glutTimerFunc(100, time, x);
 }
 
 void begin(){
@@ -105,6 +115,8 @@ int main(int argc, char **argv){
 
 	glutDisplayFunc(display);
 	glutTimerFunc(5, time, 1);
+	glutTimerFunc(5, time, 2);
+	glutTimerFunc(5, time, 3);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouseFunc);

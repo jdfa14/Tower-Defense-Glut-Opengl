@@ -95,6 +95,8 @@ public:
 	void button_listener(int id);//it will do the actions from buttons
 	void draw(double time);//it will draw all the objects (time in miliseconds)
 	void refresh(double time);//it will actualice everything that is needed
+	void updateTowers(double elapsedTimeInMili);
+	void updateEnemies(double elapsedTimeInMili);
 
 	//functions
 	bool loadScreen(int i);
