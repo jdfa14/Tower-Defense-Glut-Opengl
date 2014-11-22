@@ -1,9 +1,9 @@
 #include "BadAgent.h"
 
-BadAgent::BadAgent(cData &data, std::vector<Location> &path, int type, int dificulty) : Mobile() {
+BadAgent::BadAgent(cData &data, std::vector<Location> &path, int type, int dificulty, int speed) : Mobile() {
 	this->data = &data;
 	this->path = &path;
-	getReadyToFight(type,dificulty);
+	getReadyToFight(type,dificulty,speed);
 	
 	vulnerable = true;
 	destroying = false;
@@ -78,7 +78,7 @@ bool BadAgent::isAlive(){
 	return !destroying;
 }
 
-void BadAgent::getReadyToFight(int type, int dif){
+void BadAgent::getReadyToFight(int type, int dif, int speed){
 	
 	switch (type)
 	{

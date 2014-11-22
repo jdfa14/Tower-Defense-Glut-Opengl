@@ -31,7 +31,7 @@ private:
 
 	//Objects
 	std::vector<Tower> towers;
-	LinkedList enemies;
+	LinkedList<BadAgent> enemies;
 	//std::vector<BadAgent> enemies;//maybe it will be not implemented
 	std::vector<LevelData> levelsData;
 
@@ -60,7 +60,7 @@ private:
 	Location mouseTracking;
 	void selectGrid(double x, double y);
 	int selectedIndexes[4];
-	int rc; // 30 x 30 little grids
+	int rc; // 20 x 20 little grids
 
 public:
 	cData data;

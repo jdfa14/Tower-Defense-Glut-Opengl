@@ -27,9 +27,10 @@ bool LevelData::loadData(std::string filename, std::vector<Grid> &positionsInMap
 	sPath = data["pathSecondary"];
 	std::cout << "\b\b7%";
 #pragma warning
+	double cellsInRows = sqrt(positionsInMap.size());
 	for (unsigned int i = 0; i < pPath.size(); i++){
 		json::Array auxLoc = pPath[i];
-		path.push_back(positionsInMap[(int)auxLoc[0] + (int)auxLoc[1] * 30].posXY);
+		path.push_back(positionsInMap[(int)auxLoc[0] + (int)auxLoc[1] * cellsInRows].posXY);
 	}
 	std::cout << "\b\b8%";
 	//loading map data

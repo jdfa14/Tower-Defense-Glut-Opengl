@@ -14,10 +14,10 @@ void GameManager::draw(double time){
 	if (playing){
 
 		for (unsigned int i = 0; i < grids.size(); i++){
-			data.Draw(grids[i].img, grids[i].posXY.posX, grids[i].posXY.posY, -1, grids[i].width + 1, grids[i].heith + 1.5);
+			data.Draw(grids[i].img, grids[i].posXY.posX, grids[i].posXY.posY, -1, grids[i].width, grids[i].heith);
 		}
 
-		for (Node * i = enemies.getHead(); i != NULL; i = i->next){
+		for (Node<BadAgent> * i = enemies.getHead(); i != NULL; i = i->next){
 			i->data->draw();
 		}
 
@@ -43,10 +43,10 @@ void GameManager::draw(double time){
 
 void GameManager::updateEnemies(double elapsedTimeMiliSec){
 	if (playing){
-		for (Node * i = enemies.getHead(); i != NULL; i = i->next){
+		for (Node<BadAgent> * i = enemies.getHead(); i != NULL; i = i->next){
 			BadAgent *bad = i->data;
 			if (bad->isReadyToDestroy()){
-				Node *aux = i;
+				Node<BadAgent> *aux = i;
 				i = i->prev;
 				enemies.remove(aux);
 			}

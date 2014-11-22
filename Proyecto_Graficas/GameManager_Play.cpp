@@ -1,22 +1,22 @@
 #include "GameManager.h"
 
 void GameManager::selectGrid(double x, double y){
-	double ratioX = 750.0 / 30.0;
-	double ratioY = 857.0 / 30.0;
+	double ratioX = 750.0 / rc;
+	double ratioY = 857.0 / rc;
 
-	int gridX = (x + 500) * 30 / 750;
-	int gridY = (357 - y) * 30 / 857;
-	int index = gridX + gridY * 30;
+	int gridX = (x + 500) * rc / 750;
+	int gridY = (357 - y) * rc / 857;
+	int index = gridX + gridY * rc;
 
 
-	if (index < 30){
-		index += 30;
+	if (index < rc){
+		index += rc;
 	}
-	if (index % 30 == 0){
+	if (index % rc == 0){
 		index++;
 	}
 
-	if (index > 900){
+	if (index > rc * rc){
 		return;
 	}
 
@@ -26,8 +26,8 @@ void GameManager::selectGrid(double x, double y){
 		grids[selectedIndexes[2]].state = grids[selectedIndexes[2]].placeable ? GRD_STATE_PLACEABLE : GRD_STATE_NOTPLACEABLE;
 		grids[selectedIndexes[3]].state = grids[selectedIndexes[3]].placeable ? GRD_STATE_PLACEABLE : GRD_STATE_NOTPLACEABLE;
 	}
-	selectedIndexes[0] = index - 31;
-	selectedIndexes[1] = index - 30;
+	selectedIndexes[0] = index - (rc + 1);
+	selectedIndexes[1] = index - rc;
 	selectedIndexes[2] = index - 1;
 	selectedIndexes[3] = index;
 
@@ -50,5 +50,4 @@ void GameManager::selectGrid(double x, double y){
 		grids[selectedIndexes[3]].state = GRD_STATE_NOTPLACEABLE;
 		canPlace = false;
 	}
-
 }

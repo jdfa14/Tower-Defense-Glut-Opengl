@@ -17,6 +17,10 @@
 #define BA_TYPE_BOSS_VIRUS		2
 #define BA_TYPE_BOSS_BACTERIA	3
 
+#define BA_MOV_SLOW		0
+#define BA_MOV_NORMAL	1
+#define BA_MOV_FAST		3
+
 class BadAgent : public Mobile
 {
 private:
@@ -42,13 +46,14 @@ private:
 	int pathIndex;
 	double distanceToTarget; // distance ^2
 
+	void getReadyToFight(int type, int dificulty, int speed);
+
 public:
-	BadAgent(cData &data, std::vector<Location> &path, int type = BA_TYPE_VIRUS, int dificulty = BA_DIF_EASY);
+	BadAgent(cData &data, std::vector<Location> &path, int type = BA_TYPE_VIRUS, int dificulty = BA_DIF_EASY, int speed = BA_MOV_SLOW);
 
 	//sets
 	void setDefs(double defAntiVirus, double defAntiBacterial);
 	
-
 	//gets
 	void getPositions(double &x, double &y);
 	void getSizes(double &w, double &h);
@@ -64,5 +69,5 @@ public:
 	//editions
 	void addChaser();
 	void chaserHasDoneHisJob();
-	void getReadyToFight(int type, int dificulty);
+	
 };

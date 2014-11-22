@@ -44,9 +44,6 @@
     <ClCompile Include="BadAgent.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="Wave.cpp">
-      <Filter>Source FIles</Filter>
-    </ClCompile>
     <ClCompile Include="Tower.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
@@ -59,7 +56,10 @@
     <ClCompile Include="LevelData.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="LinkedList.cpp" />
+    <ClCompile Include="Wave.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="WavesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -123,9 +123,6 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="Location.h" />
-    <ClInclude Include="Wave.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="level.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
@@ -136,6 +133,10 @@
       <Filter>Headers Files</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Wave.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WavesManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">

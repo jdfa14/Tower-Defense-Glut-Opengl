@@ -167,7 +167,6 @@
     <ClCompile Include="GameManager_Mouse.cpp" />
     <ClCompile Include="GameManager_Play.cpp" />
     <ClCompile Include="LevelData.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Mobile.cpp" />
     <ClCompile Include="old Image.cpp" />
     <ClCompile Include="json\json.cpp" />
@@ -177,6 +176,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Wave.cpp" />
+    <ClCompile Include="WavesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BadAgent.h" />
@@ -205,6 +205,7 @@
     <ClInclude Include="structs.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="GlutWindow.h" />
+    <ClInclude Include="WavesManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

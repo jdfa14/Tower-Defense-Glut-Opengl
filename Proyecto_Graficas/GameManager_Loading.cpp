@@ -40,7 +40,7 @@ void GameManager::init(){
 	}
 
 	//setting grids positions
-	rc = 30.0;
+	rc = 20.0;
 
 	double mapWidth = (win.getOrthoWidth() + ((double)MAP_INIT_X * 2.0) - 20); // 750 - 20 margins
 	double mapHeight = (win.getOrthoHeight() + ((double)MAP_INIT_Y * 2.0) - 20);// 857.15 - 20
@@ -57,19 +57,12 @@ void GameManager::init(){
 			Grid aux;
 			aux.posXY.posX =  initX;
 			aux.posXY.posY =  initY;
-			aux.width = gridWidth;
-			aux.heith = gridHeight;
+			aux.width = gridWidth + 1.5;//visual hard coded fix
+			aux.heith = gridHeight + 1;//visual hard codded fix
 			aux.state = GRD_STATE_PLACEABLE;
 			aux.placeable = true;
-			if (i == 24 && j == 10){
-				aux.placeable = false;
-				aux.state = 1;
-			}
-
 			grids.push_back(aux);
 			initX += gridWidth;
-			
-
 		}
 		initY -= gridHeight;
 	}

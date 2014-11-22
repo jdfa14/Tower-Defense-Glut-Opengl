@@ -33,7 +33,7 @@ void Tower::setType(int type){
 	}
 }
 
-Tower::Tower(cData &data, LinkedList &enemies, double x, double y, double z, int type){
+Tower::Tower(cData &data, LinkedList<BadAgent> &enemies, double x, double y, double z, int type){
 	StaticObject::StaticObject();
 	this->data = &data;
 	this->enemies = &enemies;
@@ -79,7 +79,7 @@ void Tower::update(double elapsedTimeMiliSec){
 
 		//check perimeter
 		if (timeBetweenShots <= 0){
-			for (Node *i = enemies->getHead(); i != NULL; i = i->next){
+			for (Node<BadAgent> *i = enemies->getHead(); i != NULL; i = i->next){
 				double xEnem, yEnem, distance;
 				BadAgent *bad = i->data;
 				bad->getPositions(xEnem, yEnem);

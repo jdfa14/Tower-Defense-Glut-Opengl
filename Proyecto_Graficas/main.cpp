@@ -82,8 +82,7 @@ void time(int x){
 	default:
 		break;
 	}
-	
-	glutTimerFunc(100, time, x);
+	glutTimerFunc(50, time, x);
 }
 
 void begin(){

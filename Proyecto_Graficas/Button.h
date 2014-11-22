@@ -12,10 +12,7 @@ public:
 
 	Button(std::string text){
 		this->text = text;
-		// pred values
-		//image.load("Images/BotonNormal.png");
-		//hover.load("Images/BotonHover.png");
-		//click.load("Images/BotonPressed.png");
+
 
 		setPositions(0, 0, 0);
 		setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str()) * 2, 100, 1);
@@ -23,10 +20,6 @@ public:
 		enable = true;
 		toDo = false;
 	}
-
-	//void setImageNormal(std::string path){ image.load(path); }
-	//void setImageHover(std::string path){ hover.load(path); }
-	//void setImageClick(std::string path){ click.load(path); }
 
 	std::string getText(){
 		return text;
@@ -39,24 +32,6 @@ public:
 		this->enable = enable;
 	}
 
-	//void draw(){// another draw with text
-	//	//need to remove this switch and use pointers instead
-	//	switch (state)
-	//	{
-	//	case Button::HOVER:
-	//		hover.draw();
-	//		break;
-	//	case Button::NORMAL:
-	//		image.draw();
-	//		break;
-	//	case Button::CLICK:
-	//		click.draw();
-	//		break;
-	//	default:
-	//		break;
-	//	}
-	//	writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
-	//}
 
 	void drawText(int normal, int hover, int pressed){
 		switch (state)

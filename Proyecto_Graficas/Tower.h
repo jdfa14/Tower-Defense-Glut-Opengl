@@ -16,7 +16,7 @@
 class Tower : public StaticObject
 {
     private:
-		LinkedList *enemies;//array where it will check
+		LinkedList<BadAgent> *enemies;//array where it will check
 		std::vector<Bullet> bullets; // my array of bullets
 		double dmgAntiViral;
 		double dmgAntiBacterial;
@@ -32,7 +32,7 @@ class Tower : public StaticObject
 		void goTo(double x, double y);//change 
 
     public:
-		Tower(cData &data, LinkedList &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
+		Tower(cData &data, LinkedList<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
 		~Tower();
 		//editions
 		
