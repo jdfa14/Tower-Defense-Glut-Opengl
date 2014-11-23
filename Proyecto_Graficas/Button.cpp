@@ -7,6 +7,7 @@ Button::Button(std::string text){
 	state = NORMAL;
 	enable = true;
 	toDo = false;
+	xMouse = yMouse = 0;
 }
 
 bool Button::isEnable(){
@@ -17,15 +18,26 @@ void Button::setEnable(bool enable){
 	this->enable = enable;
 }
 
-void Button::setImages(int normal, int hover){
+void Button::setImages(int normal, int hover,int tooltipImg){
 	this->normal = normal;
 	this->hover = hover;
+	this->tooltipImg = tooltipImg;
+}
+
+void Button::setToolTip(std::string tooltip){
+	this->tooltipMessage = tooltip;
+	this->tooltip = true;
 }
 
 void Button::drawText(){
 	switch (state)
 	{
-	case HOVER: StaticObject::drawText(hover); break;
+	case HOVER:
+	case CLICK:
+		StaticObject::drawText(hover);
+		if (tooltip)
+			writeTooltip();
+		break;
 	default: StaticObject::drawText(normal); break;
 	}
 	writeText(text, x, y, GLUT_BITMAP_TIMES_ROMAN_24);
@@ -38,25 +50,24 @@ void Button::mouseState(int xMouse, int yMouse, bool isClicked){
 			if (isClicked)
 			{
 				state = CLICK;
-				//std::cout << "Clicked \n";
-				//perform action and controls pendings
-				//activate flag, that will be deactivated when the action is performed
 				toDo = true;
 			}
 			else
 			{
 				state = HOVER;
-				//std::cout << "Hover \n";
 				if (toDo){
 					toDo = false;
 					action();
 				}
 			}
+			this->xMouse = xMouse;
+			this->yMouse = yMouse;
 			return;
 		}
 		if (toDo){
 			toDo = false;
 		}
+
 		state = NORMAL;
 	}
 }
@@ -81,5 +92,33 @@ void Button::writeText(std::string text, double x, double y, void *font){
 	glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.85), (GLfloat)y);
 	for (unsigned int i = 0; i < text.length(); i++) {
 		glutBitmapCharacter(font, text[i]);
+	}
+}
+
+void Button::writeTooltip(){
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tooltipImg);
+	glPushMatrix();
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 0);	glVertex3i(xMouse - 200	, yMouse - 80, 0);
+	glTexCoord2f(1, 0);	glVertex3i(xMouse		, yMouse - 80, 0);
+	glTexCoord2f(1, 1);	glVertex3i(xMouse		, yMouse	 , 0);
+	glTexCoord2f(0, 1);	glVertex3i(xMouse - 200	, yMouse	 , 0);
+	glEnd();
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
+	glColor3ub(0, 0, 0);
+	double initX = xMouse - 190;
+	double initY = yMouse - 12;
+	glRasterPos3f((GLfloat)initX , (GLfloat)initY,1);
+	for (unsigned int i = 0; i < tooltipMessage.length(); i++) {
+		if (tooltipMessage[i] == '\n'){
+			initY -= ( 6 +glutBitmapWidth(GLUT_BITMAP_HELVETICA_12, 'X'));
+			glRasterPos3f((GLfloat)initX, (GLfloat)initY,1);
+		}
+		else{
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, tooltipMessage[i]);
+		}
 	}
 }

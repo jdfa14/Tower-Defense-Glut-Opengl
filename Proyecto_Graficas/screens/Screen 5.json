@@ -15,26 +15,30 @@
         "text" : "Type 1",
         "ID" : 20,
         "positions" : [315,287,0],
-        "sizes" : [125,145,1]
+        "sizes" : [125,145,1],
+        "tooltip" : "Anti-virus specialist\ntesting"
       },
       {
         "text" : "Type 2",
         "ID" : 21,
         "positions" : [440,287,0],
-        "sizes" : [125,145,1]
+        "sizes" : [125,145,1],
+        "tooltip" : "Anti-virus specialist"
       },
       {
         "text" : "Type 3",
         "ID" : 22,
         "positions" : [315,142,0],
-        "sizes" : [125,146,1]
+        "sizes" : [125,146,1],
+        "tooltip" : "Anti-virus specialist"
       },
       {
         "text" : "Type 4",
         "ID" : 23,
         "positions" : [440,142,0],
         "sizes" : [125,146,1],
-        "enable" : false
+        "enable" : false,
+        "tooltip" : "Anti-virus specialist"
       }
     ]
   }

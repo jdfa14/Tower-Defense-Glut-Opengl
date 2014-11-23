@@ -33,7 +33,7 @@ bool cData::Load()
 	LoadImage(IMG_BUTTONHOVER, path + "buttonHover.png"); i++;
 	LoadImage(IMG_BUTTONPRESSED, path + "buttonPressed.png"); i++;
 	LoadImage(IMG_LIFEBAR, path + "lifeBar.png"); i++;
-
+	LoadImage(IMG_BTN_TOOLTIP, path + "tooltip.png"); i++;
 	std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
 	//loading backgrounds

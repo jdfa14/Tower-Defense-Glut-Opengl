@@ -75,17 +75,22 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 			json::Object jsonBut = buttons[i];
 			std::string name = (std::string)jsonBut["text"];
 			Button newButton(name);
-			newButton.setImages(imgData->GetID(IMG_BUTTONNORMAL), imgData->GetID(IMG_BUTTONHOVER));
+			newButton.setImages(imgData->GetID(IMG_BUTTONNORMAL), imgData->GetID(IMG_BUTTONHOVER),imgData->GetID(IMG_BTN_TOOLTIP));
 			newButton.setID(jsonBut["ID"]);
 			newButton.setEventsStack(events);
 
 			if (jsonBut["images"].GetType() != json::NULLVal){
 				json::Array arr = jsonBut["images"];
-				newButton.setImages(imgData->GetID(arr[0]), imgData->GetID(arr[1]));
+				
+				newButton.setImages(imgData->GetID(arr[0]), imgData->GetID(arr[1]), imgData->GetID(IMG_BTN_TOOLTIP));
 			}
 
 			if (jsonBut["enable"].GetType() != json::NULLVal){
 				newButton.setEnable(jsonBut["enable"]);
+			}
+
+			if (jsonBut["tooltip"].GetType() != json::NULLVal){
+				newButton.setToolTip((std::string)jsonBut["tooltip"]);
 			}
 
 			if (jsonBut["positions"].GetType() != json::NULLVal){
