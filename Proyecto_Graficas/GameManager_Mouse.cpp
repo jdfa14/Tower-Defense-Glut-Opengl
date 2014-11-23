@@ -14,6 +14,7 @@ void GameManager::button_listener(int id){
 	else{//where is 4 and five?? its a magical mistery
 		std::vector<Button> *levelbuttons;
 		std::vector<Grid> *auxGridData;
+		int levelSelected = 0;
 		
 		//6 show player data
 		switch (id)
@@ -50,16 +51,16 @@ void GameManager::button_listener(int id){
 		case 16:
 		case 17:
 		case 18:
+			levelSelected = 0;
 			if (hereYouAre[screenState][1] == ERRORNAV){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;
 			}
 			playing = true;
+			
 
-			// load stuff from level objects
-			// Need to change level selector, only loading one
-#pragma warning // por los loles
-			auxGridData = levelsData[0].getGridData();
+			auxGridData = levelsData[levelSelected].getGridData();
+			wavesManager.loadLevel(levelsData[levelSelected].getWaves());
 
 			for (unsigned i = 0; i < grids.size(); i++){
 				grids[i].placeable = (*auxGridData)[i].placeable;
@@ -67,7 +68,7 @@ void GameManager::button_listener(int id){
 				grids[i].state = (*auxGridData)[i].state;
 				grids[i].tileType = (*auxGridData)[i].tileType;
 			}
-			path = levelsData[0].getPathData();
+			path = levelsData[levelSelected].getPathData();
 			loadScreen(hereYouAre[screenState][1]);
 			break;
 			//special back from playing

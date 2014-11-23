@@ -29,9 +29,6 @@
     <ClCompile Include="old Image.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="cData.cpp">
-      <Filter>Source FIles</Filter>
-    </ClCompile>
     <ClCompile Include="cTexture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
@@ -59,7 +56,18 @@
     <ClCompile Include="Wave.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="WavesManager.cpp" />
+    <ClCompile Include="WavesManager.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="cData.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tower.h">
@@ -116,13 +124,9 @@
     <ClInclude Include="old Image.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="cData.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="cTexture.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="Location.h" />
     <ClInclude Include="level.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
@@ -132,11 +136,48 @@
     <ClInclude Include="LevelData.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Wave.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="WavesManager.h" />
+    <ClInclude Include="WavesManager.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Headers Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Location.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="corona.h">
+      <Filter>corona</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.hpp">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_errors.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_memoryinfo.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_output.h">
+      <Filter>fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="cData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Managers">
@@ -160,5 +201,30 @@
     <Filter Include="Managers\LinkedList">
       <UniqueIdentifier>{ed735d34-6603-4109-83d1-de626f65520c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="corona">
+      <UniqueIdentifier>{774bb0ea-3c24-400b-bb1b-b4a18eb11740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fmod">
+      <UniqueIdentifier>{31b5a3a1-10e8-447c-9748-e4ad068e04b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{809423c1-353f-4699-85b3-04825fc6d939}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="corona.lib">
+      <Filter>corona</Filter>
+    </Library>
+    <Library Include="fmodex_vc.lib">
+      <Filter>fmod</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="corona.dll">
+      <Filter>corona</Filter>
+    </None>
+    <None Include="fmodex.dll">
+      <Filter>fmod</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -87,9 +87,10 @@ void time(int x){
 
 void begin(){
 	gameManager.begin();
+}
 
-	//TEST
-	//TEST
+void idle(){
+	gameManager.idle();
 }
 
 int main(int argc, char **argv){
@@ -119,6 +120,7 @@ int main(int argc, char **argv){
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouseFunc);
+	glutIdleFunc(idle);
 	glutPassiveMotionFunc(mousePassive);
 	glutMainLoop();
 	return 0;

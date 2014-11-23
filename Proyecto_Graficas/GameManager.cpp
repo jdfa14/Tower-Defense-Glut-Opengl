@@ -1,7 +1,8 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager() 
 {
+	
 	showingGrid = false;
 	playing = false;
 	screenState = 0;

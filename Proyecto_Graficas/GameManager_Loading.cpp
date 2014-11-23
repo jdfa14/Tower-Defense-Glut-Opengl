@@ -8,36 +8,7 @@ void GameManager::init(){
 	double height = win.getOrthoHeight();
 	const int cant = 4;
 
-	//we load players info from jsons
-	std::cout << "Loading players \n";
-	for (int i = 1; i < 4; i++){
-		Player aux("Player " + std::to_string(i));
-		aux.loadPlayer(events);
-		std::cout << "Player " << i << " loaded\n";
-		players.push_back(aux);
-	}
-
-	//we load all posible screens
-	std::cout << "Loading screens \n";
-	for (int i = MAIN; i < NUMBER_OF_SCREENS; i = i + 1){
-		Screen newScreen;
-		newScreen.loadLevel(i,&events);
-		newScreen.getBGImage()->setPositions(0, 0, -99);
-		newScreen.getBGImage()->setSizes(width, height, 1);
-		switch (i)
-		{
-		case 0: newScreen.setName("Main"); break;
-		case 1: newScreen.setName("Player Selection"); break;
-		case 2: newScreen.setName("Instructions"); break;
-		case 3: newScreen.setName("Credits"); break;
-		case 4: newScreen.setName("Level Selection"); break;
-		case 5: newScreen.setName("Play Level"); break;
-		default: break;
-		}
-
-		screens.push_back(newScreen);
-		std::cout << "Screen " << i << " loaded\n";
-	}
+	
 
 	//setting grids positions
 	rc = 20.0;
@@ -70,7 +41,7 @@ void GameManager::init(){
 	//loading Levels
 	std::cout << "Loading data from leves... 00%";
 	for (int i = 0; i < 1; i++){
-		LevelData level;
+		LevelData level(data,enemies,&path);
 		level.loadData("levels/level_" + std::to_string(i) + ".json", grids);
 		std::cout << "\b\b\b" + std::to_string((i + 1) * 10) + "%";
 		levelsData.push_back(level);
@@ -105,8 +76,7 @@ void GameManager::init(){
 		std::cout << std::endl;
 	}
 
-	std::cout << "Starting \n";
-	loadScreen(screenState);
+	
 }
 
 bool GameManager::loadScreen(int i){
@@ -132,7 +102,44 @@ void GameManager::begin(){
 	glShadeModel(GL_SMOOTH);//sombreado plano
 
 	//loading images
-	std::cout << "Loading Images \n";
 	data.Load();
 
+	double width = win.getOrthoWidth();
+	double height = win.getOrthoHeight();
+
+
+	//we load players info from jsons
+	std::cout << "Loading players \n";
+	for (int i = 1; i < 4; i++){
+		Player aux("Player " + std::to_string(i), data);
+		aux.loadPlayer(events);
+		std::cout << "Player " << i << " loaded\n";
+		players.push_back(aux);
+	}
+
+	//we load all posible screens
+	std::cout << "Loading screens \n";
+
+	for (int i = MAIN; i < NUMBER_OF_SCREENS; i = i + 1){
+		Screen newScreen(data);
+		newScreen.loadLevel(i, &events);
+		newScreen.getBGImage()->setPositions(0, 0, -99);
+		newScreen.getBGImage()->setSizes(width, height, 1);
+		switch (i)
+		{
+		case 0: newScreen.setName("Main"); break;
+		case 1: newScreen.setName("Player Selection"); break;
+		case 2: newScreen.setName("Instructions"); break;
+		case 3: newScreen.setName("Credits"); break;
+		case 4: newScreen.setName("Level Selection"); break;
+		case 5: newScreen.setName("Play Level"); break;
+		default: break;
+		}
+
+		screens.push_back(newScreen);
+		std::cout << "Screen " << i << " loaded\n";
+	}
+
+	std::cout << "Starting \n";
+	loadScreen(screenState);
 }

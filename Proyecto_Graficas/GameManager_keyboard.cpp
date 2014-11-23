@@ -21,9 +21,12 @@ void GameManager::keyboard(unsigned char key, int x, int y){
 			button_listener(0);
 		}
 		break;
+	case 'S':
+		wavesManager.nextWave();
+		break;
 	case 'E':
 		//enemies.push_back(*enemy);
-		enemy = new BadAgent(data, *path);
+		enemy = new BadAgent(data, &path);
 		enemy->setSizes(grids[0].width, grids[0].heith, 1);
 		enemies.addAtTail(enemy);
 		break;

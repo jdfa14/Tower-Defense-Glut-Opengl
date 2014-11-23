@@ -55,8 +55,22 @@
 #define IMG_VIRUS			43
 #define IMG_BACTERIA		44
 
+#define IMG_LIFEBAR			45
+
+#define IMG_BTN_LEVELNORMAL	47
+#define IMG_BTN_LEVELHOVER	48
+
+#define IMG_BTN_LEVEL_LOCK_NORMAL	49
+#define IMG_BTN_LEVEL_LOCK_HOVER	50
+
+#define IMG_BTN_PLAYER_NORMAL		51
+#define IMG_BTN_PLAYER_HOVER		52
+
+#define IMG_BTN_PLAYER_NEW_NORMAL	53
+#define IMG_BTN_PLAYER_NEW_HOVER	54
+
 //Image array size
-#define NUM_TEX				45
+#define NUM_TEX				55
 
 
 class cData

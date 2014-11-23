@@ -1,11 +1,12 @@
 #include "Screen.h"
 
 
-Screen::Screen()
+Screen::Screen(cData &imgData)
 {
 	screenName = "No Name";
 	type = "";
 	loaded = false;
+	this->imgData = &imgData;
 }
 
 std::vector<Button>* Screen::getButtons(){
@@ -74,8 +75,14 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 			json::Object jsonBut = buttons[i];
 			std::string name = (std::string)jsonBut["text"];
 			Button newButton(name);
+			newButton.setImages(imgData->GetID(IMG_BUTTONNORMAL), imgData->GetID(IMG_BUTTONHOVER));
 			newButton.setID(jsonBut["ID"]);
 			newButton.setEventsStack(events);
+
+			if (jsonBut["images"].GetType() != json::NULLVal){
+				json::Array arr = jsonBut["images"];
+				newButton.setImages(imgData->GetID(arr[0]), imgData->GetID(arr[1]));
+			}
 
 			if (jsonBut["enable"].GetType() != json::NULLVal){
 				newButton.setEnable(jsonBut["enable"]);

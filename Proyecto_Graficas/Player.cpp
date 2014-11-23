@@ -1,11 +1,11 @@
 #include "Player.h"
 
-Player::Player(std::string fileName) : Player()
-{
-	setFileName(fileName);
+Player::Player(std::string fileName, cData &data):Player(data) {
+	this->fileName = fileName;
 }
 
-Player::Player(){
+Player::Player(cData &data){
+	this->data = &data;
 	name = "No name";
 	newPlayer = true;
 	resetLevels();
@@ -83,6 +83,12 @@ void Player::resetLevels(){
 			newOne.setSizes(width, height, 1);
 			newOne.setPositions(xP, yP, 0);
 			newOne.setEnable(!levels[(i * 5 + j)].locked);
+			if (levels[(i * 5 + j)].locked){
+				newOne.setImages(data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL), data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL));
+			}
+			else{
+				newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER));
+			}
 			levelButtons.push_back(newOne);
 			xP += spaceX + width;
 		}

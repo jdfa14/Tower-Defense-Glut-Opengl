@@ -1,17 +1,17 @@
 #include "Wave.h"
 
 
-Wave::Wave(cData &data, std::vector<Location> &path, double timeToStart, double timeBetweenMobs){
+Wave::Wave(cData &data, std::vector<Location> **path, double timeToStart, double timeBetweenMobs){
 	this->timeToStart = timeToStart;
 	this->data = &data;
-	this->path = &path;
+	this->path = path;
 	timeTNM = timeBetweenMobs;
 	timeSLM = timeBetweenMobs;
 	pos = -1;
 	finished = false;
 }
 
-void Wave::setVectorToSpawn(std::vector<BadAgent> *toSpawn){
+void Wave::setVectorToSpawn(LinkedList<BadAgent> *toSpawn){
 	this->toSpawn = toSpawn;
 }
 
@@ -31,7 +31,7 @@ void Wave::wait(double elapsedTimeMiliSec){
 void Wave::spawn(double elapsedTimeMiliSec){
 	if (!finished)
 		if (timeSLM > 0){
-			timeSLM -= elapsedTimeMiliSec;
+			timeSLM -= elapsedTimeMiliSec / 1000;
 		}
 		else{
 			timeSLM = timeTNM;
@@ -39,13 +39,13 @@ void Wave::spawn(double elapsedTimeMiliSec){
 			if (pos == enemies.size())
 				finished = true;
 			else
-				toSpawn->push_back(enemies[pos]);
+				toSpawn->addAtTail(&enemies[pos]);
 		}	
 }
 
 void Wave::addMoob(int howMany, int type, int dificulty, int speed){
 	for (int i = 0; i < howMany; i++){
-		BadAgent newOne(*data, *path, type, dificulty, speed);
+		BadAgent newOne(*data, path, type, dificulty, speed);
 		enemies.push_back(newOne);
 	}
 }

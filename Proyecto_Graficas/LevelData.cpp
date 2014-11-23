@@ -1,8 +1,11 @@
 #include "LevelData.h"
 
 
-LevelData::LevelData()
+LevelData::LevelData(cData &imgData, LinkedList<BadAgent> &toSpawn, std::vector<Location> **pathToWalk)
 {
+	this->imgData = &imgData;
+	this->toSpawn = &toSpawn;
+	this->pathToWalk = pathToWalk;
 }
 
 bool LevelData::loadData(std::string filename, std::vector<Grid> &positionsInMap){
@@ -12,6 +15,7 @@ bool LevelData::loadData(std::string filename, std::vector<Grid> &positionsInMap
 	json::Array map;
 	json::Array pPath;
 	json::Array sPath;
+	json::Array jWaves;
 
 	std::string mapTile;
 	std::cout << "\b\b1%";
@@ -25,14 +29,25 @@ bool LevelData::loadData(std::string filename, std::vector<Grid> &positionsInMap
 	data = json["data"];
 	pPath = data["pathPrimary"];
 	sPath = data["pathSecondary"];
+	jWaves = data["waves"];
 	std::cout << "\b\b7%";
-#pragma warning
+
 	double cellsInRows = sqrt(positionsInMap.size());
 	for (unsigned int i = 0; i < pPath.size(); i++){
 		json::Array auxLoc = pPath[i];
 		path.push_back(positionsInMap[(int)auxLoc[0] + (int)auxLoc[1] * cellsInRows].posXY);
 	}
 	std::cout << "\b\b8%";
+	//loading waves
+
+	for (unsigned int i = 0; i < jWaves.size(); i++){
+		json::Object daWave = jWaves[i];
+		Wave newWave(*imgData, pathToWalk, daWave["timeStart"], daWave["timeSpawn"]);
+		newWave.setVectorToSpawn(toSpawn);
+		newWave.addMoob(daWave["quantity"], daWave["kind"], daWave["difficulty"], daWave["speed"]);
+		waves.push_back(newWave);
+	}
+
 	//loading map data
 	map = data["map"];
 	std::cout << "\b\b9%";
@@ -61,4 +76,8 @@ std::vector<Grid> *LevelData::getGridData(){
 
 std::vector<Location>* LevelData::getPathData(){
 	return &path;
+}
+
+std::vector<Wave> * LevelData::getWaves(){
+	return &waves;
 }

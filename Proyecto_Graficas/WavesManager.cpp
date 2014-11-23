@@ -1,6 +1,5 @@
 #include "WavesManager.h"
 
-
 WavesManager::WavesManager()
 {
 	start = false;
@@ -23,19 +22,42 @@ void WavesManager::nextWave(){
 		start = !start;
 
 	if (hasNextWave()){// The first waiting element will be added to active
-		active.push_back(waiting[0]);
-		//waiting.erase(waiting.begin);
+		active.addAtTail(waiting.getHead());
+		waiting.removeHead();
 	}
 }
 
 void WavesManager::update(double elapsedTimeMiliSec){
-	for (int i = 0; i < active.size(); i++){
-		active[i].spawn(elapsedTimeMiliSec);
-	}
-	if (!waiting.empty()){
-		waiting[0].wait(elapsedTimeMiliSec);// only the next wave will wait
-		if (waiting[0].isReadyToSpawn()){
-			nextWave();
+	if (start){
+		for (Node<Wave> *i = active.getHead(); i != NULL; i = i->next){
+			i->data->spawn(elapsedTimeMiliSec);
+			if (i->data->hasFinished()){
+				Node<Wave> *aux = i;
+				i = i->prev;
+				active.remove(aux);
+			}
+			if (i == NULL)
+				break;
 		}
+
+		if (!waiting.empty()){
+			waiting.getHead()->data->wait(elapsedTimeMiliSec);// only the next wave will wait
+			if (waiting.getHead()->data->isReadyToSpawn()){
+				nextWave();
+			}
+		}
+	}
+}
+
+void WavesManager::loadLevel(LinkedList<Wave> *allWaves){
+	reset();
+	for (Node<Wave> *i = allWaves->getHead(); i != NULL; i = i->next){
+		waiting.addAtTail(i);
+	}
+}
+
+void WavesManager::loadLevel(std::vector<Wave> *allWaves){
+	for (unsigned int i = 0; i < allWaves->size(); i++){
+		waiting.addAtTail(&(*allWaves)[i]);
 	}
 }

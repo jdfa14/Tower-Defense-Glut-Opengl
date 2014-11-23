@@ -1,14 +1,16 @@
+#pragma once
 #include "Globals.h"
 #include "BadAgent.h"
 #include "cData.h"
+#include "LinkedList.h"
 
 class Wave
 {
 private:
 
 	cData *data;
-	std::vector<Location> *path;
-	std::vector<BadAgent> *toSpawn; // vector to put the nw moob
+	std::vector<Location> **path;
+	LinkedList<BadAgent> *toSpawn; // vector to put the nw moob
 	std::vector<BadAgent> enemies;
 	int pos; // position in enemies vector
 	double timeToStart;// time to start since activated
@@ -18,10 +20,10 @@ private:
 	bool finished;
 
 public:
-	Wave(cData &data, std::vector<Location> &path, double timeToStart = 3, double timeBetweenMobs = 1);
+	Wave(cData &data, std::vector<Location> **path, double timeToStart = 3, double timeBetweenMobs = 1);
 
 	//sets
-	void setVectorToSpawn(std::vector<BadAgent> *toSpawn);
+	void setVectorToSpawn(LinkedList<BadAgent> *toSpawn);
 	
 	//gets
 	bool isReadyToSpawn();

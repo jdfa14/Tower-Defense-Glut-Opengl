@@ -25,6 +25,7 @@ class BadAgent : public Mobile
 {
 private:
 	double hitPoints;
+	double maxHitPoints;
 	double defAntiV;// in %
 	double defAntiB;// in % of reduction
 	cData *data;
@@ -42,14 +43,14 @@ private:
 	void goTo(double toX, double toY);// change direction with the same speed
 
 	//Movement stuff for the autobot
-	std::vector<Location> *path;
+	std::vector<Location> **path;
 	int pathIndex;
 	double distanceToTarget; // distance ^2
 
 	void getReadyToFight(int type, int dificulty, int speed);
 
 public:
-	BadAgent(cData &data, std::vector<Location> &path, int type = BA_TYPE_VIRUS, int dificulty = BA_DIF_EASY, int speed = BA_MOV_SLOW);
+	BadAgent(cData &data, std::vector<Location> **path, int type = BA_TYPE_VIRUS, int dificulty = BA_DIF_EASY, int speed = BA_MOV_SLOW);
 
 	//sets
 	void setDefs(double defAntiVirus, double defAntiBacterial);

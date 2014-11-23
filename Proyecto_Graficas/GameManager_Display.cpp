@@ -5,7 +5,7 @@ void GameManager::draw(double time){
 	drawBG();
 	
 	for (unsigned int i = 0; i < buttons->size(); i++)
-		(*buttons)[i].drawText(data.GetID(IMG_BUTTONNORMAL), data.GetID(IMG_BUTTONHOVER), data.GetID(IMG_BUTTONPRESSED));
+		(*buttons)[i].drawText();
 	/*for (unsigned int i = 0; i < images->size(); i++)
 		(*images)[i].draw();*/
 	//also we need to draw all other objects
@@ -73,7 +73,7 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 		button_listener(events.top());
 		events.pop();
 	}
-
+	wavesManager.update(elapsedTimeMiliSec);
 }
 
 void GameManager::drawBG(){
@@ -89,4 +89,8 @@ void GameManager::drawBG(){
 	glEnd();
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
+}
+
+void GameManager::idle(){
+	sounds.Update();
 }

@@ -3,12 +3,13 @@
 #include "cData.h"
 #include "BadAgent.h"
 #include "Wave.h"
+#include "LinkedList.h"
 
 class WavesManager
 {
 private:
-	std::vector<Wave> active;
-	std::vector<Wave> waiting;
+	LinkedList<Wave> active;
+	LinkedList<Wave> waiting;
 
 	bool start;
 	bool levelFinished;
@@ -20,7 +21,9 @@ public:
 	void update(double elapsedTimeMili);
 	void addWave(Wave &wave);
 	void nextWave();//the first waiting wave will became an active and will start to spawn enemies
-
 	bool hasNextWave();// True if there is one or more waiting waves
+
+	void loadLevel(LinkedList<Wave> *allWaves);
+	void loadLevel(std::vector<Wave> *allWaves);
 };
 

@@ -1,14 +1,15 @@
 #include "BadAgent.h"
 
-BadAgent::BadAgent(cData &data, std::vector<Location> &path, int type, int dificulty, int speed) : Mobile() {
+BadAgent::BadAgent(cData &data, std::vector<Location> **path, int type, int dificulty, int speed) : Mobile() {
 	this->data = &data;
-	this->path = &path;
+	this->path = path;
 	getReadyToFight(type,dificulty,speed);
 	
 	vulnerable = true;
 	destroying = false;
 	readyToDestroy = false;
 	waitForMultipleObjects = 0;
+	pathIndex = -1;
 }
 
 void BadAgent::addChaser(){
@@ -48,16 +49,23 @@ void BadAgent::takeDamaged(double antiVDMG, double antiBDMG){
 
 void BadAgent::update(double elapsedTimeMiliSec){
 	if (!destroying){
+		if (pathIndex < 0){
+			x = (**path)[0].posX;
+			y = (**path)[0].posY;
+			setInitialSpeeds(500, 500); // it will be redirected and reduced
+			goTo((**path)[1].posX, (**path)[1].posY);
+			pathIndex = 1;
+		}
 		Mobile::update(elapsedTimeMiliSec);
 		if (hitPoints <= 0){
 			destroying = true;
 		}
-		std::cout << "Walking to [" << (*path)[pathIndex].posX << "," << (*path)[pathIndex].posY << "] ";
+		std::cout << "Walking to [" << (**path)[pathIndex].posX << "," << (**path)[pathIndex].posY << "] ";
 		if (amICloseEnought()){// si esta lo suficientemente cerca de la siguiente grid
 			if (nextStept()){// si ya llego al final
 				pathIndex = 0;
-				x = (*path)[0].posX;
-				y = (*path)[0].posY;
+				x = (**path)[0].posX;
+				y = (**path)[0].posY;
 				// GO AGAIN!! KILL THAT EVIL PLAYER
 				// Here we should do some dmg to the player
 			}
@@ -72,6 +80,8 @@ void BadAgent::update(double elapsedTimeMiliSec){
 
 void BadAgent::draw(){
 	Mobile::draw(data->GetID(img));
+	double w = width * (hitPoints / maxHitPoints);
+	data->Draw(IMG_LIFEBAR, x, y + height / 2.0 + 15, 1, w, 10);	
 }
 
 bool BadAgent::isAlive(){
@@ -116,11 +126,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		readyToDestroy = true;
 		break;
 	}
-
-	x = (*path)[0].posX;
-	y = (*path)[0].posY;
-	setInitialSpeeds(500, 500); // it will be redirected and reduced
-	goTo((*path)[1].posX, (*path)[1].posY);
+	maxHitPoints = hitPoints;
 }
 
 //AUTOBOT!
@@ -144,16 +150,16 @@ void BadAgent::goTo(double x, double y){
 
 bool BadAgent::nextStept(){
 	pathIndex++;
-	if (pathIndex == path->size())
+	if (pathIndex == (*path)->size())
 		return true; // mission complete! do damage and stuff
 
-	goTo((*path)[pathIndex].posX, (*path)[pathIndex].posY);
-	distanceToTarget = pow((*path)[pathIndex].posX - x, 2) + pow((*path)[pathIndex].posY - y, 2);
+	goTo((**path)[pathIndex].posX, (**path)[pathIndex].posY);
+	distanceToTarget = pow((**path)[pathIndex].posX - x, 2) + pow((**path)[pathIndex].posY - y, 2);
 	return false;//Come one! you can do it, DESTROY THE PLAYER!
 }
 
 bool BadAgent::amICloseEnought(){
-	distanceToTarget = pow((*path)[pathIndex].posX - x, 2) + pow((*path)[pathIndex].posY - y, 2);
+	distanceToTarget = pow((**path)[pathIndex].posX - x, 2) + pow((**path)[pathIndex].posY - y, 2);
 	std::cout << " Distance: " << distanceToTarget << "\n";
 	return distanceToTarget < 650; // 24 grid width, 27 gird heigth av ~ 25 ^ 2
 }

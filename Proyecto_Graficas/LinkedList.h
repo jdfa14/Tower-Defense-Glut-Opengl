@@ -1,7 +1,8 @@
 #pragma once
 
 template <class T>
-struct Node{
+class Node{
+public:
 	T *data;
 	Node* next;
 	Node* prev;
@@ -19,6 +20,9 @@ public:
 
 	void addAtTail(T* data); // pointer to the new object created
 	void addAtHead(T* data);
+	void addAtTail(Node<T> *node);
+	void addAtHead(Node<T> *node);
+
 	void remove(Node<T>* node); // deletes that node
 	void removeTail(); // deletes tail
 	void removeHead(); // deletes head
@@ -26,6 +30,7 @@ public:
 
 	Node<T>* getTail();
 	Node<T>* getHead();
+	bool empty();
 	int getSize();
 };
 
@@ -58,8 +63,12 @@ void LinkedList<T>::addAtHead(T *data){
 		head->prev = n;
 		head = n;
 	}
-
 	size++;
+}
+
+template<class T>
+void LinkedList<T>::addAtHead(Node<T> *node){
+	addAtHead(node->data);
 }
 
 template <class T>
@@ -88,6 +97,11 @@ void LinkedList<T>::addAtTail(T *data){
 	size++;
 }
 
+template<class T>
+void LinkedList<T>::addAtTail(Node<T> *node){
+	addAtTail(node->data);
+}
+
 template <class T>
 void LinkedList<T>::remove(Node<T>* n){
 	if (n == NULL)
@@ -106,7 +120,7 @@ void LinkedList<T>::remove(Node<T>* n){
 	n->prev->next = n->next;
 	n->next->prev = n->prev;
 	//free
-	free(n->data);
+	//free(n->data);
 	free(n);
 	size--;
 }
@@ -126,13 +140,14 @@ void LinkedList<T>::removeTail(){
 		tail = tail->prev;
 		tail->next = NULL;
 	}
-	free(n->data);
+	//free(n->data); potential memory leak
 	free(n);
 	size--;
 }
 template <class T>
 void LinkedList<T>::removeHead(){
 	Node<T> *n = head;
+	T * data = n->data;
 	if (n == NULL)
 		return;
 	if (head == tail){//solo un elemento
@@ -143,7 +158,6 @@ void LinkedList<T>::removeHead(){
 		head = head->next;
 		head->prev = NULL;
 	}
-	free(n->data);
 	free(n);
 	size--;
 }
@@ -161,6 +175,12 @@ template <class T>
 Node<T>* LinkedList<T>::getHead(){
 	return head;
 }
+
+template<class T>
+bool LinkedList<T>::empty(){
+	return head == NULL;
+}
+
 template <class T>
 int LinkedList<T>::getSize(){
 	return size;

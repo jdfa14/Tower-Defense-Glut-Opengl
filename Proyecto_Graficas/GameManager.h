@@ -12,6 +12,9 @@
 #include "Grid.h"
 #include "LevelData.h"
 #include "LinkedList.h"
+#include "WavesManager.h"
+#include "Wave.h"
+#include "Sound.h"
 
 #define MAP_INIT_X -125
 #define MAP_INIT_Y -71.42
@@ -19,11 +22,14 @@
 class GameManager
 {
 private:
+	//Img and Audio data
+	cData data;
+	Sound sounds;
+
 	// only 3 static players could be created
 	std::vector<Player> players;
 	Player *selectedPlayer;
 	std::vector<Level> *levels;
-
 
 	GlutWindow win;// all the data from the window
 
@@ -34,6 +40,7 @@ private:
 	LinkedList<BadAgent> enemies;
 	//std::vector<BadAgent> enemies;//maybe it will be not implemented
 	std::vector<LevelData> levelsData;
+	WavesManager wavesManager;
 
 	//visual controls
 	std::vector<Screen> screens;
@@ -42,8 +49,6 @@ private:
 	std::vector<Grid> grids;
 
 	Texture *bgImage;
-	Screen mainScreen;
-	
 
 	//Matriz de navegacion
 	int screenState;
@@ -52,6 +57,7 @@ private:
 
 	//grid and playing stuff
 	std::vector<Location> *path;
+
 	bool playing;
 	bool showingGrid;// only if placing a towa will be true
 	bool isOnMap;
@@ -63,7 +69,7 @@ private:
 	int rc; // 20 x 20 little grids
 
 public:
-	cData data;
+	
 
 	const std::string MENU = "Menu";
 	const std::string LEVEL = "Level";
@@ -105,6 +111,7 @@ public:
 	void begin();
 	void drawBG();
 	void keyboard(unsigned char key, int x, int y);
+	void idle();
 
 };
 

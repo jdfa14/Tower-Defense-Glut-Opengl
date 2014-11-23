@@ -7,10 +7,12 @@
 #include "BadAgent.h"
 #include "Tower.h"
 #include "json\json.h"
+#include "cData.h"
 
 class Screen
 {
 private:
+	cData *imgData;
 	std::string screenName;
 	std::string type;
 	Texture background;
@@ -21,7 +23,7 @@ private:
 	bool loaded;
 
 public:
-	Screen();
+	Screen(cData &imgData);
 
 	//gets
 	std::vector<Button>* getButtons();

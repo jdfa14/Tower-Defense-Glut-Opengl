@@ -32,6 +32,7 @@ bool cData::Load()
 	LoadImage(IMG_BUTTONNORMAL, path + "buttonNormal.png"); i++;
 	LoadImage(IMG_BUTTONHOVER, path + "buttonHover.png"); i++;
 	LoadImage(IMG_BUTTONPRESSED, path + "buttonPressed.png"); i++;
+	LoadImage(IMG_LIFEBAR, path + "lifeBar.png"); i++;
 
 	std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
@@ -40,6 +41,8 @@ bool cData::Load()
 	LoadImage(IMG_BGMAIN, path + "menu.png"); i++;
 	LoadImage(IMG_BGCREDITS, path + "credits.png"); i++;
 	LoadImage(IMG_BGPLAY, path + "play.png"); i++;
+	LoadImage(IMG_BGPLAYERSELECT, path + "playerBackground.png"); i++;
+	LoadImage(IMG_BGLEVELSELECT, path + "playerBackground.png"); i++;
 	LoadImage(IMG_GRIDGREEN, path + "greenGrid.png"); i++;
 	LoadImage(IMG_GRIDRED, path + "redGrid.png"); i++;
 	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++;

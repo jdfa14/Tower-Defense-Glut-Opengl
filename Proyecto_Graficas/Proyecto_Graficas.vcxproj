@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glut32.lib;corona.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glut32.lib;corona.lib;fmodex_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="BadAgent.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="cData.cpp" />
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tower.cpp" />
     <ClCompile Include="Wave.cpp" />
@@ -183,12 +185,21 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="cData.h" />
+    <ClInclude Include="corona.h" />
     <ClInclude Include="cTexture.h" />
+    <ClInclude Include="fmod.h" />
+    <ClInclude Include="fmod.hpp" />
+    <ClInclude Include="fmod_codec.h" />
+    <ClInclude Include="fmod_dsp.h" />
+    <ClInclude Include="fmod_errors.h" />
+    <ClInclude Include="fmod_memoryinfo.h" />
+    <ClInclude Include="fmod_output.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="LevelData.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Location.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="TempGameManager.h" />
     <ClInclude Include="addGlut.h" />
     <ClInclude Include="GameManager.h" />
@@ -206,6 +217,14 @@
     <ClInclude Include="Tower.h" />
     <ClInclude Include="GlutWindow.h" />
     <ClInclude Include="WavesManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="corona.lib" />
+    <Library Include="fmodex_vc.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="corona.dll" />
+    <None Include="fmodex.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

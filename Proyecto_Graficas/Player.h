@@ -6,20 +6,21 @@
 #include "json\json.h"
 #include "level.h"
 #include "Button.h"
+#include "cData.h"
 
 class Player
 {
 private:
+	cData *data;
 	std::string name;
 	std::string fileName;
 	std::vector<Level> levels;
 	std::vector<Button> levelButtons;
 	bool newPlayer;
 
-
 public:
-	Player(std::string fileName);
-	Player();
+	Player(std::string fileName, cData &data);
+	Player(cData &data);
 
 	//gets
 	std::string getName();
