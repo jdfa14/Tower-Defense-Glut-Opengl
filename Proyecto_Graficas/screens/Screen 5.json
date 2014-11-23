@@ -16,21 +16,21 @@
         "ID" : 20,
         "positions" : [315,287,0],
         "sizes" : [125,145,1],
-        "tooltip" : "Anti-virus specialist\ntesting"
+        "tooltip" : "Anti-virus_white_cell\n(Good against virus)\nFire_rate:_1_cell_per_second\nShoots_a_single_white_cell\nand_do_average_dmg"
       },
       {
         "text" : "Type 2",
         "ID" : 21,
         "positions" : [440,287,0],
         "sizes" : [125,145,1],
-        "tooltip" : "Anti-virus specialist"
+        "tooltip" : "Anti-Bacterial_yellow_cell\n(Good_against_bacterias)\nFire_rate:_2_cells_per_second\nShots_a_single_yellow_sell\nthat_sticks_on_the_enemy_and\ndo_dmg_for_2_seconds"
       },
       {
         "text" : "Type 3",
         "ID" : 22,
         "positions" : [315,142,0],
         "sizes" : [125,146,1],
-        "tooltip" : "Anti-virus specialist"
+        "tooltip" : "Pill\n(Booster)\nFire_rate:_0_cells_per_second\nBoost_any_friendly_cell_close\nto_him"
       },
       {
         "text" : "Type 4",
@@ -38,7 +38,7 @@
         "positions" : [440,142,0],
         "sizes" : [125,146,1],
         "enable" : false,
-        "tooltip" : "Anti-virus specialist"
+        "tooltip" : "Under_development"
       }
     ]
   }

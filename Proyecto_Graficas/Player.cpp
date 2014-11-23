@@ -83,12 +83,7 @@ void Player::resetLevels(){
 			newOne.setSizes(width, height, 1);
 			newOne.setPositions(xP, yP, 0);
 			newOne.setEnable(!levels[(i * 5 + j)].locked);
-			if (levels[(i * 5 + j)].locked){
-				newOne.setImages(data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL), data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL), data->GetID(IMG_BTN_TOOLTIP));
-			}
-			else{
-				newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER), data->GetID(IMG_BTN_TOOLTIP));
-			}
+			newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER), data->GetID(IMG_BTN_TOOLTIP),data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL));
 			levelButtons.push_back(newOne);
 			xP += spaceX + width;
 		}

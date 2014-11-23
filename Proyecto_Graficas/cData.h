@@ -61,7 +61,7 @@
 #define IMG_BTN_LEVELHOVER	48
 
 #define IMG_BTN_LEVEL_LOCK_NORMAL	49
-#define IMG_BTN_LEVEL_LOCK_HOVER	50
+#define IMG_BTN_LEVEL_LOCK_HOVER	50 // not needed 
 
 #define IMG_BTN_PLAYER_NORMAL		51
 #define IMG_BTN_PLAYER_HOVER		52
@@ -96,13 +96,15 @@
 #define IMG_BTN_TOWER3S_NORMAL	71
 #define IMG_BTN_TOWER3S_HOVER	72
 
-#define IMG_BTN_SELL_NORMAL		73
-#define IMG_BTN_SELL_HOVER		74
+#define IMG_BTN_TOWER_LOCKED	73
 
-#define IMG_BTN_TOOLTIP		75
+#define IMG_BTN_SELL_NORMAL		74
+#define IMG_BTN_SELL_HOVER		75
+
+#define IMG_BTN_TOOLTIP		76
 
 //Image array size
-#define NUM_TEX				76
+#define NUM_TEX				77
 
 
 class cData

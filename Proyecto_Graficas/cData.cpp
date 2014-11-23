@@ -24,53 +24,55 @@ bool cData::LoadImage(int img, std::string filename, int type)
 
 bool cData::Load()
 {
-	std::cout << "Loading images -> 00%";
+	std::cout << "Loading images... 00%";
 	double i = 0;
 
 	std::string path = "Images/";
 	//loading buttons
-	LoadImage(IMG_BUTTONNORMAL, path + "buttonNormal.png"); i++;
-	LoadImage(IMG_BUTTONHOVER, path + "buttonHover.png"); i++;
-	LoadImage(IMG_BUTTONPRESSED, path + "buttonPressed.png"); i++;
-	LoadImage(IMG_LIFEBAR, path + "lifeBar.png"); i++;
-	LoadImage(IMG_BTN_TOOLTIP, path + "tooltip.png"); i++;
-	std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_LIFEBAR, path + "lifeBar.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_TOOLTIP, path + "tooltip.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+
+	path = "Images/buttons/";
+	LoadImage(IMG_BUTTONNORMAL, path + "buttonNormal.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BUTTONHOVER, path + "buttonHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BUTTONPRESSED, path + "buttonHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_LEVELNORMAL, path + "levelNormal.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_LEVELHOVER, path + "levelHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_LEVEL_LOCK_NORMAL, path + "levelLocked.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_LEVEL_LOCK_HOVER, path + "levelLocked.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+
+	
 
 	//loading backgrounds
 	path = "Images/backgrounds/";
-	LoadImage(IMG_BGMAIN, path + "menu.png"); i++;
-	LoadImage(IMG_BGCREDITS, path + "credits.png"); i++;
-	LoadImage(IMG_BGPLAY, path + "play.png"); i++;
-	LoadImage(IMG_BGPLAYERSELECT, path + "playerBackground.png"); i++;
-	LoadImage(IMG_BGLEVELSELECT, path + "playerBackground.png"); i++;
-	LoadImage(IMG_GRIDGREEN, path + "greenGrid.png"); i++;
-	LoadImage(IMG_GRIDRED, path + "redGrid.png"); i++;
-	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++;
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGMAIN, path + "menu.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGCREDITS, path + "credits.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGPLAY, path + "play.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGPLAYERSELECT, path + "playerBackground.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGLEVELSELECT, path + "playerBackground.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_GRIDGREEN, path + "greenGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_GRIDRED, path + "redGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
 	
 	// loading towers
 	path = "Images/towers/";
 	// Pills
-	LoadImage(IMG_TOWER1NORMAL, path + "tower1Normal.png"); i++;
-	LoadImage(IMG_TOWER1UPGRADED, path + "tower1Upgraded.png"); i++;
-	LoadImage(IMG_TOWER1SUPER, path + "tower1Super.png"); i++;
+	LoadImage(IMG_TOWER1NORMAL, path + "tower1Normal.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER1UPGRADED, path + "tower1Upgraded.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER1SUPER, path + "tower1Super.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	// White cell
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_TOWER2NORMAL, path + "tower2Normal.png"); i++;
-	LoadImage(IMG_TOWER2UPGRADED, path + "tower2Upgraded.png"); i++;
-	LoadImage(IMG_TOWER2SUPER, path + "tower2Super.png"); i++;
+	LoadImage(IMG_TOWER2NORMAL, path + "tower2Normal.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER2UPGRADED, path + "tower2Upgraded.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER2SUPER, path + "tower2Super.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	// Yellow cell
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_TOWER3NORMAL, path + "tower3Normal.png"); i++;
-	LoadImage(IMG_TOWER3UPGRADED, path + "tower3Upgraded.png"); i++;
-	LoadImage(IMG_TOWER3SUPER, path + "tower3Super.png"); i++;
+	LoadImage(IMG_TOWER3NORMAL, path + "tower3Normal.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER3UPGRADED, path + "tower3Upgraded.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER3SUPER, path + "tower3Super.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	//toplace
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_TOWER_1_TOPLACE, path + "tower1ToPlace.png"); i++;
-	LoadImage(IMG_TOWER_2_TOPLACE, path + "tower2ToPlace.png"); i++;
-	LoadImage(IMG_TOWER_3_TOPLACE, path + "tower3ToPlace.png"); i++;
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER_1_TOPLACE, path + "tower1ToPlace.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER_2_TOPLACE, path + "tower2ToPlace.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TOWER_3_TOPLACE, path + "tower3ToPlace.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
 	//lading tiles
 	path = "Images/tiles/tile_";
@@ -94,16 +96,15 @@ bool cData::Load()
 	LoadImage(IMG_TILE_X, path + "x.png"); i++;
 
 	path = "Images/enemies/";
-	LoadImage(IMG_VIRUS, path + "bad.png");
-	LoadImage(IMG_BACTERIA, path + "bad.png");
+	LoadImage(IMG_VIRUS, path + "bad.png"); std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BACTERIA, path + "bad.png"); std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
 
 	// Agrega virus inicio
 	path = "Images/enemies/";
-	LoadImage(IMG_VIRUS, path + "bad.png"); i++;
+	LoadImage(IMG_VIRUS, path + "bad.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	// Agrega virus fin
 
-	std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	std::cout << "\n";
 	return true;
 }

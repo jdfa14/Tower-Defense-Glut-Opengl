@@ -21,6 +21,7 @@ private:
 	int ID;
 	int hover;
 	int normal;
+	int locked;
 	double xMouse, yMouse;
 
 	std::stack<int> *events;
@@ -35,7 +36,7 @@ public:
 
 	// sets
 	void setEnable(bool enable);
-	void setImages(int normal, int hover, int tooltipImg);
+	void setImages(int normal, int hover, int tooltipImg, int locked);
 	void setID(int ID);
 	void setEventsStack(std::stack<int> *pointer);
 	void setToolTip(std::string tooltip);
