@@ -3,6 +3,8 @@
 #include "json\json.h"
 
 void GameManager::init(){
+	sounds.Load();
+	sounds.Play(0);
 	//for this, we need the ortho already with all his values
 	double width = win.getOrthoWidth();
 	double height = win.getOrthoHeight();
