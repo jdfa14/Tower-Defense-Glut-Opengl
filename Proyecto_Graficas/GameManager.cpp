@@ -26,6 +26,7 @@ void GameManager::getReadyToPlay(){
 	dnaInLevel = 0;
 	timeInLevel = 0;
 	playerHitPoints = 100;
+	dnaInLevel = 375;
 }
 
 void GameManager::gameFinished(){
