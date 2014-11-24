@@ -57,10 +57,10 @@
 
 #define IMG_LIFEBAR			45 // Done
 
-#define IMG_BTN_LEVELNORMAL	47
-#define IMG_BTN_LEVELHOVER	48
+#define IMG_BTN_LEVELNORMAL	47// Done
+#define IMG_BTN_LEVELHOVER	48// Done
 
-#define IMG_BTN_LEVEL_LOCK_NORMAL	49
+#define IMG_BTN_LEVEL_LOCK_NORMAL	49// Done
 #define IMG_BTN_LEVEL_LOCK_HOVER	50 // not needed 
 
 #define IMG_BTN_PLAYER_NORMAL		51
@@ -101,7 +101,7 @@
 #define IMG_BTN_SELL_NORMAL		74
 #define IMG_BTN_SELL_HOVER		75
 
-#define IMG_BTN_TOOLTIP		76
+#define IMG_BTN_TOOLTIP		76 // Done
 
 //Image array size
 #define NUM_TEX				77
