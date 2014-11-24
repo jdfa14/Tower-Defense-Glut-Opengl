@@ -1,6 +1,7 @@
 #include "Button.h"
 
 Button::Button(std::string text){
+	std::replace(text.begin(), text.end(), '_', ' ');
 	this->text = text;
 	setPositions(0, 0, 0);
 	setSizes(glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text.c_str()) * 2, 100, 1);
@@ -8,10 +9,25 @@ Button::Button(std::string text){
 	enable = true;
 	toDo = false;
 	xMouse = yMouse = 0;
+	score = 0;
+	progress = 0;
+	type = BTN_TYPE_NORMAL;
 }
 
 bool Button::isEnable(){
 	return enable;
+}
+
+void Button::setType(int type){
+	this->type = type;
+}
+
+void Button::setScore(int score){
+	this->score = score;
+}
+
+void Button::setProgress(int progress){
+	this->progress = progress;
 }
 
 void Button::setEnable(bool enable){
@@ -95,10 +111,30 @@ void Button::setEventsStack(std::stack<int> *pointer){
 
 void Button::writeText(std::string text, double x, double y, void *font){
 	glColor3ub(255, 255, 255);
-	glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.85), (GLfloat)y);
-	for (unsigned int i = 0; i < text.length(); i++) {
-		glutBitmapCharacter(font, text[i]);
+	std::string *auxStr;
+	switch (type)
+	{
+	case BTN_TYPE_NORMAL:
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.85), (GLfloat)y);
+		for (unsigned int i = 0; i < text.length(); i++) {
+			glutBitmapCharacter(font, text[i]);
+		}
+		break;
+	case BTN_TYPE_LEVEL:
+		glRasterPos2f((GLfloat)x + width / 10.0, (GLfloat)y + height / 10.0);
+		for (unsigned int i = 0; i < text.length(); i++) {
+			glutBitmapCharacter(font, text[i]);
+		}
+		auxStr = new std::string(std::to_string(score));
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)auxStr->c_str())* 0.75), (GLfloat)y - 50);
+		for (unsigned int i = 0; i < auxStr->length(); i++) {
+			glutBitmapCharacter(font, (*auxStr)[i]);
+		}
+		free(auxStr);
+	default:
+		break;
 	}
+	
 }
 
 void Button::writeTooltip(){

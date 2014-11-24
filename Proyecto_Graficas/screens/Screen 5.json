@@ -12,6 +12,12 @@
         "sizes" : [250,100,1]
       },
       {
+        "text" : "Go_go_go!",
+        "ID" : 24,
+        "positions" : [375,-350,0],
+        "sizes" : [250,100,1]
+      },
+      {
         "text" : "Type 1",
         "ID" : 20,
         "positions" : [315,287,0],

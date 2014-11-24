@@ -3,10 +3,6 @@
 void GameManager::button_listener(int id){
 	std::vector<Button> *levelbuttons;
 	std::vector<Grid> *auxGridData;
-
-
-	// fomr 1 to 4 are navigation orders (0 is back)
-	// bigger than that are action orders
 	
 	if (id < 4){
 		//loading screen
@@ -107,6 +103,10 @@ void GameManager::button_listener(int id){
 			typeOfPlacingTower = id - 20;
 			showingGrid = true;
 			break;
+		case 24:// NEXT Wave
+			wavesManager.nextWave();
+			wavesStarted = true;
+			break;
 		default:
 			break;
 		}
@@ -125,7 +125,9 @@ void GameManager::pasiveMouse(int x, int y){
 
 		if (x >= -500 && x < 250 && y >= -500 && y <= 357){ // isOnMap
 			isOnMap = true;
-			selectGrid(x, y);
+			if (showingGrid){
+				selectGrid(x, y);
+			}
 		}
 		else{
 			isOnMap = false;
@@ -169,8 +171,16 @@ void GameManager::leftClick(int x, int y, int state)
 						grids[selectedIndexes[1]].state = GRD_STATE_NOTPLACEABLE;
 						grids[selectedIndexes[2]].state = GRD_STATE_NOTPLACEABLE;
 						grids[selectedIndexes[3]].state = GRD_STATE_NOTPLACEABLE;
-
 						showingGrid = false;
+						switch (typeOfPlacingTower)
+						{
+						case WHITE_TOWER:
+							dnaInLevel -= PRICE_TOWER_TYPE_1; break;
+						case YELLOW_TOWER:
+							dnaInLevel -= PRICE_TOWER_TYPE_2; break;
+						case PILL_TOWER:
+							dnaInLevel -= PRICE_TOWER_TYPE_2; break;
+						}
 					}
 				}
 			}

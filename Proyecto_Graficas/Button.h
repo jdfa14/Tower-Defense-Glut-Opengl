@@ -1,10 +1,13 @@
 #pragma once
 #include "addGlut.h"
 #include <stack>
+#include <algorithm>
 #include "StaticObject.h"
 #include "Button.h"
 #include "cData.h"
 
+#define BTN_TYPE_NORMAL  0
+#define BTN_TYPE_LEVEL  1
 
 class Button : 
 	public StaticObject
@@ -13,6 +16,9 @@ private:
 	bool enable;
 	bool tooltip; // if has tooltip
 	int tooltipImg;
+	int type;
+	int score;
+	int progress;
 
 	std::string text;
 	std::string tooltipMessage;
@@ -40,6 +46,9 @@ public:
 	void setID(int ID);
 	void setEventsStack(std::stack<int> *pointer);
 	void setToolTip(std::string tooltip);
+	void setType(int type);
+	void setScore(int score);
+	void setProgress(int progress);
 
 	//gets
 	bool isEnable();

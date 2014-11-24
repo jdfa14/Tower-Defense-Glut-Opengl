@@ -93,12 +93,14 @@ void Player::resetLevels(){
 }
 
 void Player::addButton(int level, int x, int y){
-	Button newOne(std::to_string(level));
+	Button newOne(std::to_string(level + 1));
 	newOne.setID(level + 9);
 	newOne.setSizes(220, 220, 1);
 	newOne.setPositions(x, y,1);
 	newOne.setEnable(!levels[level].locked);
 	newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER), data->GetID(IMG_BTN_TOOLTIP), data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL));
+	newOne.setType(BTN_TYPE_LEVEL);
+	newOne.setScore(levels[level].score);
 	levelButtons.push_back(newOne);
 }
 
@@ -161,6 +163,7 @@ bool Player::loadPlayer(std::stack<int> &events){
 
 		for (unsigned int i = 0; i < levels.size(); i++){
 			levelButtons[i].setEnable(!levels[i].locked);
+			levelButtons[i].setScore(levels[i].score);
 			levelButtons[i].setEventsStack(&events);
 		}
 

@@ -35,7 +35,6 @@ bool cData::Load()
 	path = "Images/buttons/";
 	LoadImage(IMG_BUTTONNORMAL, path + "buttonNormal.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BUTTONHOVER, path + "buttonHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_BUTTONPRESSED, path + "buttonHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BTN_LEVELNORMAL, path + "levelNormal.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BTN_LEVELHOVER, path + "levelHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BTN_LEVEL_LOCK_NORMAL, path + "levelLocked.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
@@ -50,6 +49,7 @@ bool cData::Load()
 	LoadImage(IMG_BGPLAY, path + "play.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BGPLAYERSELECT, path + "playerBackground.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BGLEVELSELECT, path + "levelSelect.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BG_HISTORY, path + "history.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDGREEN, path + "greenGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDRED, path + "redGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";

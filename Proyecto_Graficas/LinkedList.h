@@ -17,6 +17,7 @@ private:
 	int size;
 public:
 	LinkedList();
+	~LinkedList();
 
 	void addAtTail(T* data); // pointer to the new object created
 	void addAtHead(T* data);
@@ -34,6 +35,11 @@ public:
 	int getSize();
 };
 
+template<class T>
+LinkedList<T>::~LinkedList(){
+	this->clear();
+}
+
 template <class T>
 LinkedList<T>::LinkedList(){
 	head = NULL;
@@ -44,7 +50,7 @@ LinkedList<T>::LinkedList(){
 template <class T>
 void LinkedList<T>::addAtHead(T *data){
 	Node *n = new Node;
-	n->data = data;
+	n->data = new T(*data);
 	if (head == NULL){// no elements
 		head = n;
 		tail = n;
@@ -74,7 +80,7 @@ void LinkedList<T>::addAtHead(Node<T> *node){
 template <class T>
 void LinkedList<T>::addAtTail(T *data){
 	Node<T> *n = new Node<T>;
-	n->data = data;
+	n->data = new T(*data);
 
 	if (head == NULL){// no elements
 		head = n;
@@ -120,7 +126,7 @@ void LinkedList<T>::remove(Node<T>* n){
 	n->prev->next = n->next;
 	n->next->prev = n->prev;
 	//free
-	//free(n->data);
+	free(n->data);
 	free(n);
 	size--;
 }
@@ -140,10 +146,11 @@ void LinkedList<T>::removeTail(){
 		tail = tail->prev;
 		tail->next = NULL;
 	}
-	//free(n->data); potential memory leak
+	free(n->data);// potential memory leak
 	free(n);
 	size--;
 }
+
 template <class T>
 void LinkedList<T>::removeHead(){
 	Node<T> *n = head;
@@ -158,6 +165,7 @@ void LinkedList<T>::removeHead(){
 		head = head->next;
 		head->prev = NULL;
 	}
+	free(n->data);
 	free(n);
 	size--;
 }
@@ -167,10 +175,12 @@ void LinkedList<T>::clear(){
 	while (head != NULL)
 		removeHead();
 }
+
 template <class T>
 Node<T>* LinkedList<T>::getTail(){
 	return tail;
 }
+
 template <class T>
 Node<T>* LinkedList<T>::getHead(){
 	return head;

@@ -9,10 +9,10 @@
 #define IMG_BGCREDITS		3 // Done
 #define IMG_BGLEVELSELECT	4 // NOT
 #define IMG_BGPLAY			5 // NOT
+#define IMG_BG_HISTORY		6
 
-#define IMG_BUTTONNORMAL	6 // Done
-#define IMG_BUTTONHOVER		7 // Done
-#define IMG_BUTTONPRESSED	8 // Not Needed
+#define IMG_BUTTONNORMAL	7 // Done
+#define IMG_BUTTONHOVER		8 // Done
 
 #define IMG_TOWER1NORMAL	9 // Done
 #define	IMG_TOWER1UPGRADED  10 // Done

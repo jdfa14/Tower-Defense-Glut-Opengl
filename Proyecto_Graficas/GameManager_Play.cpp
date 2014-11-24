@@ -30,12 +30,25 @@ void GameManager::selectGrid(double x, double y){
 	selectedIndexes[1] = index - rc;
 	selectedIndexes[2] = index - 1;
 	selectedIndexes[3] = index;
+	bool canAfford = false;
+	switch (typeOfPlacingTower)
+	{
+	case WHITE_TOWER:
+		canAfford = dnaInLevel - PRICE_TOWER_TYPE_1 > 0;
+		break;
+	case YELLOW_TOWER:
+		canAfford = dnaInLevel - PRICE_TOWER_TYPE_2 > 0;
+		break;
+	case PILL_TOWER:
+		canAfford = dnaInLevel - PRICE_TOWER_TYPE_3 > 0;
+		break;
+	}
 
 
 	if (grids[selectedIndexes[0]].placeable &&
 		grids[selectedIndexes[1]].placeable &&
 		grids[selectedIndexes[2]].placeable &&
-		grids[selectedIndexes[3]].placeable){
+		grids[selectedIndexes[3]].placeable && canAfford){
 
 		grids[selectedIndexes[0]].state = GRD_STATE_SELECTED;
 		grids[selectedIndexes[1]].state = GRD_STATE_SELECTED;
@@ -50,4 +63,5 @@ void GameManager::selectGrid(double x, double y){
 		grids[selectedIndexes[3]].state = GRD_STATE_NOTPLACEABLE;
 		canPlace = false;
 	}
+
 }

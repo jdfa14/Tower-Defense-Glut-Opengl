@@ -142,9 +142,6 @@
     <ClInclude Include="WavesManager.h">
       <Filter>Headers Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Headers Files</Filter>
-    </ClInclude>
     <ClInclude Include="Location.h">
       <Filter>Structs</Filter>
     </ClInclude>
@@ -177,6 +174,9 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

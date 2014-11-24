@@ -76,6 +76,7 @@ void WavesManager::loadLevel(LinkedList<Wave> *allWaves){
 }
 
 void WavesManager::loadLevel(std::vector<Wave> *allWaves){
+	reset();
 	for (unsigned int i = 0; i < allWaves->size(); i++){
 		waiting.addAtTail(&(*allWaves)[i]);
 	}
