@@ -10,8 +10,6 @@ void GameManager::init(){
 	double height = win.getOrthoHeight();
 	const int cant = 4;
 
-	
-
 	//setting grids positions
 	rc = 20.0;
 
@@ -144,4 +142,17 @@ void GameManager::begin(){
 
 	std::cout << "Starting \n";
 	loadScreen(screenState);
+
+	sellButton.setToolTip("You will get 80% of total cost");
+	sellButton.setPositions(375, -250, 0);
+	sellButton.setSizes(250, 100, 1);
+	sellButton.setImages(data.GetID(IMG_BUTTONNORMAL), data.GetID(IMG_BUTTONHOVER), data.GetID(IMG_BTN_TOOLTIP), data.GetID(IMG_BUTTONNORMAL));
+	sellButton.setEventsStack(&events);
+	sellButton.setID(26);
+
+	upgradeButton.setPositions(375, -150, 0);
+	upgradeButton.setSizes(250, 100, 1);
+	upgradeButton.setImages(data.GetID(IMG_BUTTONNORMAL), data.GetID(IMG_BUTTONHOVER), data.GetID(IMG_BTN_TOOLTIP), data.GetID(IMG_BUTTONNORMAL));
+	upgradeButton.setEventsStack(&events);
+	upgradeButton.setID(25);
 }

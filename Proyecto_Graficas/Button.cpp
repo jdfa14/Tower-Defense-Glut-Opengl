@@ -116,22 +116,44 @@ void Button::writeText(std::string text, double x, double y, void *font){
 	switch (type)
 	{
 	case BTN_TYPE_NORMAL:
-		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.85), (GLfloat)y);
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)text.c_str())* 0.6), (GLfloat)y - 8);
 		for (unsigned int i = 0; i < text.length(); i++) {
 			glutBitmapCharacter(font, text[i]);
 		}
 		break;
 	case BTN_TYPE_LEVEL:
-		glRasterPos2f((GLfloat)x + width / 10.0, (GLfloat)y + height / 10.0);
+		glRasterPos2f((GLfloat)x + width / 12.0, (GLfloat)y + height / 10.0);
 		for (unsigned int i = 0; i < text.length(); i++) {
 			glutBitmapCharacter(font, text[i]);
 		}
 		auxStr = new std::string(std::to_string(score));
-		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)auxStr->c_str())* 0.75), (GLfloat)y - 50);
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)auxStr->c_str())* 0.6), (GLfloat)y - 50);
 		for (unsigned int i = 0; i < auxStr->length(); i++) {
 			glutBitmapCharacter(font, (*auxStr)[i]);
 		}
 		free(auxStr);
+		break;
+	case BTN_TYPE_PLAYER:
+		glRasterPos2f((GLfloat)x + width / 10.0, (GLfloat)y + height / 10.0);
+		for (unsigned int i = 0; i < text.length(); i++) {
+			glutBitmapCharacter(font, text[i]);
+		}
+
+		auxStr = new std::string(std::to_string(score));
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)auxStr->c_str())* 0.6), (GLfloat)y - 50);
+		for (unsigned int i = 0; i < auxStr->length(); i++) {
+			glutBitmapCharacter(font, (*auxStr)[i]);
+		}
+		free(auxStr);
+
+		auxStr = new std::string("TEST");
+		glRasterPos2f((GLfloat)(x - glutBitmapLength(font, (unsigned char*)auxStr->c_str())* 0.6), (GLfloat)y - 50);
+		for (unsigned int i = 0; i < auxStr->length(); i++) {
+			glutBitmapCharacter(font, (*auxStr)[i]);
+		}
+		free(auxStr);
+
+		break;
 	default:
 		break;
 	}

@@ -3,8 +3,6 @@
 void GameManager::draw(double time){
 	drawBG();
 	
-
-
 	for (unsigned int i = 0; i < buttons->size(); i++)
 		(*buttons)[i].drawText();
 	
@@ -16,6 +14,11 @@ void GameManager::draw(double time){
 		writeData(scoreInLevel, -25, 410, GM_FORMAT_NUMBER);
 		writeData(dnaInLevel, 150, 410, GM_FORMAT_NUMBER);
 		//
+
+		if (selectedTower != NULL){
+			sellButton.drawText();
+			upgradeButton.drawText();
+		}
 
 		for (unsigned int i = 0; i < grids.size(); i++){
 			data.Draw(grids[i].img, grids[i].posXY.posX, grids[i].posXY.posY, -1, grids[i].width, grids[i].heith);

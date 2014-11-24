@@ -36,11 +36,11 @@ class Tower : public StaticObject
 		double range; //range from origin to shot must be positive
 		double timeBetweenShots; 
 		double timeToShot;//need to be 0 to be able to shot
-		int type;// 1 normal, 2 desintegrators, 3 booster
-		int level;// 1 normal, 2 upgraded, 3 super
+		int type;// 0 normal, 1 desintegrators, 2 booster
+		int level;// 0 normal, 1 upgraded, 2 super
+		int totalCost;
 		cData *data;
 		void setType(int type);
-
 		//shot
 		void goTo(double x, double y);//change 
 
@@ -49,10 +49,15 @@ class Tower : public StaticObject
 		~Tower();
 		//editions
 		bool didHeJustClickedMe(double x, double y); // return true if x and y are inside him
+		void upgrade();
 
 		//sets
 		void setTimeToShot(double timeInSeconds);
 		void setRange(double range);
+		
+
+		//gets
+		int getSellRefound();//get the $ from celling 80%
 
 		//Display
 		void update(double elapsedTimeMiliSec); //time to shot, update every Bullet

@@ -30,8 +30,7 @@ void GameManager::button_listener(int id){
 		}
 		
 	}
-	else{//where is 4 and five?? its a magical mistery
-		//6 show player data
+	else{
 		switch (id)
 		{
 		case 6:// SELECT PLAYER goTo(levelSelection)
@@ -107,6 +106,20 @@ void GameManager::button_listener(int id){
 			wavesManager.nextWave();
 			wavesStarted = true;
 			break;
+
+		case 25://UPGRADE TOWER
+			
+			selectedTower->data->upgrade();
+			break;
+		case 26://SELL TOWER
+			dnaInLevel += selectedTower->data->getSellRefound();
+			towers.remove(selectedTower);
+			selectedTower = NULL;
+			sellButton.setEnable(false);
+			upgradeButton.setEnable(false);
+
+
+			break;
 		default:
 			break;
 		}
@@ -122,6 +135,8 @@ void GameManager::pasiveMouse(int x, int y){
 	if (playing){
 		mouseTracking.posX = x;
 		mouseTracking.posY = y;
+		sellButton.mouseState(x, y, false);
+		upgradeButton.mouseState(x, y, false);
 
 		if (x >= -500 && x < 250 && y >= -500 && y <= 357){ // isOnMap
 			isOnMap = true;
@@ -154,14 +169,13 @@ void GameManager::leftClick(int x, int y, int state)
 		for (unsigned int i = 0; i < buttons->size(); i++){
 			(*buttons)[i].mouseState(x, y, true);
 		}
+		sellButton.mouseState(x, y, true);
+		upgradeButton.mouseState(x, y, true);
 	}
 	else {
 		if (playing){
-			
-
-
-			if (showingGrid){
-				if (isOnMap){
+			if (isOnMap){
+				if (showingGrid){
 					if (canPlace){
 						Tower toPlace(data, enemies, grids[selectedIndexes[0]].posXY.posX + grids[selectedIndexes[0]].width / 2.0, grids[selectedIndexes[0]].posXY.posY - grids[selectedIndexes[0]].heith / 2.0, 0, typeOfPlacingTower);
 						toPlace.setSizes(grids[selectedIndexes[0]].width * 2, grids[selectedIndexes[0]].heith * 2, 1);
@@ -183,6 +197,20 @@ void GameManager::leftClick(int x, int y, int state)
 							dnaInLevel -= PRICE_TOWER_TYPE_2; break;
 						case PILL_TOWER:
 							dnaInLevel -= PRICE_TOWER_TYPE_2; break;
+						}
+					}
+				}
+				else{// if not placing tower
+					// SELECTING TOWER ON CLICK
+					selectedTower = NULL;
+					sellButton.setEnable(false);
+					upgradeButton.setEnable(false);
+					for (Node<Tower> *i = towers.getHead(); i != NULL; i = i->next){
+						if (i->data->didHeJustClickedMe(x, y)){
+							selectedTower = i;
+							sellButton.setEnable(true);
+							upgradeButton.setEnable(true);
+							break;
 						}
 					}
 				}

@@ -8,6 +8,7 @@
 
 #define BTN_TYPE_NORMAL  0
 #define BTN_TYPE_LEVEL  1
+#define BTN_TYPE_PLAYER 2
 
 class Button : 
 	public StaticObject

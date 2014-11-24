@@ -52,6 +52,9 @@ private:
 	std::vector<Texture> *images;
 	std::vector<Grid> grids;
 
+	Button sellButton;
+	Button upgradeButton;
+
 	Texture *bgImage;
 
 	//Matriz de navegacion
@@ -82,6 +85,7 @@ private:
 	bool wavesStarted;
 	bool finished;
 	bool victory;
+	Node<Tower> *selectedTower;
 
 	void writeData(int data, double x, double y,int format);
 	void getReadyToPlay();
@@ -106,6 +110,7 @@ public:
 	};
 	
 	GameManager();
+	~GameManager();
 
 	//gets
 	GlutWindow *getWin();

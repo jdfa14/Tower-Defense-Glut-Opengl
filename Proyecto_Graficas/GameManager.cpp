@@ -1,8 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager() 
+GameManager::GameManager() : sellButton("Sell Tower"), upgradeButton("Upgrade Tower")
 {
-	
 	showingGrid = false;
 	playing = false;
 	screenState = 0;
@@ -11,6 +10,16 @@ GameManager::GameManager()
 	selectedIndexes[1] = -1;
 	selectedIndexes[2] = -1;
 	selectedIndexes[3] = -1;
+	selectedTower = NULL;
+}
+
+GameManager::~GameManager(){
+	towers.clear();
+	enemies.clear();
+	for (int i = 0; i < NUMBER_OF_SCREENS; i++){
+		delete hereYouAre[i];
+	}
+	delete hereYouAre;
 }
 
 GlutWindow* GameManager::getWin(){
@@ -33,6 +42,9 @@ void GameManager::gameFinished(){
 	playing = false;
 	Level data = selectedPlayer->getLevel(levelSelected);
 	Level newData;
+	selectedTower = NULL;
+	sellButton.setEnable(false);
+	upgradeButton.setEnable(false);
 	if (victory){// only if victory
 		newData.completed = true;
 		newData.score = scoreInLevel;

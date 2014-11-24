@@ -1,5 +1,46 @@
 #include "Tower.h"
 
+Tower::Tower(cData &data, LinkedList<BadAgent> &enemies, double x, double y, double z, int type){
+	StaticObject::StaticObject();
+	this->data = &data;
+	this->enemies = &enemies;
+	srand(time(NULL));
+	setPositions(x, y, z);
+	setSizes(50, 50, 1);
+	timeBetweenShots = 0;
+	totalCost = 0;
+	level = 0;
+	setType(type);
+}
+
+Tower::~Tower(){
+	bullets.clear();
+}
+
+void Tower::upgrade(){
+	level++;
+	switch (type)
+	{
+	case WHITE_TOWER:
+		dmgAntiBacterial *= 1.1;
+		dmgAntiViral *= 1.1;
+		totalCost += level == 2 ? PRICE_TO_UPGRADE_TYPE_1 : PRICE_TO_SUPPER_TYPE_1;
+		break;
+	case YELLOW_TOWER:
+		dmgAntiBacterial *= 1.1;
+		dmgAntiViral *= 1.1;
+		totalCost += level == 2 ? PRICE_TO_UPGRADE_TYPE_2 : PRICE_TO_SUPPER_TYPE_2;
+		break;
+	case PILL_TOWER:
+		//NOTHING!! cuz not implemented
+		break;
+	}
+}
+
+int Tower::getSellRefound(){
+	return totalCost * 0.8;
+}
+
 void Tower::setTimeToShot(double timeInSeconds){
 	timeToShot = timeInSeconds * 1000;
 }
@@ -31,21 +72,6 @@ void Tower::setType(int type){
 		setRange(200);
 		break;
 	}
-}
-
-Tower::Tower(cData &data, LinkedList<BadAgent> &enemies, double x, double y, double z, int type){
-	StaticObject::StaticObject();
-	this->data = &data;
-	this->enemies = &enemies;
-	srand(time(NULL));
-	setPositions(x, y, z);
-	setSizes(50, 50, 1);
-	timeBetweenShots = 0;
-	setType(type);
-}
-
-Tower::~Tower(){
-	bullets.clear();
 }
 
 void Tower::update(double elapsedTimeMiliSec){
@@ -129,7 +155,7 @@ void Tower::shot(BadAgent* toChase){
 	bullets.push_back(toShot);
 }
 
-bool Tower::didHeJustClickedMe(double x, double y){
-	return (x + width / 2.0 > x && x > x - width / 2.0 &&
-			y + height / 2.0 > y && y > y - height / 2.0);
+bool Tower::didHeJustClickedMe(double xMouse, double yMouse){
+	return (x + width / 2.0 > xMouse && xMouse > x - width / 2.0 &&
+			y + height / 2.0 > yMouse && yMouse > y - height / 2.0);
 }
