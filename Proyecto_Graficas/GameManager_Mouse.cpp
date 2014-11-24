@@ -157,12 +157,15 @@ void GameManager::leftClick(int x, int y, int state)
 	}
 	else {
 		if (playing){
+			
+
+
 			if (showingGrid){
 				if (isOnMap){
 					if (canPlace){
 						Tower toPlace(data, enemies, grids[selectedIndexes[0]].posXY.posX + grids[selectedIndexes[0]].width / 2.0, grids[selectedIndexes[0]].posXY.posY - grids[selectedIndexes[0]].heith / 2.0, 0, typeOfPlacingTower);
 						toPlace.setSizes(grids[selectedIndexes[0]].width * 2, grids[selectedIndexes[0]].heith * 2, 1);
-						towers.push_back(toPlace);
+						towers.addAtTail(&toPlace);
 						grids[selectedIndexes[0]].placeable = false;
 						grids[selectedIndexes[1]].placeable = false;
 						grids[selectedIndexes[2]].placeable = false;

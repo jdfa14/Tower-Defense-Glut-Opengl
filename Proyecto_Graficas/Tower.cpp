@@ -128,3 +128,8 @@ void Tower::shot(BadAgent* toChase){
 	toShot.setSizes(25, 25, 1);
 	bullets.push_back(toShot);
 }
+
+bool Tower::didHeJustClickedMe(double x, double y){
+	return (x + width / 2.0 > x && x > x - width / 2.0 &&
+			y + height / 2.0 > y && y > y - height / 2.0);
+}

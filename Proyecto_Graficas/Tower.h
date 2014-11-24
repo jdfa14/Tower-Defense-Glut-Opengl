@@ -48,7 +48,7 @@ class Tower : public StaticObject
 		Tower(cData &data, LinkedList<BadAgent> &enemies, double x = 0, double y = 0, double z = 0,int type = WHITE_TOWER);
 		~Tower();
 		//editions
-		
+		bool didHeJustClickedMe(double x, double y); // return true if x and y are inside him
 
 		//sets
 		void setTimeToShot(double timeInSeconds);

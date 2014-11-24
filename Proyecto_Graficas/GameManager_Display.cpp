@@ -25,8 +25,8 @@ void GameManager::draw(double time){
 			i->data->draw();
 		}
 
-		for (unsigned int i = 0; i < towers.size(); i++){
-			towers[i].draw();
+		for (Node<Tower> * i = towers.getHead(); i != NULL; i = i->next){
+			i->data->draw();
 		}
 
 		if (showingGrid){//all towers and monsters must be draw before the grid, so the transparency will work properly
@@ -64,8 +64,8 @@ void GameManager::updateEnemies(double elapsedTimeMiliSec){
 
 void GameManager::updateTowers(double elapsedTimeMiliSec){
 	if (playing){
-		for (unsigned int i = 0; i < towers.size(); i++){
-			towers[i].update(elapsedTimeMiliSec);
+		for (Node<Tower> * i = towers.getHead(); i != NULL; i = i->next){
+			i->data->update(elapsedTimeMiliSec);
 		}
 	}
 }

@@ -40,7 +40,7 @@ private:
 	std::stack<int> events;
 
 	//Objects
-	std::vector<Tower> towers;
+	LinkedList<Tower> towers;
 	LinkedList<BadAgent> enemies;
 	//std::vector<BadAgent> enemies;//maybe it will be not implemented
 	std::vector<LevelData> levelsData;
