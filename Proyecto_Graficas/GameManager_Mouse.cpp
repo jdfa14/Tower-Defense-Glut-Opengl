@@ -72,7 +72,6 @@ void GameManager::button_listener(int id){
 				return;
 			}
 			getReadyToPlay();
-			
 
 			auxGridData = levelsData[levelSelected].getGridData();
 			wavesManager.loadLevel(levelsData[levelSelected].getWaves());

@@ -13,6 +13,13 @@ void WavesManager::reset(){
 	active.clear();
 }
 
+double WavesManager::getTimeToNext(){
+	
+	if (!waiting.empty())
+		return waiting.getHead()->data->getTimeToStart();
+	return -1;
+}
+
 bool WavesManager::hasFinished(){
 	return levelFinished;
 }
@@ -31,7 +38,8 @@ void WavesManager::nextWave(){
 	}
 }
 
-void WavesManager::update(double elapsedTimeMiliSec){
+bool WavesManager::update(double elapsedTimeMiliSec){
+	bool flag = false;
 	if (start && !levelFinished){
 		for (Node<Wave> *i = active.getHead(); i != NULL; i = i->next){
 			i->data->spawn(elapsedTimeMiliSec);
@@ -48,6 +56,7 @@ void WavesManager::update(double elapsedTimeMiliSec){
 			waiting.getHead()->data->wait(elapsedTimeMiliSec);// only the next wave will wait
 			if (waiting.getHead()->data->isReadyToSpawn()){
 				nextWave();
+				flag = true;
 			}
 		}
 
@@ -56,6 +65,7 @@ void WavesManager::update(double elapsedTimeMiliSec){
 			std::cout << "WavesManager has finished\n";
 		}
 	}
+	return flag;
 }
 
 void WavesManager::loadLevel(LinkedList<Wave> *allWaves){

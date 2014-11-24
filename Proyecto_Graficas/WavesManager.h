@@ -18,7 +18,8 @@ public:
 	WavesManager();
 
 	void reset();//clear all vectors
-	void update(double elapsedTimeMili);
+	bool update(double elapsedTimeMili);
+	double getTimeToNext();
 	void addWave(Wave &wave);
 	void nextWave();//the first waiting wave will became an active and will start to spawn enemies
 	bool hasNextWave();// True if there is one or more waiting waves

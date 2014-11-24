@@ -47,6 +47,10 @@ private:
 	int pathIndex;
 	double distanceToTarget; // distance ^2
 
+	//damage and rewards
+	int dmgToDo;
+	int dnaToGive;
+
 	void getReadyToFight(int type, int dificulty, int speed);
 
 public:
@@ -61,9 +65,11 @@ public:
 	double getHP();
 	bool isReadyToDestroy();
 	bool isAlive();
+	int getDmgToDo();
+	int getDnaToGive();
 
 	void takeDamaged(double antiVDMG, double antiBDMG);//do damage and reduce life
-	void update(double elapsedTimeMiliSec);// move and verify arriving to the location
+	bool update(double elapsedTimeMiliSec);// move and verify arriving to the location
 	//Display
 	void draw();//draw himself and Hp bar
 

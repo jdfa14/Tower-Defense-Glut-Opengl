@@ -28,6 +28,7 @@ public:
 	//gets
 	bool isReadyToSpawn();
 	bool hasFinished();
+	double getTimeToStart();
 
 	//mods
 	void wait(double elapsedTimeMiliSec);// it will consume timeToStaet

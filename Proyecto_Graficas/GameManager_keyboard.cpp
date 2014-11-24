@@ -23,6 +23,7 @@ void GameManager::keyboard(unsigned char key, int x, int y){
 		break;
 	case 'S':
 		wavesManager.nextWave();
+		wavesStarted = true;
 		break;
 	case 'E':
 		//enemies.push_back(*enemy);

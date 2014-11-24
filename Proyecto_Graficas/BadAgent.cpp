@@ -39,6 +39,14 @@ double BadAgent::getHP(){
 	return hitPoints;
 }
 
+int BadAgent::getDmgToDo(){
+	return dmgToDo;
+}
+
+int BadAgent::getDnaToGive(){
+	return dnaToGive;
+}
+
 bool BadAgent::isReadyToDestroy(){
 	return readyToDestroy;
 }
@@ -47,7 +55,7 @@ void BadAgent::takeDamaged(double antiVDMG, double antiBDMG){
 	hitPoints = hitPoints - antiVDMG *(1.0 - defAntiV / 100.0) - antiBDMG * (1.0 - defAntiB / 100.0);
 }
 
-void BadAgent::update(double elapsedTimeMiliSec){
+bool BadAgent::update(double elapsedTimeMiliSec){
 	if (!destroying){
 		if (pathIndex < 0){
 			x = (**path)[0].posX;
@@ -67,6 +75,7 @@ void BadAgent::update(double elapsedTimeMiliSec){
 				y = (**path)[0].posY;
 				// GO AGAIN!! KILL THAT EVIL PLAYER
 				// Here we should do some dmg to the player
+				return true;
 			}
 		}
 	}
@@ -75,6 +84,7 @@ void BadAgent::update(double elapsedTimeMiliSec){
 		if (waitForMultipleObjects <= 0)
 			readyToDestroy = true;
 	}
+	return false;
 }
 
 void BadAgent::draw(){
@@ -96,24 +106,32 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		hitPoints = 100 + 50 * dif;
 		setDefs(50, 10);
 		setSizes(25, 25, 1);
+		dmgToDo = 2 + 1 * dif;
+		dnaToGive = 25 + 5 * dif;
 		break;
 	case BA_TYPE_VIRUS:
 		img = IMG_VIRUS;
 		hitPoints = 75 + 30 * dif;
 		setDefs(10, 70);
 		setSizes(25, 25, 1);
+		dmgToDo = 1 + 2 * dif;
+		dnaToGive = 15 + 10 * dif;
 		break;
 	case BA_TYPE_BOSS_BACTERIA:
 		img = IMG_BACTERIA;
 		hitPoints = 1000 + 200 * dif;
 		setDefs(90, 25);
 		setSizes(50, 50, 1);
+		dmgToDo = 20 + 5 * dif;
+		dnaToGive = 400 + 20 * dif;
 		break;
 	case BA_TYPE_BOSS_VIRUS:
 		img = IMG_VIRUS;
 		hitPoints = 1000 + 100 * dif;
 		setDefs(10, 100);
 		setSizes(50, 50, 1);
+		dmgToDo = 20 + 3 *dif;
+		dnaToGive = 300 + 25 * dif;
 		break;
 	default:
 		std::cout << "Error not valid type: " << type << " deleting...\n";

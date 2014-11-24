@@ -15,6 +15,10 @@ void Wave::setVectorToSpawn(LinkedList<BadAgent> *toSpawn){
 	this->toSpawn = toSpawn;
 }
 
+double Wave::getTimeToStart(){
+	return timeToStart;
+}
+
 bool Wave::isReadyToSpawn(){
 	return timeToStart <= 0;
 }

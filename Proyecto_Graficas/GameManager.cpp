@@ -19,6 +19,7 @@ GlutWindow* GameManager::getWin(){
 
 void GameManager::getReadyToPlay(){
 	playing = true;
+	wavesStarted = false;
 	finished = false;
 	victory = false;
 	scoreInLevel = 0;

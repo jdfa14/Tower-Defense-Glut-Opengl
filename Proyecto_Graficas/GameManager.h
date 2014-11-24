@@ -19,6 +19,10 @@
 #define MAP_INIT_X -125
 #define MAP_INIT_Y -71.42
 
+#define GM_FORMAT_TIME		0
+#define GM_FORMAT_NUMBER	1
+#define GM_FORMAT_LIFE		2
+
 class GameManager
 {
 private:
@@ -75,10 +79,11 @@ private:
 	int playerHitPoints;
 	double timeInLevel;
 	bool playing;
+	bool wavesStarted;
 	bool finished;
 	bool victory;
 
-	void writeData(std::string data, double x, double y);
+	void writeData(int data, double x, double y,int format);
 	void getReadyToPlay();
 	void gameFinished();
 
