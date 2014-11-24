@@ -42,6 +42,7 @@ void Button::setImages(int normal, int hover, int tooltipImg, int locked){
 }
 
 void Button::setToolTip(std::string tooltip){
+	std::replace(tooltip.begin(), tooltip.end(), '_', ' ');
 	this->tooltipMessage = tooltip;
 	this->tooltip = true;
 }
@@ -158,9 +159,6 @@ void Button::writeTooltip(){
 		if (tooltipMessage[i] == '\n'){
 			initY -= ( 8 +glutBitmapWidth(GLUT_BITMAP_HELVETICA_12, 'X'));
 			glRasterPos3f((GLfloat)initX, (GLfloat)initY,1);
-		}
-		else if (tooltipMessage[i] == '_'){
-			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, ' ');
 		}
 		else{
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, tooltipMessage[i]);
