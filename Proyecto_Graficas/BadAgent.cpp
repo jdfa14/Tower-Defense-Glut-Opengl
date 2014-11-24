@@ -60,7 +60,6 @@ void BadAgent::update(double elapsedTimeMiliSec){
 		if (hitPoints <= 0){
 			destroying = true;
 		}
-		std::cout << "Walking to [" << (**path)[pathIndex].posX << "," << (**path)[pathIndex].posY << "] ";
 		if (amICloseEnought()){// si esta lo suficientemente cerca de la siguiente grid
 			if (nextStept()){// si ya llego al final
 				pathIndex = 0;
@@ -96,28 +95,24 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		img = IMG_BACTERIA;
 		hitPoints = 100 + 50 * dif;
 		setDefs(50, 10);
-		setMaxSpeed(100 + 20 * dif); // units per second
 		setSizes(25, 25, 1);
 		break;
 	case BA_TYPE_VIRUS:
 		img = IMG_VIRUS;
 		hitPoints = 75 + 30 * dif;
 		setDefs(10, 70);
-		setMaxSpeed(200 + 50 * dif);
 		setSizes(25, 25, 1);
 		break;
 	case BA_TYPE_BOSS_BACTERIA:
 		img = IMG_BACTERIA;
 		hitPoints = 1000 + 200 * dif;
 		setDefs(90, 25);
-		setMaxSpeed(100);
 		setSizes(50, 50, 1);
 		break;
 	case BA_TYPE_BOSS_VIRUS:
 		img = IMG_VIRUS;
 		hitPoints = 1000 + 100 * dif;
 		setDefs(10, 100);
-		setMaxSpeed(100);
 		setSizes(50, 50, 1);
 		break;
 	default:
@@ -126,6 +121,24 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		readyToDestroy = true;
 		break;
 	}
+
+	switch (speed)
+	{
+	case BA_MOV_SLOW:
+		setMaxSpeed(80 + 10 * dif);
+		break;
+	case BA_MOV_NORMAL:
+		setMaxSpeed(120 + 15 * dif);
+		break;
+	case BA_MOV_FAST:
+		setMaxSpeed(160 + 20 * dif);
+		break;
+	default:
+		setMaxSpeed(800);
+		std::cout << "ERROR" << std::endl;
+		break;
+	}
+
 	maxHitPoints = hitPoints;
 }
 
@@ -160,6 +173,5 @@ bool BadAgent::nextStept(){
 
 bool BadAgent::amICloseEnought(){
 	distanceToTarget = pow((**path)[pathIndex].posX - x, 2) + pow((**path)[pathIndex].posY - y, 2);
-	std::cout << " Distance: " << distanceToTarget << "\n";
 	return distanceToTarget < 650; // 24 grid width, 27 gird heigth av ~ 25 ^ 2
 }

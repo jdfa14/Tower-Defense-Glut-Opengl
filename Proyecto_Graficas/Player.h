@@ -17,6 +17,7 @@ private:
 	std::vector<Level> levels;
 	std::vector<Button> levelButtons;
 	bool newPlayer;
+	void addButton(int level, int x, int y);
 
 public:
 	Player(std::string fileName, cData &data);
@@ -34,6 +35,8 @@ public:
 	void setName(std::string name);
 	void setFileName(std::string fileName);
 	void setNewPlayer(bool newby);
+	void setNewLevelScore(int levelPos, Level);
+	void unlock(int levelPos);
 
 	//Edit
 	void addLevel(Level level);

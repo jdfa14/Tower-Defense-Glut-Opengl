@@ -13,6 +13,10 @@ void WavesManager::reset(){
 	active.clear();
 }
 
+bool WavesManager::hasFinished(){
+	return levelFinished;
+}
+
 bool WavesManager::hasNextWave(){
 	return !waiting.empty();
 }
@@ -28,7 +32,7 @@ void WavesManager::nextWave(){
 }
 
 void WavesManager::update(double elapsedTimeMiliSec){
-	if (start){
+	if (start && !levelFinished){
 		for (Node<Wave> *i = active.getHead(); i != NULL; i = i->next){
 			i->data->spawn(elapsedTimeMiliSec);
 			if (i->data->hasFinished()){
@@ -45,6 +49,11 @@ void WavesManager::update(double elapsedTimeMiliSec){
 			if (waiting.getHead()->data->isReadyToSpawn()){
 				nextWave();
 			}
+		}
+
+		if (waiting.empty() && active.empty()){
+			levelFinished = true;
+			std::cout << "WavesManager has finished\n";
 		}
 	}
 }

@@ -1,17 +1,14 @@
 #include "GameManager.h"
 
 void GameManager::draw(double time){
-	//bgImage->draw();
 	drawBG();
 	
 	for (unsigned int i = 0; i < buttons->size(); i++)
 		(*buttons)[i].drawText();
-	/*for (unsigned int i = 0; i < images->size(); i++)
-		(*images)[i].draw();*/
-	//also we need to draw all other objects
-
 	
 	if (playing){
+
+
 
 		for (unsigned int i = 0; i < grids.size(); i++){
 			data.Draw(grids[i].img, grids[i].posXY.posX, grids[i].posXY.posY, -1, grids[i].width, grids[i].heith);
@@ -20,10 +17,6 @@ void GameManager::draw(double time){
 		for (Node<BadAgent> * i = enemies.getHead(); i != NULL; i = i->next){
 			i->data->draw();
 		}
-
-		/*for (unsigned int i = 0; i < enemies.size(); i++){
-			enemies[i].draw();
-		}*/
 
 		for (unsigned int i = 0; i < towers.size(); i++){
 			towers[i].draw();
@@ -73,7 +66,14 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 		button_listener(events.top());
 		events.pop();
 	}
-	wavesManager.update(elapsedTimeMiliSec);
+	
+	if (playing){
+		wavesManager.update(elapsedTimeMiliSec);
+		if (enemies.getSize() == 0 && wavesManager.hasFinished()){
+			std::cout << "Level Finished\n";
+			gameFinished();
+		}
+	}
 }
 
 void GameManager::drawBG(){
@@ -93,4 +93,5 @@ void GameManager::drawBG(){
 
 void GameManager::idle(){
 	sounds.Update();
+	glutPostRedisplay();
 }

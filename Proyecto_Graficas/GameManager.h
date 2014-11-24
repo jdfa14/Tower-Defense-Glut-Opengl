@@ -58,7 +58,7 @@ private:
 	//grid and playing stuff
 	std::vector<Location> *path;
 
-	bool playing;
+	
 	bool showingGrid;// only if placing a towa will be true
 	bool isOnMap;
 	bool canPlace;
@@ -67,6 +67,20 @@ private:
 	void selectGrid(double x, double y);
 	int selectedIndexes[4];
 	int rc; // 20 x 20 little grids
+
+	//Data while playing
+	int scoreInLevel;
+	int dnaInLevel;
+	int levelSelected;
+	int playerHitPoints;
+	double timeInLevel;
+	bool playing;
+	bool finished;
+	bool victory;
+
+	void writeData(std::string data, double x, double y);
+	void getReadyToPlay();
+	void gameFinished();
 
 public:
 	
@@ -81,6 +95,7 @@ public:
 		CREDITS,
 		LEVELSELECT,
 		PLAYLEVEL,
+		HISTORY,
 		NUMBER_OF_SCREENS,
 		ERRORNAV
 	};

@@ -1,0 +1,22 @@
+{
+  "type" : "Menu",
+  "level" : 1,
+  "name" : "Player_selection",
+  "data" : {
+  "background" : "history.png",
+  "buttons" : [
+      {
+        "text" : "Continue",
+        "ID" : 1,
+        "positions" : [300,-50,0],
+        "sizes" : [250,700,1]
+      },
+      {
+        "text" : "Back",
+        "ID" : 0,
+        "positions" : [-375,-475,0],
+        "sizes" : [250,50,1]
+      }
+    ]
+  }
+}

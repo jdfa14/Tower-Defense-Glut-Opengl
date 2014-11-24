@@ -19,7 +19,7 @@
 
 #define BA_MOV_SLOW		0
 #define BA_MOV_NORMAL	1
-#define BA_MOV_FAST		3
+#define BA_MOV_FAST		2
 
 class BadAgent : public Mobile
 {
@@ -29,7 +29,7 @@ private:
 	double defAntiV;// in %
 	double defAntiB;// in % of reduction
 	cData *data;
-	
+	int reward;
 	int img;
 	int state; // not necesary if you see this comment
 	int waitForMultipleObjects; //:B

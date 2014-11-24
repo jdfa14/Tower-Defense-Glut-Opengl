@@ -31,12 +31,20 @@ Level Player::getLevel(int i){
 	return levels[i];
 }
 
+bool Player::isNewPlayer(){
+	return newPlayer;
+}
+
 void Player::setName(std::string name){
 	this->name = name;
 }
 
 void Player::setFileName(std::string fileName){
 	this->fileName = fileName;
+}
+
+void Player::setNewPlayer(bool newby){
+	this->newPlayer = newby;
 }
 
 void Player::addLevel(Level level){
@@ -68,7 +76,7 @@ void Player::resetLevels(){
 	aux.locked = false;
 	levels.push_back(aux);
 
-	for (int i = 1; i < 10; i++){
+	for (int i = 1; i < 5; i++){
 		Level toLoad;
 		toLoad.completed = false;
 		toLoad.score = 0;
@@ -76,20 +84,22 @@ void Player::resetLevels(){
 		levels.push_back(toLoad);
 	}
 
-	for (int i = 0; i < 2; i++){
-		for (int j = 0; j < 5; j++){
-			Button newOne("Level " + std::to_string(i * 5 + j + 1));
-			newOne.setID(i * 5 + j + 9);
-			newOne.setSizes(width, height, 1);
-			newOne.setPositions(xP, yP, 0);
-			newOne.setEnable(!levels[(i * 5 + j)].locked);
-			newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER), data->GetID(IMG_BTN_TOOLTIP),data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL));
-			levelButtons.push_back(newOne);
-			xP += spaceX + width;
-		}
-		xP = -500 + 100 + width / 2.0 + spaceX / 2.0;
-		yP -= (spaceY + height);
-	}
+	addButton(0, -360,-140);
+	addButton(1, -230, 100);
+	addButton(2,    0, 270);
+	addButton(3,  230, 100);
+	addButton(4,  360,-140);
+
+}
+
+void Player::addButton(int level, int x, int y){
+	Button newOne(std::to_string(level));
+	newOne.setID(level + 9);
+	newOne.setSizes(220, 220, 1);
+	newOne.setPositions(x, y,1);
+	newOne.setEnable(!levels[level].locked);
+	newOne.setImages(data->GetID(IMG_BTN_LEVELNORMAL), data->GetID(IMG_BTN_LEVELHOVER), data->GetID(IMG_BTN_TOOLTIP), data->GetID(IMG_BTN_LEVEL_LOCK_NORMAL));
+	levelButtons.push_back(newOne);
 }
 
 bool Player::loadPlayer(std::stack<int> &events){
@@ -157,7 +167,10 @@ bool Player::loadPlayer(std::stack<int> &events){
 	}
 	else{
 		name = "New Player";
-		resetLevels();// fill the then posible levels
+		resetLevels();// fill the 5 posible levels
+		for (unsigned int i = 0; i < levels.size(); i++){
+			levelButtons[i].setEventsStack(&events);
+		}
 	}
 	return true;
 }
@@ -197,5 +210,16 @@ bool Player::savePlayer(){
 	output << json_string;
 	output.close();
 	//json saved
+
+	std::cout << "Player Saved \n";
 	return true;
+}
+
+void Player::unlock(int levelPos){
+	levels[levelPos].locked = false;
+	levelButtons[levelPos].setEnable(true);
+}
+
+void Player::setNewLevelScore(int levelPos, Level newLevel){
+	levels[levelPos] = newLevel;
 }

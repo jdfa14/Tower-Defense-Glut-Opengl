@@ -82,8 +82,6 @@ void Bullet::update(double elapsedTimeMiliSeconds){
 
 		accX = (xMonster - x - speedX * timeToArrive) / (timeToArrive * timeToArrive);
 		accY = (yMonster - y - speedY * timeToArrive) / (timeToArrive * timeToArrive);
-		//std::cout << "\n time: " << timeToArrive << " Speed: " << actualSpeed;
-		//std::cout << "\n distance: " << distance << " x, y: " << x << " , " << y;
 		if (distance < 0){
 			hit = true;
 			xDif = x - xMonster;

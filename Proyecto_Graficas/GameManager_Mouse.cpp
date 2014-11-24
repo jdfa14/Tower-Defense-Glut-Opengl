@@ -1,62 +1,77 @@
 #include "GameManager.h"
 
 void GameManager::button_listener(int id){
+	std::vector<Button> *levelbuttons;
+	std::vector<Grid> *auxGridData;
+
+
 	// fomr 1 to 4 are navigation orders (0 is back)
 	// bigger than that are action orders
+	
 	if (id < 4){
 		//loading screen
 		if (hereYouAre[screenState][id] == ERRORNAV){
 			std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << id << std::endl;
 			return;
 		}
-		loadScreen(hereYouAre[screenState][id]);
+		if (screenState == HISTORY){
+			loadScreen(hereYouAre[screenState][id]);
+			if (id != 0){// if its not a back button
+				levelbuttons = selectedPlayer->getLevelButtons();
+				if (buttons->size() > 2)//delete previous buttons if the case
+				for (unsigned int i = 0; i < levelbuttons->size(); i++)
+					buttons->pop_back();
+
+				for (unsigned int i = 0; i < levelbuttons->size(); i++){
+					buttons->push_back((*levelbuttons)[i]);
+				}
+				selectedPlayer->setNewPlayer(false);
+			}
+			//selectedPlayer->savePlayer(); deactivated for testing, you MUST uncomment this line
+		}
+		else{
+			loadScreen(hereYouAre[screenState][id]);
+		}
+		
 	}
 	else{//where is 4 and five?? its a magical mistery
-		std::vector<Button> *levelbuttons;
-		std::vector<Grid> *auxGridData;
-		int levelSelected = 0;
-		
 		//6 show player data
 		switch (id)
 		{
-		case 6://load player to level selection
+		case 6:// SELECT PLAYER goTo(levelSelection)
 		case 7:
 		case 8:
 			selectedPlayer = &players[id - 6];
 			levels = selectedPlayer->getAllLevels();
 			levelbuttons = selectedPlayer->getLevelButtons();
-			loadScreen(hereYouAre[screenState][1]);
 
-			if (buttons->size() > 1)//delete previous buttons if the case
+			if (selectedPlayer->isNewPlayer()){
+				loadScreen(hereYouAre[screenState][2]);
+			}
+			else{
+				loadScreen(hereYouAre[screenState][1]);
+				if (buttons->size() > 1)//delete previous buttons if the case
 				for (unsigned int i = 0; i < levelbuttons->size(); i++)
 					buttons->pop_back();
 
-			for (unsigned int i = 0; i < levelbuttons->size(); i++){
-				buttons->push_back((*levelbuttons)[i]);
+				for (unsigned int i = 0; i < levelbuttons->size(); i++){
+					buttons->push_back((*levelbuttons)[i]);
+				}
 			}
 
-			if (screenState == ERRORNAV){
-				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
-				return;
-			}
 			break;
 
-		case 9://level selection goTo Play
+		case 9://level selection goTo(Play)
 		case 10:
 		case 11:
 		case 12:
 		case 13:
-		case 14:
-		case 15:
-		case 16:
-		case 17:
-		case 18:
-			levelSelected = 0;
+			levelSelected = 0; // id - 9
 			if (hereYouAre[screenState][1] == ERRORNAV){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;
 			}
-			playing = true;
+			getReadyToPlay();
 			
 
 			auxGridData = levelsData[levelSelected].getGridData();

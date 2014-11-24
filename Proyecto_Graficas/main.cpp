@@ -67,7 +67,6 @@ void display(){
 }
 
 void time(int x){
-	glutPostRedisplay();
 	switch (x)
 	{
 	case 1:

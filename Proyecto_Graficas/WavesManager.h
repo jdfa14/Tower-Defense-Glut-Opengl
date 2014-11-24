@@ -22,6 +22,7 @@ public:
 	void addWave(Wave &wave);
 	void nextWave();//the first waiting wave will became an active and will start to spawn enemies
 	bool hasNextWave();// True if there is one or more waiting waves
+	bool hasFinished();
 
 	void loadLevel(LinkedList<Wave> *allWaves);
 	void loadLevel(std::vector<Wave> *allWaves);

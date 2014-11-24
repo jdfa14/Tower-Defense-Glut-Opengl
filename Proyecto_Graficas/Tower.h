@@ -13,6 +13,19 @@
 #define YELLOW_TOWER 1
 #define PILL_TOWER 2
 
+
+#define PRICE_TOWER_TYPE_1			100
+#define PRICE_TO_UPGRADE_TYPE_1		150
+#define PRICE_TO_SUPPER_TYPE_1		300
+
+#define PRICE_TOWER_TYPE_2			150
+#define PRICE_TO_UPGRADE_TYPE_2		200
+#define PRICE_TO_SUPPER_TYPE_2		300
+
+#define PRICE_TOWER_TYPE_3			200
+#define PRICE_TO_UPGRADE_TYPE_3		300
+#define PRICE_TO_SUPPER_TYPE_3		400
+
 class Tower : public StaticObject
 {
     private:

@@ -53,11 +53,12 @@ void GameManager::init(){
 	int mat[NUMBER_OF_SCREENS][cant] = {
 		//Back			fwrd1			fwrd1 //fwrd1
 		{ ERRORNAV,		PLAYERSELECT,	INSTRUCTIONS, CREDITS }, // Main
-		{ MAIN,			LEVELSELECT,    ERRORNAV, ERRORNAV }, // Player select
+		{ MAIN,			LEVELSELECT,    HISTORY, ERRORNAV }, // Player select
 		{ MAIN,			ERRORNAV,		ERRORNAV, ERRORNAV }, // Instructions
 		{ MAIN,			ERRORNAV,		ERRORNAV, ERRORNAV }, // Credits
 		{ PLAYERSELECT, PLAYLEVEL,		ERRORNAV, ERRORNAV }, // Level Select
-		{ LEVELSELECT,	ERRORNAV,		ERRORNAV, ERRORNAV }  // Playing level
+		{ LEVELSELECT,	ERRORNAV,		ERRORNAV, ERRORNAV },  // Playing level
+		{ PLAYERSELECT, LEVELSELECT,	ERRORNAV, ERRORNAV } // HISTORY
 	};
 
 	hereYouAre = new int*[NUMBER_OF_SCREENS];
@@ -89,7 +90,6 @@ bool GameManager::loadScreen(int i){
 	buttons = screens[i].getButtons();
 	images = screens[i].getImages();
 	//towers = screens[i].getTowers();
-
 	screenState = i;
 	return true;
 }
