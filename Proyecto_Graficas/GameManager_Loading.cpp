@@ -40,10 +40,10 @@ void GameManager::init(){
 
 	//loading Levels
 	std::cout << "Loading data from leves... 00%";
-	for (int i = 0; i < 1; i++){
+	for (int i = 0; i < 5; i++){
 		LevelData level(data,enemies,&path);
 		level.loadData("levels/level_" + std::to_string(i) + ".json", grids);
-		std::cout << "\b\b\b" + std::to_string((i + 1) * 10) + "%";
+		std::cout << "\b\b\b" + std::to_string((i + 1) * 20) + "%";
 		levelsData.push_back(level);
 	}
 	std::cout << "\n";

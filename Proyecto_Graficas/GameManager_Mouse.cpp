@@ -61,7 +61,7 @@ void GameManager::button_listener(int id){
 		case 11:
 		case 12:
 		case 13:
-			levelSelected = 0; // id - 9
+			levelSelected = id - 9; // id - 9
 			if (hereYouAre[screenState][1] == ERRORNAV){
 				std::cout << "Fatal error, trying to navigate from screen #" << screenState << " with invalid option #" << 1 << std::endl;
 				return;
