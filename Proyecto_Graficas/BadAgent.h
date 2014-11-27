@@ -50,6 +50,7 @@ private:
 	//damage and rewards
 	int dmgToDo;
 	int dnaToGive;
+	int pointsToGice;
 
 	void getReadyToFight(int type, int dificulty, int speed);
 
@@ -67,6 +68,7 @@ public:
 	bool isAlive();
 	int getDmgToDo();
 	int getDnaToGive();
+	int getPointsToGive();
 
 	void takeDamaged(double antiVDMG, double antiBDMG);//do damage and reduce life
 	bool update(double elapsedTimeMiliSec);// move and verify arriving to the location

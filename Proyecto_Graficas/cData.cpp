@@ -38,9 +38,22 @@ bool cData::Load()
 	LoadImage(IMG_BTN_LEVELNORMAL, path + "levelNormal.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BTN_LEVELHOVER, path + "levelHover.png"); i++; std::cout << "\b\b\b0" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BTN_LEVEL_LOCK_NORMAL, path + "levelLocked.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_BTN_LEVEL_LOCK_HOVER, path + "levelLocked.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-
 	
+	LoadImage(IMG_BTN_PLAYER1_NORMAL, path + "player1Progress.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER1_HOVER, path + "player1ProgressHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER1_NEW_NORMAL, path + "player1NewGame.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER1_NEW_HOVER, path + "player1NewGameHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+
+	LoadImage(IMG_BTN_PLAYER2_NORMAL, path + "player2Progress.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER2_HOVER, path + "player2ProgressHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER2_NEW_NORMAL, path + "player2NewGame.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER2_NEW_HOVER, path + "player2NewGameHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+
+	LoadImage(IMG_BTN_PLAYER3_NORMAL, path + "player3Progress.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER3_HOVER, path + "player3ProgressHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER3_NEW_NORMAL, path + "player3NewGame.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BTN_PLAYER3_NEW_HOVER, path + "player3NewGameHover.png");  i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+
 
 	//loading backgrounds
 	path = "Images/backgrounds/";

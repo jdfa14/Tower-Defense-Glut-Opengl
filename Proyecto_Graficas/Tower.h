@@ -49,7 +49,7 @@ class Tower : public StaticObject
 		~Tower();
 		//editions
 		bool didHeJustClickedMe(double x, double y); // return true if x and y are inside him
-		void upgrade();
+		void upgrade(int &dnaPoints);
 
 		//sets
 		void setTimeToShot(double timeInSeconds);

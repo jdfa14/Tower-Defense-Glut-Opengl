@@ -169,7 +169,6 @@
     <ClCompile Include="GameManager_Play.cpp" />
     <ClCompile Include="LevelData.cpp" />
     <ClCompile Include="Mobile.cpp" />
-    <ClCompile Include="old Image.cpp" />
     <ClCompile Include="json\json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />

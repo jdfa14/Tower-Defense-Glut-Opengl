@@ -17,23 +17,36 @@ Tower::~Tower(){
 	bullets.clear();
 }
 
-void Tower::upgrade(){
-	level++;
+void Tower::upgrade(int &dnaPoints){
+	if (level >= 2)
+		return;
+	
+	int cost;
 	switch (type)
 	{
 	case WHITE_TOWER:
-		dmgAntiBacterial *= 1.1;
-		dmgAntiViral *= 1.1;
-		totalCost += level == 2 ? PRICE_TO_UPGRADE_TYPE_1 : PRICE_TO_SUPPER_TYPE_1;
+		dmgAntiBacterial *= 2.1;
+		dmgAntiViral *= 2.1;
+		cost = level == 1 ? PRICE_TO_UPGRADE_TYPE_1 : PRICE_TO_SUPPER_TYPE_1;
 		break;
 	case YELLOW_TOWER:
-		dmgAntiBacterial *= 1.1;
-		dmgAntiViral *= 1.1;
-		totalCost += level == 2 ? PRICE_TO_UPGRADE_TYPE_2 : PRICE_TO_SUPPER_TYPE_2;
+		dmgAntiBacterial *= 2.3;
+		dmgAntiViral *= 1.9;
+		cost = level == 1 ? PRICE_TO_UPGRADE_TYPE_2 : PRICE_TO_SUPPER_TYPE_2;
 		break;
 	case PILL_TOWER:
 		//NOTHING!! cuz not implemented
+		cost = -dnaPoints;
 		break;
+	default:
+		cost = -dnaPoints;
+		break;
+	}
+
+	if (dnaPoints - cost >= 0){
+		totalCost += cost;
+		level++;
+		dnaPoints -= cost;
 	}
 }
 
@@ -54,22 +67,25 @@ void Tower::setType(int type){
 	switch (type)
 	{
 	case WHITE_TOWER:
-		dmgAntiBacterial = 10;
-		dmgAntiViral = 3;
+		dmgAntiBacterial = 30;
+		dmgAntiViral = 10;
 		setTimeToShot(1);
 		setRange(200);
+		totalCost = PRICE_TOWER_TYPE_1;
 		break;
 	case YELLOW_TOWER:
 		dmgAntiBacterial = 2;
 		dmgAntiViral = 0.7;
 		setTimeToShot(0.5);
 		setRange(100);
+		totalCost = PRICE_TOWER_TYPE_2;
 		break;
 	case PILL_TOWER:
 		dmgAntiBacterial = 0;
 		dmgAntiViral = 0;
 		setTimeToShot(0);
 		setRange(200);
+		totalCost = PRICE_TOWER_TYPE_3 * 1.3;
 		break;
 	}
 }

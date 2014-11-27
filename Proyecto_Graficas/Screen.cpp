@@ -33,10 +33,6 @@ std::string Screen::getType(){
 	return type;
 }
 
-Texture* Screen::getBGImage(){
-	return &background;
-}
-
 void Screen::setName(std::string screenName){
 	this->screenName = screenName;
 }
@@ -66,7 +62,6 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 
 	type = (std::string)json["type"];
 	data = json["data"];
-	background.load("Images/backgrounds/" + (std::string)data["background"]);
 
 	//load buttons
 	if (data["buttons"].GetType() != json::NULLVal){
@@ -81,7 +76,7 @@ bool Screen::loadLevel(int num, std::stack<int> *events){
 
 			if (jsonBut["images"].GetType() != json::NULLVal){
 				json::Array arr = jsonBut["images"];
-				newButton.setImages(imgData->GetID(arr[0]), imgData->GetID(arr[1]), imgData->GetID(IMG_BTN_TOOLTIP), imgData->GetID(arr[3]));
+				newButton.setImages(imgData->GetID(arr[0]), imgData->GetID(arr[1]), imgData->GetID(IMG_BTN_TOOLTIP), imgData->GetID(arr[2]));
 			}
 			else{
 				newButton.setImages(imgData->GetID(IMG_BUTTONNORMAL), imgData->GetID(IMG_BUTTONHOVER), imgData->GetID(IMG_BTN_TOOLTIP), imgData->GetID(IMG_BUTTONNORMAL));

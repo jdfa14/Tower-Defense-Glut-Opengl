@@ -23,7 +23,7 @@ void GameManager::button_listener(int id){
 				}
 				selectedPlayer->setNewPlayer(false);
 			}
-			//selectedPlayer->savePlayer(); deactivated for testing, you MUST uncomment this line
+			selectedPlayer->savePlayer();
 		}
 		else{
 			loadScreen(hereYouAre[screenState][id]);
@@ -106,10 +106,8 @@ void GameManager::button_listener(int id){
 			wavesManager.nextWave();
 			wavesStarted = true;
 			break;
-
 		case 25://UPGRADE TOWER
-			
-			selectedTower->data->upgrade();
+			selectedTower->data->upgrade(dnaInLevel);
 			break;
 		case 26://SELL TOWER
 			dnaInLevel += selectedTower->data->getSellRefound();

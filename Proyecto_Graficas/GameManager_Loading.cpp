@@ -3,8 +3,7 @@
 #include "json\json.h"
 
 void GameManager::init(){
-	sounds.Load();
-	sounds.Play(0);
+
 	//for this, we need the ortho already with all his values
 	double width = win.getOrthoWidth();
 	double height = win.getOrthoHeight();
@@ -71,12 +70,6 @@ void GameManager::init(){
 			hereYouAre[i][j] = mat[i][j];
 	}
 
-	for (int i = 0; i < NUMBER_OF_SCREENS; i++){
-		for (int j = 0; j < cant; j++)
-			std::cout << hereYouAre[i][j] << " ";
-		std::cout << std::endl;
-	}
-
 	
 }
 
@@ -86,7 +79,6 @@ bool GameManager::loadScreen(int i){
 		std::cout << "A wild potato has appeared!" << std::endl;
 		return false;
 	}
-	bgImage = screens[i].getBGImage();
 	buttons = screens[i].getButtons();
 	images = screens[i].getImages();
 	//towers = screens[i].getTowers();
@@ -100,7 +92,7 @@ void GameManager::begin(){
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
 	glShadeModel(GL_SMOOTH);//sombreado plano
-
+	
 	//loading images
 	data.Load();
 
@@ -119,12 +111,9 @@ void GameManager::begin(){
 
 	//we load all posible screens
 	std::cout << "Loading screens \n";
-
 	for (int i = MAIN; i < NUMBER_OF_SCREENS; i = i + 1){
 		Screen newScreen(data);
 		newScreen.loadLevel(i, &events);
-		newScreen.getBGImage()->setPositions(0, 0, -99);
-		newScreen.getBGImage()->setSizes(width, height, 1);
 		switch (i)
 		{
 		case 0: newScreen.setName("Main"); break;
@@ -142,6 +131,8 @@ void GameManager::begin(){
 
 	std::cout << "Starting \n";
 	loadScreen(screenState);
+	sounds.Load();
+	sounds.Play(0);
 
 	sellButton.setToolTip("You will get 80% of total cost");
 	sellButton.setPositions(375, -250, 0);

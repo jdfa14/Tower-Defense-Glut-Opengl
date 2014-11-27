@@ -52,11 +52,13 @@ void GameManager::updateEnemies(double elapsedTimeMiliSec){
 				Node<BadAgent> *aux = i;
 				i = i->prev;
 				dnaInLevel += bad->getDnaToGive();
+				scoreInLevel += bad->getPointsToGive();
 				enemies.remove(aux);
 			}
 			else{
 				if (bad->update(elapsedTimeMiliSec)){
 					playerHitPoints -= bad->getDmgToDo();
+					scoreInLevel -= bad->getPointsToGive() * 0.40;
 				}
 			}
 			if (i == NULL)// in case tha prev returns null
@@ -90,6 +92,11 @@ void GameManager::refresh(double elapsedTimeMiliSec){
 		}
 		if (enemies.getSize() == 0 && wavesManager.hasFinished()){
 			std::cout << "Level Finished\n";
+			victory = true;
+			gameFinished();
+		}
+		else if (playerHitPoints <= 0){
+			victory = false;
 			gameFinished();
 		}
 	}

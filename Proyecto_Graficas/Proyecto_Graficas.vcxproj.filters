@@ -26,9 +26,6 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="old Image.cpp">
-      <Filter>Source FIles</Filter>
-    </ClCompile>
     <ClCompile Include="cTexture.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>

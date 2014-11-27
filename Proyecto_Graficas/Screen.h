@@ -15,7 +15,6 @@ private:
 	cData *imgData;
 	std::string screenName;
 	std::string type;
-	Texture background;
 	std::vector<Texture> images;
 	std::vector<Button> buttons;
 	std::vector<Tower> towers;
@@ -32,7 +31,6 @@ public:
 	//std::vector<std::vector<BadAgent>> getEnemies(); pending... i need to know if i will use a class or a struct
 	std::string getScreenName();
 	std::string getType();
-	Texture* getBGImage();
 	bool isLoaded();
 
 	//sets

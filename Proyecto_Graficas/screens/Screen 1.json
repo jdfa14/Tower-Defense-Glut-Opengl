@@ -9,19 +9,22 @@
         "text" : "Player 1",
         "ID" : 6,
         "positions" : [-300,-50,0],
-        "sizes" : [250,700,1]
+        "sizes" : [250,700,1],
+        "images" : [50,51,50]
       },
       {
         "text" : "Player 2",
         "ID" : 7,
         "positions" : [0,-50,0],
-        "sizes" : [250,700,1]
+        "sizes" : [250,700,1],
+        "images" : [54,55,54]
       },
       {
         "text" : "Player 3",
         "ID" : 8,
         "positions" : [300,-50,0],
-        "sizes" : [250,700,1]
+        "sizes" : [250,700,1],
+        "images" : [58,59,58]
       },
       {
         "text" : "Back",

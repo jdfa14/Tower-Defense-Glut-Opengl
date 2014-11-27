@@ -4,12 +4,15 @@ BadAgent::BadAgent(cData &data, std::vector<Location> **path, int type, int difi
 	this->data = &data;
 	this->path = path;
 	getReadyToFight(type,dificulty,speed);
-	
 	vulnerable = true;
 	destroying = false;
 	readyToDestroy = false;
 	waitForMultipleObjects = 0;
 	pathIndex = -1;
+}
+
+int BadAgent::getPointsToGive(){
+	return pointsToGice;
 }
 
 void BadAgent::addChaser(){
@@ -108,6 +111,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		setSizes(25, 25, 1);
 		dmgToDo = 2 + 1 * dif;
 		dnaToGive = 25 + 5 * dif;
+		pointsToGice = 50;
 		break;
 	case BA_TYPE_VIRUS:
 		img = IMG_VIRUS;
@@ -116,6 +120,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		setSizes(25, 25, 1);
 		dmgToDo = 1 + 2 * dif;
 		dnaToGive = 15 + 10 * dif;
+		pointsToGice = 60;
 		break;
 	case BA_TYPE_BOSS_BACTERIA:
 		img = IMG_BACTERIA;
@@ -124,6 +129,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		setSizes(50, 50, 1);
 		dmgToDo = 20 + 5 * dif;
 		dnaToGive = 400 + 20 * dif;
+		pointsToGice = 150;
 		break;
 	case BA_TYPE_BOSS_VIRUS:
 		img = IMG_VIRUS;
@@ -132,6 +138,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 		setSizes(50, 50, 1);
 		dmgToDo = 20 + 3 *dif;
 		dnaToGive = 300 + 25 * dif;
+		pointsToGice = 180;
 		break;
 	default:
 		std::cout << "Error not valid type: " << type << " deleting...\n";
@@ -158,6 +165,7 @@ void BadAgent::getReadyToFight(int type, int dif, int speed){
 	}
 
 	maxHitPoints = hitPoints;
+	setPositions(-2000, -2000, 1);
 }
 
 //AUTOBOT!

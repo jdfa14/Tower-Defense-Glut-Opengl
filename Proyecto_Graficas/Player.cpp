@@ -225,4 +225,5 @@ void Player::unlock(int levelPos){
 
 void Player::setNewLevelScore(int levelPos, Level newLevel){
 	levels[levelPos] = newLevel;
+	savePlayer();
 }
