@@ -6,21 +6,21 @@
   "background" : "player_selection.bmp",
   "buttons" : [
       {
-        "text" : "Player 1",
+        "text" : "",
         "ID" : 6,
         "positions" : [-300,-50,0],
         "sizes" : [250,700,1],
         "images" : [50,51,50]
       },
       {
-        "text" : "Player 2",
+        "text" : "",
         "ID" : 7,
         "positions" : [0,-50,0],
         "sizes" : [250,700,1],
         "images" : [54,55,54]
       },
       {
-        "text" : "Player 3",
+        "text" : "",
         "ID" : 8,
         "positions" : [300,-50,0],
         "sizes" : [250,700,1],
