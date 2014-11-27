@@ -74,7 +74,7 @@ void Tower::setType(int type){
 		totalCost = PRICE_TOWER_TYPE_1;
 		break;
 	case YELLOW_TOWER:
-		dmgAntiBacterial = 2;
+		dmgAntiBacterial = 0.8;
 		dmgAntiViral = 0.7;
 		setTimeToShot(0.5);
 		setRange(100);

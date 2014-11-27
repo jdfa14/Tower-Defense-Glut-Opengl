@@ -63,11 +63,11 @@ bool cData::Load()
 	LoadImage(IMG_BGPLAYERSELECT, path + "playerBackground.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BGLEVELSELECT, path + "levelSelect.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_BG_HISTORY, path + "history.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BGINSTRUCTIONS, path + "options.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDGREEN, path + "greenGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDRED, path + "redGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	LoadImage(IMG_GRIDSELECTED, path + "selectedGrid.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
-	
 	// loading towers
 	path = "Images/towers/";
 	// Pills
@@ -89,33 +89,29 @@ bool cData::Load()
 
 	//lading tiles
 	path = "Images/tiles/tile_";
-	LoadImage(IMG_TILE_A, path + "a.png"); i++;
-	LoadImage(IMG_TILE_B, path + "b.png"); i++;
-	LoadImage(IMG_TILE_C, path + "c.png"); i++;
-	LoadImage(IMG_TILE_D, path + "d.png"); i++;
-	LoadImage(IMG_TILE_E, path + "e.png"); i++;
-	LoadImage(IMG_TILE_F, path + "f.png"); i++;
-	LoadImage(IMG_TILE_G, path + "g.png"); i++;
-	LoadImage(IMG_TILE_H, path + "h.png"); i++;
-	LoadImage(IMG_TILE_I, path + "i.png"); i++;
-	LoadImage(IMG_TILE_J, path + "j.png"); i++;
-	LoadImage(IMG_TILE_K, path + "k.png"); i++;
-	LoadImage(IMG_TILE_L, path + "l.png"); i++;
+	LoadImage(IMG_TILE_A, path + "a.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_B, path + "b.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_C, path + "c.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_D, path + "d.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_E, path + "e.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_F, path + "f.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_G, path + "g.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_H, path + "h.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_I, path + "i.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_J, path + "j.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_K, path + "k.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_TILE_L, path + "l.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 	/*LoadImage(IMG_TILE_M, path + "m.png"); i++;
 	LoadImage(IMG_TILE_N, path + "n.png"); i++;
 	LoadImage(IMG_TILE_O, path + "o.png"); i++;
 	LoadImage(IMG_TILE_P, path + "p.png"); i++;
 	LoadImage(IMG_TILE_Q, path + "q.png"); i++;*/
-	LoadImage(IMG_TILE_X, path + "x.png"); i++;
+	LoadImage(IMG_TILE_X, path + "x.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
 
-	path = "Images/enemies/";
-	LoadImage(IMG_VIRUS, path + "bad.png"); std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-	LoadImage(IMG_BACTERIA, path + "bad.png"); std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
-
-
-	// Agrega virus inicio
 	path = "Images/enemies/";
 	LoadImage(IMG_VIRUS, path + "bad.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	LoadImage(IMG_BACTERIA, path + "badAgent_1_2.png"); i++; std::cout << "\b\b\b" << (int)(i / (double)NUM_TEX * 100.0) << "%";
+	std::cout << "\b\b\b" << "100%";
 	// Agrega virus fin
 
 	std::cout << "\n";
